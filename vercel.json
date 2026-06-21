@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --prefix PM-Pepsi-App/frontend",
+  "buildCommand": "npm run build:vercel --prefix PM-Pepsi-App/frontend",
+  "outputDirectory": "PM-Pepsi-App/frontend/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
