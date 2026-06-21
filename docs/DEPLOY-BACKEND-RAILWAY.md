@@ -17,6 +17,27 @@ Repo เป็น monorepo — Dockerfile อยู่ที่ `PM-Pepsi-App/ba
 
 **ทางเลือก:** ตั้ง Root Directory = `PM-Pepsi-App/backend` แล้วใช้ Dockerfile ในโฟลเดอร์นั้น
 
+## Healthcheck failed (service unavailable)
+
+Build ผ่านแต่ deploy fail ที่ `/api/v1/health` — สาเหตุที่พบบ่อย:
+
+1. **ไม่ได้ตั้ง Variables บน Railway** (แอป crash ตอน start)
+2. **`sharp` บน Alpine** — แก้แล้ว: ใช้ `node:20-slim` ใน Dockerfile
+
+### Variables ที่ต้องมี (Railway → Variables)
+
+| ตัวแปร | จำเป็น | ตัวอย่าง |
+|--------|--------|----------|
+| `DATABASE_URL` | ใช่ | `postgresql://postgres.rbuencvudatesysexeoq:***@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres` |
+| `SESSION_SECRET` | ใช่ | สุ่ม ≥ 32 ตัวอักษร |
+| `NODE_ENV` | แนะนำ | `production` |
+| `CORS_ORIGIN` | แนะนำ | `https://your-app.vercel.app` |
+| `APP_PUBLIC_URL` | แนะนำ | URL Railway ของ service |
+| `BACKUP_SCHEDULER` | แนะนำ | `0` |
+| `INTEGRATION_WATCH_SCHEDULER` | แนะนำ | `0` |
+
+ดู **Deploy Logs → Runtime Logs** ถ้าเห็น `Invalid environment variables` = ขาด `DATABASE_URL` หรือ `SESSION_SECRET`
+
 ## Environment variables (Railway Dashboard → Variables)
 
 | ตัวแปร | ค่า |
