@@ -1,0 +1,317 @@
+{
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "th": "Thai",
+    "switchAria": "Switch language"
+  },
+  "actions": {
+    "login": "Sign in",
+    "logout": "Sign out",
+    "search": "Search",
+    "retry": "Try again",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "expandSection": "Expand section",
+    "collapseSection": "Collapse section",
+    "showFilters": "Show filters",
+    "hideFilters": "Hide filters"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "aria": "Notifications",
+    "ariaUnread": "Notifications, {{count}} unread",
+    "empty": "No notifications",
+    "markAllRead": "Mark all read"
+  },
+  "confirmDelete": {
+    "confirm": "Delete",
+    "cannotUndo": "This cannot be undone."
+  },
+  "nav": {
+    "pinMenu": "Pin menu expanded",
+    "unpinMenu": "Unpin menu",
+    "pinMenuTitle": "Pin sidebar menu",
+    "unpinMenuTitle": "Unpin sidebar menu",
+    "mainMenu": "Main menu",
+    "fromTbmenu": "Menu from tbmenu",
+    "apiDb": "(API+DB)",
+    "fallback": "(fallback)"
+  },
+  "shell": {
+    "rbacPreview": "Previewing role <strong>{{role}}</strong> ({{name}}) — {{count}} permissions",
+    "stopPreview": "Stop preview",
+    "mustChangePassword": "You must change your password —",
+    "goToProfile": "Settings → Profile",
+    "maintenance": "System maintenance in progress — some features may be temporarily unavailable"
+  },
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "usernameRequired": "Enter your username",
+    "passwordRequired": "Enter your password",
+    "loginSuccess": "Signed in successfully",
+    "hello": "Hello, {{name}}",
+    "signInTitle": "Sign in",
+    "signInTo": "Sign in to {{app}}",
+    "signingIn": "Signing in…",
+    "backHome": "Back to home",
+    "openBoard": "Engineering Board (kiosk)",
+    "usernamePlaceholder": "Username",
+    "passwordPlaceholder": "Password",
+    "feedback": {
+      "invalidTitle": "Sign-in failed",
+      "lockoutTitle": "Temporarily locked",
+      "blockedTitle": "Access denied",
+      "maintenanceTitle": "Maintenance mode",
+      "rateLimitTitle": "Too many requests",
+      "genericTitle": "Something went wrong",
+      "networkTitle": "Connection failed",
+      "networkMessage": "Check your network or try again",
+      "genericMessage": "Could not sign in — please try again",
+      "confirmContinue": "Continue",
+      "confirmOk": "OK"
+    },
+    "logout": {
+      "success": "Signed out successfully",
+      "loggingOut": "Signing out",
+      "pleaseWait": "Please wait…"
+    }
+  },
+  "footer": {
+    "defaultCopyright": "© S.Y. Interactive Development Limited",
+    "versionTitle": "App version",
+    "privacyPolicy": "Privacy Policy",
+    "siteName": "Lays Lamphun"
+  },
+  "hero": {
+    "defaultEyebrow": "Planning & maintenance · Pepsi"
+  },
+  "theme": {
+    "light": "Light mode",
+    "dark": "Dark mode",
+    "system": "System",
+    "lightShort": "Light",
+    "darkShort": "Dark",
+    "toggleTitleServer": "Switch theme (default: {{mode}})",
+    "toggleTitleCustom": "Switch theme (custom — right-click to reset)",
+    "ariaLight": "Switch to light mode",
+    "ariaDark": "Switch to dark mode",
+    "iconTitleServer": "Theme: {{mode}} (following {{serverMode}}) — click to switch",
+    "iconTitleCustom": "Theme: {{mode}} (custom) — right-click to reset admin default"
+  },
+  "announcements": {
+    "regionAria": "System announcements",
+    "dismissTitle": "Dismiss announcement",
+    "dismissAria": "Dismiss announcement: {{title}}"
+  },
+  "admin": {
+    "accessDenied": "You do not have permission to view this page",
+    "backToConsole": "Back to Admin Console"
+  },
+  "toast": {
+    "saved": "Saved",
+    "deleted": "Deleted"
+  },
+  "errors": {
+    "loadFailed": "Could not load data"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Profile · API health · System users",
+    "noAccess": "No access",
+    "noAccessDesc": "Requires permission admin.settings.read",
+    "tabs": {
+      "profile": "Profile",
+      "language": "Language",
+      "telegram": "Telegram",
+      "connection": "Connection",
+      "users": "Users"
+    },
+    "profileTitle": "User profile",
+    "profileHint": "Data from session ({{source}})",
+    "profileSourceMember": "member / tbl_member",
+    "profileSourceWc": "work center / tbworkcenter",
+    "displayName": "Display name",
+    "status": "Status",
+    "username": "Username",
+    "wcCode": "Work center code",
+    "plant": "Plant",
+    "signInRequired": "Please sign in",
+    "signInForProfile": "Sign in to view your profile",
+    "loadProfileFailed": "Could not load profile",
+    "languageHint": "Applies to this browser only. English is the default for new users.",
+    "sidebar": {
+      "title": "Sidebar layout",
+      "hint": "Saved in this browser only. Pin/unpin is in the sidebar footer.",
+      "densityLabel": "Menu density",
+      "densityHint": "Compact reduces spacing; touch targets stay at least 44px on mobile.",
+      "densityComfortable": "Comfortable",
+      "densityCompact": "Compact",
+      "widthLabel": "Expanded width",
+      "widthHint": "Collapsed rail stays icon-only (w-14).",
+      "widthNarrow": "Standard (240px)",
+      "widthWide": "Wide (256px)",
+      "pinHint": "Pin the menu open: use the pin button at the bottom of the sidebar."
+    },
+    "hintApiHealth": "API health",
+    "connection": {
+      "apiAddress": "API address",
+      "viteEmpty": "(empty = same-origin)",
+      "health": "Health",
+      "envHint": "See values in `.env` / `.env.example`",
+      "apiHealth": "API health",
+      "refresh": "Refresh",
+      "connectFailed": "Cannot reach API",
+      "status": "Status",
+      "ready": "Ready",
+      "serverTime": "Server time"
+    },
+    "telegram": {
+      "title": "Telegram notifications",
+      "hint": "Link your work center to receive assignment alerts via Bot",
+      "linked": "Linked",
+      "notLinked": "Not linked",
+      "linkedAt": "Linked at",
+      "createInvite": "Create invite link",
+      "relink": "New invite link",
+      "unlink": "Unlink Telegram",
+      "inviteTitle": "Open in Telegram",
+      "inviteFailed": "Could not create invite",
+      "unlinked": "Telegram unlinked",
+      "unlinkFailed": "Unlink failed",
+      "botNotConfigured": "Bot not configured (TELEGRAM_BOT_TOKEN on server)"
+    },
+    "users": {
+      "loadFailed": "Could not load users",
+      "colUsername": "Username",
+      "colRole": "Role",
+      "colActive": "Active",
+      "yes": "Yes",
+      "no": "No",
+      "empty": "No data"
+    },
+    "profileFields": {
+      "age": "Age",
+      "workAge": "Tenure",
+      "worktimeHours": "Total hours (worktime)",
+      "hoursUnit": "hr",
+      "idCard": "ID card",
+      "bank": "Bank",
+      "lastLogin": "Last sign-in"
+    },
+    "password": {
+      "title": "Change password",
+      "hint": "Work center and member accounts",
+      "success": "Password updated successfully",
+      "current": "Current password",
+      "new": "New password",
+      "confirm": "Confirm new password",
+      "submit": "Update password"
+    }
+  },
+  "filterDrawer": {
+    "title": "Date range & filters",
+    "closeFilter": "Close filters",
+    "close": "Close",
+    "escHint": "Press Esc to close",
+    "apply": "Apply"
+  },
+  "imageLightbox": {
+    "title": "View image",
+    "zoomOut": "Zoom out",
+    "zoomIn": "Zoom in",
+    "fitScreen": "Fit to screen",
+    "close": "Close",
+    "loading": "Loading image…",
+    "help": "Drag to pan · wheel/pinch to zoom · double-click to zoom",
+    "escClose": "Esc to close",
+    "keyboardNav": "Esc close · ← → change image",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
+    "position": "{{current}} / {{total}}"
+  },
+  "confirmPhrase": {
+    "confirm": "Confirm",
+    "phraseLabel": "Type {{phrase}} to confirm",
+    "placeholder": "Type the phrase above exactly",
+    "mismatch": "Phrase does not match — must be exact",
+    "matched": "Matched — you can confirm"
+  },
+  "spinner": {
+    "loading": "Loading…"
+  },
+  "impersonation": {
+    "actingAs": "Acting as <strong>{{name}}</strong>",
+    "expiresIn": "(expires in ~{{min}} min)",
+    "stop": "Stop impersonation"
+  },
+  "collapseHint": {
+    "arrowPrefix": "Press arrow"
+  },
+  "api": {
+    "maintenanceDefault": "System maintenance — some features may be temporarily unavailable",
+    "htmlNotJson": "Received HTML instead of JSON — check backend API is running (port 4000) and path is correct",
+    "invalidJson": "Invalid JSON response"
+  },
+  "calendar": {
+    "today": "This month",
+    "month": "Month",
+    "week": "Week",
+    "day": "Day",
+    "moreJobs": "+{{count}} jobs",
+    "monthsShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "monthsLong": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ]
+  },
+  "datePicker": {
+    "placeholder": "Pick a date"
+  },
+  "userMenu": {
+    "profile": "Profile",
+    "menuAria": "Profile menu",
+    "statusLine": "Status {{userst}} : {{sysstatus}}",
+    "currentAge": "Current age",
+    "workAge": "Tenure",
+    "totalHours": "Total hours",
+    "hoursUnit": "hr",
+    "navAria": "Profile links",
+    "viewPerformance": "View Performance",
+    "workHours": "Work hours",
+    "planWorkView": "Plan Work View"
+  },
+  "commandPalette": {
+    "aria": "Open command palette (Ctrl+K)",
+    "title": "Search and go to page",
+    "description": "Command palette — press Enter to open page",
+    "label": "Search pages",
+    "placeholder": "Search menu or page…",
+    "empty": "No results",
+    "footer": "↑↓ select · Enter open · Esc close",
+    "mainNavGroup": "Main menu"
+  },
+  "parity": {
+    "shellTitle": "More details",
+    "summaryWeeklyTitle": "Weekly summary",
+    "summaryWeeklyDesc": "Weekly summary and related charts",
+    "summaryWeeklyLink": "Weekly summary"
+  },
+  "rbac": {
+    "requiresPermission": "Requires permission"
+  }
+}

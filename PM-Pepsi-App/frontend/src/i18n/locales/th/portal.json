@@ -1,0 +1,36 @@
+{
+  "title": "เลือกระบบ",
+  "subtitle": "เลือกระบบที่คุณได้รับสิทธิ์ใช้งาน",
+  "welcome": "สวัสดี {{name}}",
+  "comingSoon": "เร็วๆ นี้",
+  "noModules": {
+    "title": "ยังไม่มีระบบที่ใช้งานได้",
+    "description": "บัญชีของคุณยังไม่ได้รับสิทธิ์เข้า module ใด — ติดต่อผู้ดูแลระบบ",
+    "openSettings": "โปรไฟล์และตั้งค่า"
+  },
+  "backToPortal": "Portal",
+  "commandPaletteGroup": "Portal",
+  "commandPaletteHint": "สลับระบบงาน",
+  "loadError": "โหลดรายการระบบไม่สำเร็จ",
+  "handoffError": "เปิดระบบไม่สำเร็จ — ลองอีกครั้งหรือติดต่อผู้ดูแล",
+  "moduleChipPm": "PM",
+  "openModule": "เปิด {{name}}",
+  "openCta": "เปิดระบบ",
+  "modules": {
+    "pm": {
+      "title": "PM Maintenance",
+      "description": "แผนงาน · ใบงาน · Confirm · ปฏิทิน"
+    },
+    "store": {
+      "title": "สโตร์อะไหล่",
+      "description": "เบิกอะไหล่และวัสดุสำหรับช่าง — งานซ่อมและ PM"
+    },
+    "repair": {
+      "title": "แจ้งซ่อม",
+      "description": "แจ้งซ่อมและติดตามงานซ่อม"
+    }
+  },
+  "toast": {
+    "comingSoon": "{{name}} อยู่ระหว่างพัฒนา"
+  }
+}

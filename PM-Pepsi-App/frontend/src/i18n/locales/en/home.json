@@ -1,0 +1,73 @@
+{
+  "greeting": "Hello{{name}}",
+  "greetingName": ", {{name}}",
+  "heroDescription": "Maintenance overview dashboard — {{date}}",
+  "liveUpdating": "Updating…",
+  "liveReady": "Data ready",
+  "startTour": "Take a tour",
+  "engineeringBoard": "Engineering Board",
+  "goAssign": "Assign work",
+  "tourEnd": "Tour finished",
+  "tour": {
+    "kpi": "Metrics and 7-day charts from PostgreSQL — click a card to open the module",
+    "quick": "Shortcuts based on your permissions — same as the sidebar menu"
+  },
+  "joyride": {
+    "back": "Back",
+    "close": "Close",
+    "last": "Done",
+    "next": "Next",
+    "skip": "Skip"
+  },
+  "kpiSection": {
+    "title": "Today's overview",
+    "subtitle": "Key metrics from the database — click for details",
+    "fullReport": "Full reports",
+    "loading": "Loading metrics",
+    "loadFailed": "Could not load summary",
+    "loadFailedHint": "Check API connection or permission",
+    "noData": "No summary data yet",
+    "noDataHint": "Refresh the page or contact your administrator",
+    "refresh": "Refresh",
+    "last7Days": "Last 7 days",
+    "openModule": "Open module"
+  },
+  "kpi": {
+    "openOrders": "Open work orders",
+    "openOrdersHint": "Status CRTD / REL",
+    "closedMonth": "Closed this month",
+    "closedMonthHint": "After Foreman QC approval · actual close date",
+    "pendingAssign": "Pending assignment",
+    "pendingAssignHint": "No plan in tbplangingwork yet",
+    "iw37nImport": "Latest IW37N import",
+    "iw37nImportHint": "Last 7 days: {{count}} batch(es)"
+  },
+  "quick": {
+    "title": "Shortcuts",
+    "subtitle": "Modules you can access — aligned with the menu",
+    "noMenu": "No menu items visible",
+    "noMenuHint": "Check RBAC permissions or wait for menu to load"
+  },
+  "routeHints": {
+    "planCalendar": "Assign work and track daily plans",
+    "calendar": "Work order calendar and plan moves",
+    "backlog": "Backlog and unassigned plans",
+    "workOrders": "Search WOs and open Confirmation",
+    "confirmation": "Export Confirm · Admin QC · Excel import",
+    "planning": "PM/CM planning table",
+    "iw37n": "Import SAP IW37N data",
+    "masterPlan": "Master Plan",
+    "masterData": "Master Data (SAP)",
+    "manhours": "Record work hours",
+    "worktime": "Summary overall",
+    "personnel": "My profile and jobs",
+    "personnelConfirm": "Personnel confirmation progress",
+    "reports": "KPIs and trends",
+    "manhoursHr": "Manhour report by work center",
+    "summaryWeekly": "Weekly summary",
+    "userLog": "Usage history",
+    "settings": "Profile and password",
+    "admin": "Admin console",
+    "default": "Open module"
+  }
+}

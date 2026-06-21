@@ -1,0 +1,73 @@
+{
+  "greeting": "สวัสดี{{name}}",
+  "greetingName": ", {{name}}",
+  "heroDescription": "แดชบอร์ดภาพรวมงานบำรุงรักษา — {{date}}",
+  "liveUpdating": "กำลังอัปเดต…",
+  "liveReady": "ข้อมูลพร้อมใช้",
+  "startTour": "แนะนำการใช้งาน",
+  "engineeringBoard": "จอ Engineering Board",
+  "goAssign": "ไปจ่ายงาน",
+  "tourEnd": "จบการแนะนำเบื้องต้น",
+  "tour": {
+    "kpi": "ตัวเลขและกราฟ 7 วันจาก PostgreSQL — คลิกการ์ดเพื่อไปโมดูลที่เกี่ยวข้อง",
+    "quick": "ทางลัดตามสิทธิ์ของคุณ — เหมือนเมนูด้านซ้าย"
+  },
+  "joyride": {
+    "back": "กลับ",
+    "close": "ปิด",
+    "last": "เสร็จ",
+    "next": "ถัดไป",
+    "skip": "ข้าม"
+  },
+  "kpiSection": {
+    "title": "ภาพรวมวันนี้",
+    "subtitle": "ตัวชี้วัดหลักจากฐานข้อมูล — คลิกเพื่อเปิดรายละเอียด",
+    "fullReport": "ดูรายงานเต็ม",
+    "loading": "กำลังโหลดตัวชี้วัด",
+    "loadFailed": "โหลดสรุปไม่สำเร็จ",
+    "loadFailedHint": "ตรวจการเชื่อมต่อ API หรือสิทธิ์",
+    "noData": "ยังไม่มีข้อมูลสรุป",
+    "noDataHint": "ลองรีเฟรชหน้าหรือติดต่อผู้ดูแลระบบ",
+    "refresh": "รีเฟรช",
+    "last7Days": "7 วันย้อนหลัง",
+    "openModule": "เปิดโมดูล"
+  },
+  "kpi": {
+    "openOrders": "ใบงานเปิด",
+    "openOrdersHint": "สถานะ CRTD / REL",
+    "closedMonth": "ปิดเดือนนี้",
+    "closedMonthHint": "หลัง Foreman อนุมัติ QC · วันที่ปิดจริง",
+    "pendingAssign": "รอจ่ายงาน",
+    "pendingAssignHint": "ยังไม่มีแผนใน tbplangingwork",
+    "iw37nImport": "นำเข้า IW37N ล่าสุด",
+    "iw37nImportHint": "รวม 7 วัน: {{count}} batch"
+  },
+  "quick": {
+    "title": "ทางลัด",
+    "subtitle": "โมดูลที่คุณเข้าถึงได้ — จัดตามเมนูระบบ",
+    "noMenu": "ไม่มีเมนูที่แสดง",
+    "noMenuHint": "ตรวจสิทธิ์ RBAC ของบัญชีหรือรอโหลดเมนูจากระบบ"
+  },
+  "routeHints": {
+    "planCalendar": "จ่ายงานและติดตามแผนรายวัน",
+    "calendar": "ปฏิทินใบงานและย้ายแผน",
+    "backlog": "งานค้างและแผนที่ยังไม่จ่าย",
+    "workOrders": "ค้นหา WO และเปิดรายละเอียด Confirmation",
+    "confirmation": "ส่งออก Confirm · Admin QC · นำเข้า Excel",
+    "planning": "ตารางแผน PM/CM",
+    "iw37n": "นำเข้าข้อมูล SAP IW37N",
+    "masterPlan": "Master Plan / แผน PM",
+    "masterData": "Master Data (SAP)",
+    "manhours": "บันทึกชั่วโมงทำงาน",
+    "worktime": "Summary Over all",
+    "personnel": "โปรไฟล์และงานของฉัน",
+    "personnelConfirm": "ความคืบหน้าการยืนยันบุคลากร",
+    "reports": "KPI และแนวโน้ม",
+    "manhoursHr": "รายงาน manhour ตาม WC",
+    "summaryWeekly": "สรุปรายสัปดาห์",
+    "userLog": "ประวัติการใช้งาน",
+    "settings": "โปรไฟล์และรหัสผ่าน",
+    "admin": "คอนโซลผู้ดูแลระบบ",
+    "default": "เปิดโมดูล"
+  }
+}

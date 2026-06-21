@@ -1,0 +1,36 @@
+# Dependencies & build
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Secrets & local env
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# PostgreSQL data / portable install (offline)
+database/postgres/
+PM-Pepsi-App/PostgreSQL/
+
+# Generated / import dumps (customer data)
+database/seeds/generated/
+MySQL/
+
+# Legacy PHP dependencies (run composer in sap/ if needed)
+sap/vendor/
+sap/mypdf-master/vendor/
+
+# OS & editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Cursor workspace assets (not app source)
+.cursor/

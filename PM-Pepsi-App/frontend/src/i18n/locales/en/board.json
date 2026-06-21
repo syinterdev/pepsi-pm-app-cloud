@@ -1,0 +1,127 @@
+{
+  "preparing": "Preparing Engineering Board…",
+  "kioskTitle": "Engineering Board (Kiosk)",
+  "kioskTokenHint": "Use a link with ?token=… from Admin → Settings → Board kiosk",
+  "kioskLoginHint": "Or sign in with dashboard.read —",
+  "signIn": "Sign in",
+  "fullAppLogin": "Sign in to full app",
+  "zoneA": "Zone A · KPI",
+  "zoneAAria": "Zone A — main KPIs",
+  "zoneC": "Zone C · PM readings",
+  "pmReadingsAria": "PM measurements",
+  "pmReadingsTitle": "3-phase / Vibration",
+  "pmReadingsSub": "{{label}} · {{count}} readings",
+  "pmReadingsEmpty": "No PM readings in this period — record from the WO Task tab",
+  "loadError": "Could not load PM readings",
+  "emptyPm": "No PM measurement data in this period",
+  "latest": "Latest: {{time}}",
+  "kpi": {
+    "openOrders": "Open work orders",
+    "openHint": "CRTD / REL",
+    "closedMonth": "Closed this month",
+    "closedHint": "Current calendar month",
+    "pendingPersonnel": "Awaiting assignment",
+    "pendingHint": "No plan yet",
+    "iw37nImport": "IW37N import",
+    "iw37nHint": "Latest from batch",
+    "noImport": "—"
+  },
+  "header": {
+    "eyebrow": "Engineering Board",
+    "signedIn": "Signed in",
+    "kiosk": "Kiosk",
+    "updatedAt": "Updated {{time}}",
+    "loading": "Loading…",
+    "refreshing": " · refreshing"
+  },
+  "period": {
+    "today": "Today",
+    "7d": "7 days",
+    "week": "This week",
+    "month": "This month",
+    "quarter": "Quarter",
+    "aria": "Report period"
+  },
+  "team": {
+    "all": "All teams",
+    "A": "Team A",
+    "B": "Team B",
+    "EE": "EE",
+    "UT": "UT",
+    "aria": "Team filter"
+  },
+  "carousel": {
+    "on": "Carousel on",
+    "off": "Carousel off",
+    "slide": "Slide {{current}} / {{total}}",
+    "zoneD": "Zone D · Carousel",
+    "navAria": "Zone A B C slides",
+    "zoneSlideAria": "Zone {{zone}} — {{label}}",
+    "everySeconds": "every {{seconds}}s",
+    "resume": "Resume",
+    "pause": "Pause",
+    "labelA": "KPI",
+    "labelB": "Utilization",
+    "labelC": "Activity",
+    "showAll": "Show all zones",
+    "slideZones": "Slide A→B→C"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "toggle": "Toggle board theme"
+  },
+  "kioskNav": {
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "carousel": "Carousel",
+    "home": "Home",
+    "appMenuAria": "App menu (sign-in required)",
+    "loginSection": "App sections (login required)",
+    "signIn": "Sign in",
+    "openFullApp": "Open full app"
+  },
+  "activityFeed": {
+    "title": "Assigned / closed",
+    "zoneTag": "Zone C · Activity",
+    "aria": "Zone C — latest assigned and closed work",
+    "sub": "Up to 12 items · refresh every 60s",
+    "empty": "No assigned/closed activity in this period",
+    "error": "Could not load activity"
+  },
+  "util": {
+    "legendTitle": "Utilization",
+    "legendPm": "PM",
+    "legendReactive": "Reactive",
+    "legendRca": "RCA",
+    "teamGridTitle": "Technician team · {{label}}",
+    "stackedTitle": "Eng Utilization — {{label}}",
+    "loadingPeople": "Loading technicians…",
+    "loadingChart": "Loading Eng Utilization…",
+    "chartFoot": "Showing {{count}} technicians (by HR hour) · Excel total = %PM + %Reactive",
+    "showRca": "Show RCA utilization",
+    "hideRca": "Hide RCA utilization",
+    "includeRca": "Include %RCA in chart and cards",
+    "zoneAria": "Zone B — Eng Utilization"
+  },
+  "zoneB": {
+    "title": "Charts & utilization",
+    "zoneTag": "Zone B",
+    "zoneTagLine": "Zone B · Utilization",
+    "sectionDesc": "{{label}} — stacked chart, week-to-week KPI, and technician cards",
+    "weekTitle": "Week-to-Week",
+    "weekEmpty": "Need at least 2 weeks in the KPI range",
+    "colWeek": "Week",
+    "colUtil": "Util %",
+    "colDelta": "Δ",
+    "colBacklog": "Backlog"
+  },
+  "footer": {
+    "live": "Live · refresh every {{seconds}}s",
+    "backApp": "Back to app",
+    "engUtilDetail": "Eng Utilization (detail)",
+    "refresh": "Refresh {{time}}",
+    "autoRefresh": "Auto refresh every {{seconds}}s"
+  }
+}
+

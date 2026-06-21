@@ -1,0 +1,106 @@
+{
+  "shell": {
+    "brand": "Planning PM/CM",
+    "signIn": "Sign in",
+    "cardLabel": "What you can do",
+    "footer": "PM/CM planning — plant site",
+    "back": "Go back",
+    "home": "Home",
+    "reload": "Reload",
+    "retryRender": "Try again"
+  },
+  "unexpected": {
+    "title": "Application error",
+    "description": "Something went wrong while rendering. You can reload or return home."
+  },
+  "generic4xx": {
+    "title": "Client error",
+    "description": "The server could not process this request. Check your input and try again."
+  },
+  "generic5xx": {
+    "title": "Server error",
+    "description": "A server error occurred. Try again later or contact your administrator."
+  },
+  "http": {
+    "400": {
+      "title": "Bad Request",
+      "description": "The submitted data is invalid or incomplete. Check the form and try again."
+    },
+    "401": {
+      "title": "Unauthorized",
+      "description": "Your session expired or you are not signed in. Please sign in again."
+    },
+    "402": {
+      "title": "Payment Required",
+      "description": "This resource may require additional approval or permissions from an administrator."
+    },
+    "403": {
+      "title": "Forbidden",
+      "description": "Your account does not have permission for this action. Contact an administrator if you need access."
+    },
+    "404": {
+      "title": "Not Found",
+      "description": "The link may be expired or the address is wrong. Check the URL or return home."
+    },
+    "405": {
+      "title": "Method Not Allowed",
+      "description": "The API call or request uses a method the server does not support."
+    },
+    "408": {
+      "title": "Request Timeout",
+      "description": "The server waited too long for the request. Try again or check your plant network connection."
+    },
+    "409": {
+      "title": "Conflict",
+      "description": "Data state does not match what the server expected (e.g. concurrent edit). Refresh and try again."
+    },
+    "410": {
+      "title": "Gone",
+      "description": "This data or page is no longer available in the system."
+    },
+    "413": {
+      "title": "Payload Too Large",
+      "description": "The upload exceeds the server size limit. Reduce the file size or split the upload."
+    },
+    "414": {
+      "title": "URI Too Long",
+      "description": "The request URL is longer than the system allows. Reduce parameters or use search instead."
+    },
+    "415": {
+      "title": "Unsupported Media Type",
+      "description": "The content type or file extension is not allowed by the API."
+    },
+    "422": {
+      "title": "Unprocessable Entity",
+      "description": "The data format is valid but failed business rules or server validation."
+    },
+    "423": {
+      "title": "Locked",
+      "description": "This item is temporarily locked by another user or process."
+    },
+    "429": {
+      "title": "Too Many Requests",
+      "description": "API rate limit reached. Wait a moment and try again."
+    },
+    "500": {
+      "title": "Internal Server Error",
+      "description": "An unexpected server error occurred. Try again or report to an administrator with the time it happened."
+    },
+    "501": {
+      "title": "Not Implemented",
+      "description": "This feature or API route is not enabled on the server yet."
+    },
+    "502": {
+      "title": "Bad Gateway",
+      "description": "The proxy or gateway received an invalid response from the upstream server."
+    },
+    "503": {
+      "title": "Service Unavailable",
+      "description": "The server is under maintenance or temporarily overloaded. Try again later."
+    },
+    "504": {
+      "title": "Gateway Timeout",
+      "description": "The upstream server did not respond in time (often at the reverse proxy)."
+    }
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "language": {
+    "label": "ภาษา",
+    "en": "English",
+    "th": "ไทย",
+    "switchAria": "สลับภาษา"
+  },
+  "actions": {
+    "login": "เข้าสู่ระบบ",
+    "logout": "ออกจากระบบ",
+    "search": "ค้นหา",
+    "retry": "ลองใหม่",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "close": "ปิด",
+    "openMenu": "เปิดเมนู",
+    "closeMenu": "ปิดเมนู",
+    "expandSection": "ขยายส่วน",
+    "collapseSection": "ย่อส่วน",
+    "showFilters": "แสดงตัวกรอง",
+    "hideFilters": "ย่อตัวกรอง"
+  },
+  "notifications": {
+    "title": "การแจ้งเตือน",
+    "aria": "การแจ้งเตือน",
+    "ariaUnread": "การแจ้งเตือน — ยังไม่อ่าน {{count}} รายการ",
+    "empty": "ไม่มีการแจ้งเตือน",
+    "markAllRead": "อ่านทั้งหมด"
+  },
+  "confirmDelete": {
+    "confirm": "ลบ",
+    "cannotUndo": "ไม่สามารถย้อนกลับได้"
+  },
+  "nav": {
+    "pinMenu": "ปักหมุดเมนู",
+    "unpinMenu": "ยกเลิกปักหมุด",
+    "pinMenuTitle": "ปักหมุดเมนูค้างขยาย",
+    "unpinMenuTitle": "ยกเลิกปักหมุดเมนู",
+    "mainMenu": "เมนูหลัก",
+    "fromTbmenu": "เมนูจาก tbmenu",
+    "apiDb": "(API+DB)",
+    "fallback": "(fallback)"
+  },
+  "shell": {
+    "rbacPreview": "จำลองสิทธิ์ role <strong>{{role}}</strong> ({{name}}) — {{count}} permissions",
+    "stopPreview": "หยุดจำลอง",
+    "mustChangePassword": "บัญชีนี้ต้องเปลี่ยนรหัสผ่าน —",
+    "goToProfile": "ไปที่ตั้งค่า → โปรไฟล์",
+    "maintenance": "ระบบอยู่ระหว่างบำรุงรักษา — บางฟังก์ชันอาจใช้งานไม่ได้ชั่วคราว"
+  },
+  "auth": {
+    "username": "ชื่อผู้ใช้",
+    "password": "รหัสผ่าน",
+    "usernameRequired": "กรุณากรอกชื่อผู้ใช้",
+    "passwordRequired": "กรุณากรอกรหัสผ่าน",
+    "loginSuccess": "เข้าสู่ระบบสำเร็จ",
+    "hello": "สวัสดี {{name}}",
+    "signInTitle": "เข้าสู่ระบบ",
+    "signInTo": "เข้าสู่ระบบ {{app}}",
+    "signingIn": "กำลังเข้าสู่ระบบ…",
+    "backHome": "กลับหน้าแรก",
+    "openBoard": "จอ Engineering Board (kiosk)",
+    "usernamePlaceholder": "ชื่อผู้ใช้",
+    "passwordPlaceholder": "รหัสผ่าน",
+    "feedback": {
+      "invalidTitle": "เข้าสู่ระบบไม่สำเร็จ",
+      "lockoutTitle": "ถูกระงับชั่วคราว",
+      "blockedTitle": "ไม่สามารถเข้าถึงได้",
+      "maintenanceTitle": "ระบบปิดปรับปรุง",
+      "rateLimitTitle": "คำขอมากเกินไป",
+      "genericTitle": "เกิดข้อผิดพลาด",
+      "networkTitle": "เชื่อมต่อไม่สำเร็จ",
+      "networkMessage": "ตรวจสอบเครือข่ายหรือลองใหม่อีกครั้ง",
+      "genericMessage": "ไม่สามารถเข้าสู่ระบบได้ — ลองใหม่อีกครั้ง",
+      "confirmContinue": "ดำเนินการต่อ",
+      "confirmOk": "ตกลง"
+    },
+    "logout": {
+      "success": "ออกจากระบบแล้ว",
+      "loggingOut": "กำลังออกจากระบบ",
+      "pleaseWait": "กรุณารอสักครู่…"
+    }
+  },
+  "footer": {
+    "defaultCopyright": "© S.Y. Interactive Development Limited",
+    "versionTitle": "เวอร์ชันแอป",
+    "privacyPolicy": "Privacy Policy",
+    "siteName": "Lays Lamphun"
+  },
+  "hero": {
+    "defaultEyebrow": "แผนและบำรุงรักษา · Pepsi"
+  },
+  "theme": {
+    "light": "โหมดสว่าง",
+    "dark": "โหมดมืด",
+    "system": "ตามระบบ",
+    "lightShort": "สว่าง",
+    "darkShort": "มืด",
+    "toggleTitleServer": "สลับธีม (ค่าเริ่มต้น: {{mode}})",
+    "toggleTitleCustom": "สลับธีม (กำหนดเอง — คลิกขวาคืนค่าเริ่มต้น)",
+    "ariaLight": "เปลี่ยนเป็นโหมดสว่าง",
+    "ariaDark": "เปลี่ยนเป็นโหมดมืด",
+    "iconTitleServer": "ธีม: {{mode}} (ตาม {{serverMode}}) — คลิกสลับ",
+    "iconTitleCustom": "ธีม: {{mode}} (กำหนดเอง) — คลิกขวาคืนค่า admin"
+  },
+  "announcements": {
+    "regionAria": "ประกาศระบบ",
+    "dismissTitle": "ปิดประกาศ",
+    "dismissAria": "ปิดประกาศ: {{title}}"
+  },
+  "admin": {
+    "accessDenied": "ไม่มีสิทธิ์เข้าหน้านี้",
+    "backToConsole": "กลับ Admin Console"
+  },
+  "toast": {
+    "saved": "บันทึกแล้ว",
+    "deleted": "ลบแล้ว"
+  },
+  "errors": {
+    "loadFailed": "โหลดข้อมูลไม่สำเร็จ"
+  },
+  "settings": {
+    "title": "ตั้งค่า",
+    "description": "โปรไฟล์ผู้ใช้ · ตรวจการเชื่อมต่อ API · รายชื่อผู้ใช้ระบบ",
+    "noAccess": "ไม่มีสิทธิ์เข้าถึง",
+    "noAccessDesc": "ต้องมีสิทธิ์ admin.settings.read",
+    "tabs": {
+      "profile": "โปรไฟล์",
+      "language": "ภาษา",
+      "telegram": "Telegram",
+      "connection": "การเชื่อมต่อ",
+      "users": "ผู้ใช้ระบบ"
+    },
+    "profileTitle": "โปรไฟล์ผู้ใช้",
+    "profileHint": "ข้อมูลจาก session ({{source}})",
+    "profileSourceMember": "สมาชิก / tbl_member",
+    "profileSourceWc": "work center / tbworkcenter",
+    "displayName": "ชื่อแสดง",
+    "status": "สถานะ",
+    "username": "ชื่อผู้ใช้",
+    "wcCode": "รหัส WC",
+    "plant": "Plant",
+    "signInRequired": "กรุณาเข้าสู่ระบบ",
+    "signInForProfile": "เข้าสู่ระบบเพื่อดูโปรไฟล์",
+    "loadProfileFailed": "โหลดโปรไฟล์ไม่สำเร็จ",
+    "languageHint": "มีผลเฉพาะเบราว์เซอร์นี้ — ผู้ใช้ใหม่เริ่มที่ภาษาอังกฤษ",
+    "sidebar": {
+      "title": "เลย์เอาต์แถบเมนู",
+      "hint": "บันทึกเฉพาะเบราว์เซอร์นี้ · ปักหมุด/ยกเลิกปักหมุดที่ footer ของ sidebar",
+      "densityLabel": "ความหนาแน่นเมนู",
+      "densityHint": "กระชับ = ระยะห่างน้อยลง · บนมือถือยังแตะได้อย่างน้อย 44px",
+      "densityComfortable": "สบาย",
+      "densityCompact": "กระชับ",
+      "widthLabel": "ความกว้างตอนขยาย",
+      "widthHint": "ตอนยุบยังเป็น rail ไอคอน (w-14)",
+      "widthNarrow": "มาตรฐาน (240px)",
+      "widthWide": "กว้าง (256px)",
+      "pinHint": "ปักหมุดเมนูค้างขยาย: ใช้ปุ่ม pin ที่ footer ของ sidebar"
+    },
+    "hintApiHealth": "สุขภาพ API",
+    "connection": {
+      "apiAddress": "ที่อยู่ API",
+      "viteEmpty": "(ว่าง = same-origin)",
+      "health": "Health",
+      "envHint": "ดูค่าใน `.env` / `.env.example`",
+      "apiHealth": "สุขภาพ API",
+      "refresh": "รีเฟรช",
+      "connectFailed": "เชื่อมต่อ API ไม่ได้",
+      "status": "สถานะ",
+      "ready": "พร้อม",
+      "serverTime": "เวลาเซิร์ฟเวอร์"
+    },
+    "telegram": {
+      "title": "แจ้งเตือน Telegram",
+      "hint": "ผูกรหัสช่างของคุณเพื่อรับแจ้งงานจ่ายผ่าน Bot",
+      "linked": "ผูกแล้ว",
+      "notLinked": "ยังไม่ผูก",
+      "linkedAt": "ผูกเมื่อ",
+      "createInvite": "สร้างลิงก์เชิญ",
+      "relink": "ลิงก์เชิญใหม่",
+      "unlink": "ยกเลิกผูก Telegram",
+      "inviteTitle": "เปิดใน Telegram",
+      "inviteFailed": "สร้างลิงก์เชิญไม่สำเร็จ",
+      "unlinked": "ยกเลิกผูก Telegram แล้ว",
+      "unlinkFailed": "ยกเลิกผูกไม่สำเร็จ",
+      "botNotConfigured": "ยังไม่ตั้ง Bot (TELEGRAM_BOT_TOKEN บนเซิร์ฟเวอร์)"
+    },
+    "users": {
+      "loadFailed": "โหลดรายชื่อผู้ใช้ไม่สำเร็จ",
+      "colUsername": "ชื่อผู้ใช้",
+      "colRole": "บทบาท",
+      "colActive": "ใช้งาน",
+      "yes": "ใช่",
+      "no": "ไม่",
+      "empty": "ไม่มีข้อมูล"
+    },
+    "profileFields": {
+      "age": "อายุ",
+      "workAge": "อายุการทำงาน",
+      "worktimeHours": "ชั่วโมงรวม (worktime)",
+      "hoursUnit": "ชม.",
+      "idCard": "เลขบัตร",
+      "bank": "ธนาคาร",
+      "lastLogin": "เข้าใช้ล่าสุด"
+    },
+    "password": {
+      "title": "เปลี่ยนรหัสผ่าน",
+      "hint": "รองรับบัญชี Work center และสมาชิก (member)",
+      "success": "บันทึกรหัสผ่านใหม่เรียบร้อย",
+      "current": "รหัสผ่านเดิม",
+      "new": "รหัสผ่านใหม่",
+      "confirm": "ยืนยันรหัสผ่านใหม่",
+      "submit": "แก้ไขรหัสผ่าน"
+    }
+  },
+  "filterDrawer": {
+    "title": "ช่วงวันที่และตัวกรอง",
+    "closeFilter": "ปิดตัวกรอง",
+    "close": "ปิด",
+    "escHint": "กด Esc เพื่อปิด",
+    "apply": "นำไปใช้"
+  },
+  "imageLightbox": {
+    "title": "ดูรูป",
+    "zoomOut": "ย่อรูป",
+    "zoomIn": "ขยายรูป",
+    "fitScreen": "พอดีหน้าจอ",
+    "close": "ปิด",
+    "loading": "กำลังโหลดรูป…",
+    "help": "ลากเลื่อน · ล้อเมาส์/ pinch ซูม · ดับเบิลคลิกซูม",
+    "escClose": "Esc ปิด",
+    "keyboardNav": "Esc ปิด · ← → เปลี่ยนรูป",
+    "prevImage": "รูปก่อนหน้า",
+    "nextImage": "รูปถัดไป",
+    "position": "{{current}} / {{total}}"
+  },
+  "confirmPhrase": {
+    "confirm": "ยืนยัน",
+    "phraseLabel": "พิมพ์ {{phrase}} เพื่อยืนยัน",
+    "placeholder": "พิมพ์ตามข้อความด้านบน",
+    "mismatch": "ข้อความไม่ตรง — ต้องพิมพ์ให้ตรงทุกตัวอักษร",
+    "matched": "ตรงแล้ว — กดยืนยันได้"
+  },
+  "spinner": {
+    "loading": "กำลังโหลด…"
+  },
+  "impersonation": {
+    "actingAs": "ทำงานในนาม <strong>{{name}}</strong>",
+    "expiresIn": "(หมดอายุใน ~{{min}} นาที)",
+    "stop": "หยุดสวมรอย"
+  },
+  "collapseHint": {
+    "arrowPrefix": "กดลูกศร"
+  },
+  "api": {
+    "maintenanceDefault": "ระบบอยู่ระหว่างบำรุงรักษา — บางฟังก์ชันอาจใช้งานไม่ได้ชั่วคราว",
+    "htmlNotJson": "ได้รับ HTML แทน JSON — ตรวจว่า backend API รันอยู่ (พอร์ต 4000) และ path ถูกต้อง",
+    "invalidJson": "Invalid JSON response"
+  },
+  "calendar": {
+    "today": "เดือนนี้",
+    "month": "เดือน",
+    "week": "สัปดาห์",
+    "day": "วัน",
+    "moreJobs": "+{{count}} งาน",
+    "monthsShort": ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."],
+    "monthsLong": [
+      "มกราคม",
+      "กุมภาพันธ์",
+      "มีนาคม",
+      "เมษายน",
+      "พฤษภาคม",
+      "มิถุนายน",
+      "กรกฎาคม",
+      "สิงหาคม",
+      "กันยายน",
+      "ตุลาคม",
+      "พฤศจิกายน",
+      "ธันวาคม"
+    ]
+  },
+  "datePicker": {
+    "placeholder": "เลือกวันที่"
+  },
+  "userMenu": {
+    "profile": "โปรไฟล์",
+    "menuAria": "เมนูโปรไฟล์",
+    "statusLine": "สถานะ {{userst}} : {{sysstatus}}",
+    "currentAge": "ปัจจุบันอายุ",
+    "workAge": "อายุการทำงาน",
+    "totalHours": "ชั่วโมงรวม",
+    "hoursUnit": "ชม.",
+    "navAria": "ลิงก์โปรไฟล์",
+    "viewPerformance": "View Performance",
+    "workHours": "ชั่วโมงทำงาน",
+    "planWorkView": "Plan Work View"
+  },
+  "commandPalette": {
+    "aria": "เปิด command palette (Ctrl+K)",
+    "title": "ค้นหาและไปยังหน้า",
+    "description": "Command palette — กด Enter เพื่อเปิดหน้า",
+    "label": "ค้นหาหน้า",
+    "placeholder": "ค้นหาเมนูหรือหน้า…",
+    "empty": "ไม่พบรายการ",
+    "footer": "↑↓ เลือก · Enter เปิดหน้า · Esc ปิด",
+    "mainNavGroup": "เมนูหลัก"
+  },
+  "parity": {
+    "shellTitle": "รายละเอียดเพิ่มเติม",
+    "summaryWeeklyTitle": "สรุปรายสัปดาห์",
+    "summaryWeeklyDesc": "สรุปรายสัปดาห์และกราฟที่เกี่ยวข้อง",
+    "summaryWeeklyLink": "สรุปรายสัปดาห์"
+  },
+  "rbac": {
+    "requiresPermission": "ต้องมีสิทธิ์"
+  }
+}

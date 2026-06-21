@@ -1,0 +1,208 @@
+/* SAP Work Order print layout — match customer paper form */
+.sap-wo-print {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  line-height: 1.35;
+  color: #000;
+  background: #fff;
+  border: 1px solid #000;
+}
+
+.sap-wo-print * {
+  box-sizing: border-box;
+}
+
+.sap-wo-print__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.45rem 0.6rem 0.25rem;
+}
+
+.sap-wo-print__wo-label {
+  font-weight: 400;
+}
+
+.sap-wo-print__wo-number {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.sap-wo-print__logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.sap-wo-print__brand-logo {
+  display: block;
+  height: var(--brand-logo-nav-height, 2rem);
+  width: auto;
+  max-width: 7.5rem;
+  object-fit: contain;
+}
+
+.sap-wo-print__brand-mark {
+  flex-shrink: 0;
+}
+
+.sap-wo-print__barcode {
+  display: block;
+  width: min(220px, 55%);
+  height: 34px;
+  margin: 0.15rem 0.6rem 0.35rem;
+}
+
+.sap-wo-print__meta {
+  padding: 0 0.6rem 0.45rem;
+  font-size: 10.5px;
+}
+
+.sap-wo-print__rule {
+  border: 0;
+  border-top: 1px solid #000;
+  margin: 0;
+}
+
+.sap-wo-print__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.28rem 0.6rem;
+}
+
+.sap-wo-print__row--stack {
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.sap-wo-print__pair {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.sap-wo-print__pair--right {
+  text-align: right;
+}
+
+.sap-wo-print__inline {
+  display: inline;
+}
+
+.sap-wo-print__indent {
+  padding-left: 1.2rem;
+}
+
+.sap-wo-print__section-title {
+  padding: 0.15rem 0.6rem;
+  font-weight: 700;
+}
+
+.sap-wo-print__grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.sap-wo-print__longtext-title {
+  padding: 0.45rem 0.6rem 0.2rem;
+  font-weight: 700;
+}
+
+.sap-wo-print__longtext-sub {
+  padding: 0 0.6rem 0.35rem;
+}
+
+.sap-wo-print__pm-list {
+  margin: 0 0 0.5rem;
+  padding: 0 0.6rem 0 1.85rem;
+  font-size: 11px;
+  line-height: 1.45;
+  list-style: decimal;
+}
+
+.sap-wo-print__pm-list li {
+  margin-bottom: 0.2rem;
+}
+
+.sap-wo-print__pm-list-empty {
+  margin: 0;
+  padding: 0 0.6rem 0.35rem;
+  font-size: 11px;
+  color: var(--app-muted, #666);
+}
+
+.sap-wo-print__measure-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.sap-wo-print__measure-table th,
+.sap-wo-print__measure-table td {
+  border: 1px solid #000;
+  padding: 0.2rem 0.35rem;
+  vertical-align: middle;
+}
+
+.sap-wo-print__measure-table th {
+  font-weight: 700;
+  text-align: center;
+}
+
+.sap-wo-print__measure-table td:first-child {
+  font-weight: 400;
+}
+
+.sap-wo-print__input {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #666;
+  background: transparent;
+  font: inherit;
+  padding: 0.1rem 0.15rem;
+  text-align: center;
+}
+
+.sap-wo-print__input--left {
+  text-align: left;
+}
+
+.sap-wo-print__input:focus {
+  outline: 1px solid var(--brand-logo-blue-dark, #003366);
+  outline-offset: 0;
+}
+
+.sap-wo-print__input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.sap-wo-print__completion {
+  padding: 0.35rem 0.6rem 0.55rem;
+}
+
+.sap-wo-print__completion-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.sap-wo-print__actions {
+  padding: 0.5rem 0.6rem 0.65rem;
+  border-top: 1px solid #000;
+}
+
+@media (max-width: 640px) {
+  .sap-wo-print__grid-2,
+  .sap-wo-print__completion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sap-wo-print__pair--right {
+    text-align: left;
+  }
+}

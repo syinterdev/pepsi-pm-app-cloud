@@ -1,0 +1,161 @@
+/* PM completion panel — scoped to /worktime Summary only */
+.worktime-pm-panel {
+  --wt-pm-surface: color-mix(in srgb, var(--brand-pepsi-blue) 92%, #0c1929);
+  --wt-pm-surface-2: color-mix(in srgb, var(--sys-blue-light) 42%, var(--brand-pepsi-blue));
+  --wt-pm-border: color-mix(in srgb, white 18%, transparent);
+  --wt-pm-text: #f8fafc;
+  --wt-pm-muted: color-mix(in srgb, var(--wt-pm-text) 72%, transparent);
+  --wt-pm-track: color-mix(in srgb, white 14%, transparent);
+  --wt-pm-input-bg: color-mix(in srgb, white 94%, var(--app-surface));
+  --wt-pm-input-text: #0f172a;
+  --wt-pm-card-bg: color-mix(in srgb, white 10%, transparent);
+  --wt-pm-card-border: color-mix(in srgb, white 16%, transparent);
+  --wt-pm-line-bar: color-mix(in srgb, var(--brand-pepsi-orange) 55%, white);
+}
+
+html.dark .worktime-pm-panel {
+  --wt-pm-surface: color-mix(in srgb, #0b1220 88%, var(--brand-pepsi-blue));
+  --wt-pm-surface-2: color-mix(in srgb, #1e293b 75%, var(--brand-pepsi-blue));
+  --wt-pm-border: color-mix(in srgb, white 12%, transparent);
+  --wt-pm-text: #f1f5f9;
+  --wt-pm-muted: #94a3b8;
+  --wt-pm-track: color-mix(in srgb, white 10%, transparent);
+  --wt-pm-input-bg: color-mix(in srgb, var(--app-surface) 92%, #1e293b);
+  --wt-pm-input-text: var(--app-text);
+  --wt-pm-card-bg: color-mix(in srgb, white 6%, transparent);
+  --wt-pm-card-border: color-mix(in srgb, white 10%, transparent);
+  --wt-pm-line-bar: color-mix(in srgb, var(--brand-pepsi-orange) 70%, #fcd9b6);
+}
+
+.worktime-pm-panel__shell {
+  border-radius: var(--app-radius-card);
+  border: 1px solid var(--wt-pm-border);
+  background: linear-gradient(
+    145deg,
+    var(--wt-pm-surface) 0%,
+    var(--wt-pm-surface-2) 100%
+  );
+  color: var(--wt-pm-text);
+  box-shadow: var(--app-shadow-card);
+}
+
+/* พื้น panel เข้มเสมอ — บังคับข้อความสว่าง (ไม่ใช้ --app-heading-color / text-app) */
+.worktime-pm-panel .worktime-pm-panel__shell :where(h1, h2, h3, h4, h5, h6),
+.worktime-pm-panel .worktime-pm-panel__shell .worktime-pm-panel__title {
+  color: var(--wt-pm-text);
+}
+
+.worktime-pm-panel .worktime-pm-panel__shell :where(p, span, li, dt, dd) {
+  color: var(--wt-pm-text);
+}
+
+.worktime-pm-panel .worktime-pm-panel__shell .worktime-pm-panel__muted {
+  color: var(--wt-pm-muted);
+}
+
+.worktime-pm-panel__filter {
+  color: var(--wt-pm-muted);
+}
+
+.worktime-pm-panel__filter label,
+.worktime-pm-panel__filter .text-app {
+  color: var(--wt-pm-muted) !important;
+}
+
+.worktime-pm-panel__filter select,
+.worktime-pm-panel__filter input[type='month'] {
+  border: 1px solid var(--wt-pm-border);
+  background: var(--wt-pm-input-bg);
+  color: var(--wt-pm-input-text);
+}
+
+.worktime-pm-panel__view-btn {
+  border: 1px solid var(--wt-pm-border);
+  background: color-mix(in srgb, var(--wt-pm-card-bg) 80%, transparent);
+  color: var(--wt-pm-muted);
+}
+
+.worktime-pm-panel__view-btn[data-active='true'] {
+  background: color-mix(in srgb, white 18%, transparent);
+  color: var(--wt-pm-text);
+  border-color: color-mix(in srgb, white 28%, transparent);
+}
+
+.worktime-pm-panel__kpi-card {
+  border: 1px solid var(--wt-pm-card-border);
+  background: var(--wt-pm-card-bg);
+  color: var(--wt-pm-text);
+}
+
+.worktime-pm-panel__kpi-card .worktime-pm-panel__kpi-muted {
+  color: var(--wt-pm-muted);
+}
+
+.worktime-pm-panel__line-row {
+  color: var(--wt-pm-text);
+}
+
+.worktime-pm-panel__line-value {
+  color: #f5d0fe;
+}
+
+.worktime-pm-panel__progress-track {
+  background: var(--wt-pm-track);
+}
+
+.worktime-pm-panel__line-row {
+  border: 1px solid var(--wt-pm-card-border);
+  background: color-mix(in srgb, var(--wt-pm-line-bar) 22%, transparent);
+}
+
+.worktime-pm-panel__line-bar-fill {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--wt-pm-line-bar) 85%, white),
+    color-mix(in srgb, var(--brand-pepsi-blue) 40%, var(--wt-pm-line-bar))
+  );
+}
+
+.worktime-pm-panel__table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.8125rem;
+}
+
+.worktime-pm-panel__table th,
+.worktime-pm-panel__table td {
+  border-bottom: 1px solid var(--wt-pm-card-border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.worktime-pm-panel__table th {
+  color: var(--wt-pm-muted);
+  font-weight: 600;
+}
+
+.worktime-pm-panel__table td {
+  color: var(--wt-pm-text);
+}
+
+.worktime-pm-panel__table .tabular-nums {
+  text-align: right;
+}
+
+.worktime-pm-panel__shell .worktime-pm-panel__empty :where(p, .text-app, .text-app-muted) {
+  color: var(--wt-pm-muted) !important;
+}
+
+.worktime-pm-panel__shell .worktime-pm-panel__empty {
+  border-color: var(--wt-pm-border);
+  background: color-mix(in srgb, var(--wt-pm-card-bg) 60%, transparent);
+}
+
+.worktime-pm-panel__chart {
+  position: relative;
+  width: 100%;
+}
+
+.worktime-pm-panel__chart canvas {
+  max-width: 100%;
+}

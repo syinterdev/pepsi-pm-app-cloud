@@ -1,0 +1,127 @@
+{
+  "preparing": "กำลังเตรียม Engineering Board…",
+  "kioskTitle": "Engineering Board (Kiosk)",
+  "kioskTokenHint": "ต้องใช้ลิงก์ที่มี ?token=… จาก Admin → ตั้งค่าระบบ → Board kiosk",
+  "kioskLoginHint": "หรือเข้าสู่ระบบด้วย dashboard.read —",
+  "signIn": "เข้าสู่ระบบ",
+  "fullAppLogin": "เข้าสู่ระบบแอปเต็มรูปแบบ",
+  "zoneA": "โซน A · KPI",
+  "zoneAAria": "โซน A — ตัวชี้วัดหลัก",
+  "zoneC": "โซน C · ค่าวัด PM",
+  "pmReadingsAria": "ค่าวัด PM",
+  "pmReadingsTitle": "กระแส 3 เฟส / Vibration",
+  "pmReadingsSub": "{{label}} · {{count}} จุดวัด",
+  "pmReadingsEmpty": "ยังไม่มีค่าวัด PM ในช่วงนี้ — บันทึกจากแท็บ Task ในใบงาน",
+  "loadError": "โหลดค่าวัด PM ไม่สำเร็จ",
+  "emptyPm": "ไม่มีข้อมูลค่าวัด PM ในช่วงนี้",
+  "latest": "ล่าสุด: {{time}}",
+  "kpi": {
+    "openOrders": "ใบงานเปิด",
+    "openHint": "CRTD / REL",
+    "closedMonth": "ปิดเดือนนี้",
+    "closedHint": "เดือนปฏิทินปัจจุบัน",
+    "pendingPersonnel": "รอจ่ายงาน",
+    "pendingHint": "ยังไม่มีแผน",
+    "iw37nImport": "นำเข้า IW37N",
+    "iw37nHint": "ล่าสุดจาก batch",
+    "noImport": "—"
+  },
+  "header": {
+    "eyebrow": "Engineering Board",
+    "signedIn": "เข้าสู่ระบบแล้ว",
+    "kiosk": "Kiosk",
+    "updatedAt": "อัปเดต {{time}}",
+    "loading": "กำลังโหลด…",
+    "refreshing": " · รีเฟรช"
+  },
+  "period": {
+    "today": "วันนี้",
+    "7d": "7 วัน",
+    "week": "สัปดาห์นี้",
+    "month": "เดือนนี้",
+    "quarter": "ไตรมาส",
+    "aria": "ช่วงเวลารายงาน"
+  },
+  "team": {
+    "all": "ทั้งหมด",
+    "A": "ทีม A",
+    "B": "ทีม B",
+    "EE": "EE",
+    "UT": "UT",
+    "aria": "ทีม"
+  },
+  "carousel": {
+    "on": "สไลด์เปิด",
+    "off": "สไลด์ปิด",
+    "slide": "สไลด์ {{current}} / {{total}}",
+    "zoneD": "โซน D · สไลด์",
+    "navAria": "สไลด์โซน A B C",
+    "zoneSlideAria": "โซน {{zone}} — {{label}}",
+    "everySeconds": "ทุก {{seconds}} วินาที",
+    "resume": "เล่นต่อ",
+    "pause": "หยุดชั่วคราว",
+    "labelA": "KPI",
+    "labelB": "Utilization",
+    "labelC": "กิจกรรม",
+    "showAll": "แสดงทั้งหมด",
+    "slideZones": "สไลด์ A→B→C"
+  },
+  "theme": {
+    "light": "สว่าง",
+    "dark": "มืด",
+    "toggle": "สลับธีมบอร์ด"
+  },
+  "kioskNav": {
+    "fullscreen": "เต็มจอ",
+    "exitFullscreen": "ออกจากเต็มจอ",
+    "carousel": "สไลด์",
+    "home": "หน้าแรก",
+    "appMenuAria": "เมนูแอป (ต้องเข้าสู่ระบบ)",
+    "loginSection": "เข้าใช้งานแอป (ต้อง login)",
+    "signIn": "เข้าสู่ระบบ",
+    "openFullApp": "เปิดแอปเต็มรูปแบบ"
+  },
+  "activityFeed": {
+    "title": "รับงาน / ปิดงาน",
+    "zoneTag": "โซน C · กิจกรรม",
+    "aria": "โซน C — รับงานและปิดงานล่าสุด",
+    "sub": "สูงสุด 12 รายการ · รีเฟรช 60 วินาที",
+    "empty": "ยังไม่มีรับงาน/ปิดงานในช่วงนี้",
+    "error": "โหลดกิจกรรมไม่สำเร็จ"
+  },
+  "util": {
+    "legendTitle": "Utilization",
+    "legendPm": "PM",
+    "legendReactive": "Reactive",
+    "legendRca": "RCA",
+    "teamGridTitle": "ทีมช่าง · {{label}}",
+    "stackedTitle": "Eng Utilization — {{label}}",
+    "loadingPeople": "กำลังโหลดรายชื่อ…",
+    "loadingChart": "กำลังโหลด Eng Utilization…",
+    "chartFoot": "แสดง {{count}} ช่าง (เรียงตาม HR hour) · Total ใน Excel = %PM + %Reactive",
+    "showRca": "แสดง RCA utilization",
+    "hideRca": "ซ่อน RCA utilization",
+    "includeRca": "รวม %RCA ในกราฟและการ์ด",
+    "zoneAria": "โซน B — Eng Utilization"
+  },
+  "zoneB": {
+    "title": "กราฟและ Utilization",
+    "zoneTag": "โซน B",
+    "zoneTagLine": "โซน B · Utilization",
+    "sectionDesc": "{{label}} — กราฟซ้อน · week-to-week · การ์ดช่าง",
+    "weekTitle": "Week-to-Week",
+    "weekEmpty": "ต้องมีอย่างน้อย 2 สัปดาห์ในช่วง KPI",
+    "colWeek": "สัปดาห์",
+    "colUtil": "Util %",
+    "colDelta": "Δ",
+    "colBacklog": "Backlog"
+  },
+  "footer": {
+    "live": "Live · รีเฟรชทุก {{seconds}} วินาที",
+    "backApp": "กลับแอป",
+    "engUtilDetail": "Eng Utilization (รายละเอียด)",
+    "refresh": "รีเฟรช {{time}}",
+    "autoRefresh": "รีเฟรชอัตโนมัติทุก {{seconds}} วินาที"
+  }
+}
+

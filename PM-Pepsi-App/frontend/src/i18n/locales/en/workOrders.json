@@ -1,0 +1,118 @@
+{
+  "page": {
+    "title": "WO/Confirmation",
+    "noAccessTitle": "No access",
+    "noAccessDesc": "Requires permission",
+    "hintSearchWo": "Search WO number",
+    "hintMassConfirm": "Mass Confirm ≤44",
+    "hintApproveTeco": "Approve → TECO",
+    "hintPhotos": "After-PM photos"
+  },
+  "links": {
+    "exportConfirmation": "Export Confirmation",
+    "workSchedulingCalendar": "Work scheduling calendar",
+    "backlog": "Backlog",
+    "importIw37n": "Import IW37N"
+  },
+  "filters": {
+    "activeCount": "{{count}} filter(s) active",
+    "labels": {
+      "activity": "Activity (mat)",
+      "equipment": "Equipment",
+      "funcLoc": "Functional location",
+      "searchQ": "Search (WO no. / text / equipment)"
+    },
+    "searchQPlaceholder": "e.g. 4000001 or motor",
+    "more": "More filters (equipment · date range)"
+  },
+  "filterSummary": {
+    "title": "Team A/B summary",
+    "subtitle": "Live preview updates when team radios change (save to persist)"
+  },
+  "teamBulk": {
+    "selected": "{{count}} of {{total}} selected on this page",
+    "teamLabel": "Team {{team}}",
+    "clearTeam": "Clear team",
+    "saveBatch": "Save team assignment",
+    "saving": "Saving…",
+    "hint": "Select rows · pick team · Save once",
+    "selectRowsFirst": "Select rows in the table first",
+    "saved": "Updated team on {{count}} work order(s)",
+    "partial": "Updated {{updated}} · {{notFound}} not found"
+  },
+  "search": {
+    "filterTitle": "Search work orders",
+    "collapsedHint": "Search \"{{q}}\"",
+    "clear": "Clear",
+    "orderNumberLabel": "Work order number",
+    "placeholder": "Type at least 2 characters of the work order number…",
+    "emptyTitle": "Search work order number",
+    "emptyDescription": "Use filters and Search — Approve / Reject and assign teams",
+    "listTitle": "Work order list",
+    "listSubtitle": "{{count}} work order(s)",
+    "listSubtitleQ": "Search \"{{q}}\" · {{count}} result(s)",
+    "loadFailedTitle": "Could not load list",
+    "loadFailedFallback": "Check API connection",
+    "loadingListAria": "Loading list"
+  },
+  "table": {
+    "loadingAria": "Loading list",
+    "emptyTitle": "No work orders found",
+    "emptyDescription": "Try another number or confirm IW37N was imported",
+    "colOrderNumber": "Work order number",
+    "colPmPhase": "Create / REL / Confirm",
+    "colMaintPlan": "Maint. plan",
+    "colTypeActivity": "Type / activity (ZB / ZD)",
+    "colEquipment": "Equipment",
+    "colFuncLoc": "Functional loc.",
+    "colTeam": "Team",
+    "colApproveReject": "Approve / Reject",
+    "selectAllAria": "Select all on this page",
+    "selectRowAria": "Select work order {{wkorder}}",
+    "teamNone": "—"
+  },
+  "toastTeam": {
+    "rowSaved": "Assigned Team {{team}}",
+    "rowCleared": "Cleared team assignment",
+    "rowSaveFailed": "Could not update team"
+  },
+  "qc": {
+    "badgeTecoApproved": "TECO / Approved",
+    "badgeRejected": "Sent back for correction",
+    "badgePending": "Pending review",
+    "noReviewPermission": "No review permission",
+    "approveDisabledTitle": "Requires details, after-PM photos, and close record first",
+    "approve": "Approve",
+    "reject": "Reject",
+    "rejectPrompt": "Reason for send-back (optional)",
+    "rejectTitle": "Send back for correction",
+    "rejectNoteLabel": "Reason (optional)",
+    "rejectNotePlaceholder": "e.g. missing after-PM photos, incorrect close time…"
+  },
+  "toast": {
+    "approveSuccess": "Approved {{wkorder}} — TECO status on technician dashboard",
+    "approveFailed": "Approval failed",
+    "rejectSent": "Sent back {{wkorder}} for technician correction",
+    "rejectFailed": "Send-back failed"
+  },
+  "technician": {
+    "emptyTitle": "Search work order number",
+    "emptyDescription": "Enter a work order number and pick from the list — technician status (pending / done) will appear",
+    "loadingAria": "Loading work order",
+    "loadFailedTitle": "Could not load work order",
+    "loadFailedFallback": "Work order not found",
+    "workOrderLabel": "Work order {{wkorder}}",
+    "openDetailClose": "Open details / close work",
+    "doneCount": "Technicians done {{count}}",
+    "pendingCount": "Technicians pending {{count}}",
+    "closeHintSuffix": " — record on Close tab (details + after-PM photos)",
+    "hintNeedComment": "Please save details (comments) before closing",
+    "hintNeedImages": "Please attach after-PM photos before closing",
+    "noTechnicians": "No assigned technicians or close records yet — open details to assign or record close",
+    "colTechCode": "Technician code",
+    "colName": "Name",
+    "colStatus": "Status",
+    "statusDone": "Done",
+    "statusPending": "Pending"
+  }
+}

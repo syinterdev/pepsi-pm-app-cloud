@@ -1,0 +1,5821 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  PM / CM — Preventive maintenance (Pepsi factory)
+  Theme tokens applied by ThemeProvider from GET /api/v1/settings/public
+  + user session preference (pm_theme_preference).
+*/
+
+:root {
+  /* โลโก้ใหม่ลูกค้า — source of truth (docs/customer-requirements/UI-DESIGN-TOKENS.md) */
+  --brand-logo-blue-dark: #003366;
+  --brand-logo-orange: #f7941d;
+  --brand-logo-green-dark: #1e6b34;
+  --brand-logo-green-light: #7ac943;
+  --brand-logo-sky: #4da6ff;
+  --brand-logo-white: #ffffff;
+
+  /* Alias เก่า → พาเลตใหม่ (compat ทั้งแอป) */
+  --brand-pepsi-blue: var(--brand-logo-blue-dark);
+  --brand-pepsi-red: var(--brand-logo-orange);
+  --brand-pepsi-white: var(--brand-logo-white);
+  --brand-pepsi-orange: var(--brand-logo-orange);
+  --brand-pepsi-green: var(--brand-logo-green-light);
+
+  /* Semantic system colors — อิงพาเลตโลโก้ */
+  --sys-blue-light: var(--brand-logo-sky);
+  --sys-blue-dark: color-mix(in srgb, var(--brand-logo-sky) 82%, #000812);
+  --sys-green-light: var(--brand-logo-green-light);
+  --sys-green-dark: var(--brand-logo-green-dark);
+  --sys-orange-light: var(--brand-logo-orange);
+  --sys-orange-dark: color-mix(in srgb, var(--brand-logo-orange) 85%, #000812);
+  --sys-red-light: #ff3b30;
+  --sys-red-dark: #ff453a;
+  --sys-purple-light: #af52de;
+  --sys-purple-dark: #bf5af2;
+  --sys-yellow-light: #ffcc00;
+  --sys-yellow-dark: #ffd60a;
+  --brand-logo-stripe: linear-gradient(
+    90deg,
+    var(--brand-logo-blue-dark) 0%,
+    var(--brand-logo-blue-dark) 16.67%,
+    var(--brand-logo-orange) 16.67%,
+    var(--brand-logo-orange) 33.33%,
+    var(--brand-logo-green-dark) 33.33%,
+    var(--brand-logo-green-dark) 50%,
+    var(--brand-logo-green-light) 50%,
+    var(--brand-logo-green-light) 66.67%,
+    var(--brand-logo-sky) 66.67%,
+    var(--brand-logo-sky) 83.33%,
+    var(--brand-logo-white) 83.33%,
+    var(--brand-logo-white) 100%
+  );
+  --app-primary: var(--brand-logo-orange);
+  --app-accent: var(--brand-logo-blue-dark);
+  --app-primary-rgb: 247, 148, 29;
+  --app-accent-rgb: 0, 51, 102;
+  --app-bg: #eef2f7;
+  --app-surface: #ffffff;
+  --app-surface-muted: #f4f4f5;
+  --app-text: #18181b;
+  --app-text-muted: #71717a;
+  --app-border: #e4e4e7;
+  --app-sidebar: #eaeaea;
+  --app-sidebar-fg: #1f2937;
+  --app-sidebar-fg-muted: #5b6470;
+  --app-sidebar-border: #d4d4d8;
+  --app-sidebar-hover: color-mix(in srgb, var(--app-accent) 10%, #eaeaea);
+  --app-sidebar-active: color-mix(in srgb, var(--app-accent) 16%, #eaeaea);
+  --app-sidebar-inner-highlight: rgba(255, 255, 255, 0.72);
+  --app-sidebar-elevated:
+    0 1px 0 color-mix(in srgb, var(--app-sidebar-inner-highlight) 55%, transparent),
+    0 6px 20px color-mix(in srgb, var(--app-text) 7%, transparent);
+  --app-sidebar-elevated-pinned:
+    0 1px 0 color-mix(in srgb, var(--app-sidebar-inner-highlight) 40%, transparent),
+    0 2px 10px color-mix(in srgb, var(--app-text) 4%, transparent);
+  --app-sidebar-elevated-hover:
+    0 2px 6px color-mix(in srgb, var(--app-text) 5%, transparent),
+    0 14px 36px color-mix(in srgb, var(--app-text) 12%, transparent);
+  --app-glass-bg: rgba(255, 255, 255, 0.7);
+  --app-glass-border: rgba(255, 255, 255, 0.18);
+
+  /* Semantic status — แทน emerald-* / amber-* / violet-* (PRE-UAT §E) */
+  --status-success: var(--brand-logo-green-light);
+  --status-warning: var(--brand-logo-orange);
+  --status-danger: var(--sys-red-light);
+  --status-info: var(--brand-logo-blue-dark);
+  --phase-before: var(--status-warning);
+  --phase-after: var(--status-success);
+
+  /* Typography — ฟอนต์เดียวทั้งแอป · scale จาก --app-font-size-base (Branding) */
+  --app-font-family: "Sarabun", "Segoe UI", system-ui, sans-serif;
+  --app-font-size-caption: 13px;
+  --app-font-size-base: 15px;
+  --app-font-size-sm: 13px;
+  --app-font-size-lg: 17px;
+  --app-font-size-xl: 20px;
+  --app-font-size-page-title: 24px;
+  --app-nav-heading-size: 14px;
+  --app-nav-link-size: 15px;
+  --app-line-height-tight: 1.25;
+  --app-line-height-body: 1.5;
+  --app-line-height-relaxed: 1.6;
+  --app-heading-color: var(--brand-logo-blue-dark);
+
+  /* Radius / shadow — U0: card 12px · button 8px · dialog 16px */
+  --app-radius-card: 12px;
+  --app-radius-button: 8px;
+  --app-radius-dialog: 16px;
+  --app-shadow-card:
+    0 1px 3px color-mix(in srgb, var(--app-text) 6%, transparent),
+    0 8px 24px color-mix(in srgb, var(--app-accent) 8%, transparent);
+  --app-shadow-card-hover:
+    0 2px 8px color-mix(in srgb, var(--app-accent) 10%, transparent),
+    0 12px 28px color-mix(in srgb, var(--app-accent) 12%, transparent);
+  --app-shadow-button: 0 1px 2px color-mix(in srgb, var(--app-text) 8%, transparent);
+  --app-shadow-dialog:
+    0 2px 8px color-mix(in srgb, var(--app-text) 8%, transparent),
+    0 16px 48px color-mix(in srgb, var(--app-accent) 14%, transparent);
+
+  /* Spacing — U0: 4 / 8 / 12 / 16 / 24 / 32 px (ใช้ gap แทน margin แนวตั้งเมื่อจัด layout) */
+  --app-space-1: 4px;
+  --app-space-2: 8px;
+  --app-space-3: 12px;
+  --app-space-4: 16px;
+  --app-space-5: 24px;
+  --app-space-6: 32px;
+
+  /* Card padding — AppCard / AdminCard / CardHeader / CardContent */
+  --app-card-padding: var(--app-space-5);
+  --app-card-padding-compact: var(--app-space-4);
+  --app-card-inner-gap: var(--app-space-2);
+}
+
+@theme inline {
+  --radius-card: var(--app-radius-card);
+  --radius-button: var(--app-radius-button);
+  --radius-dialog: var(--app-radius-dialog);
+
+  /* Tailwind spacing keys → scale (ค่านอก scale ถูก snap เข้า step ใกล้สุด) */
+  --spacing-0: 0px;
+  --spacing-px: 1px;
+  --spacing-0\.5: var(--app-space-1);
+  --spacing-1: var(--app-space-1);
+  --spacing-1\.5: var(--app-space-2);
+  --spacing-2: var(--app-space-2);
+  --spacing-2\.5: var(--app-space-3);
+  --spacing-3: var(--app-space-3);
+  --spacing-3\.5: var(--app-space-4);
+  --spacing-4: var(--app-space-4);
+  --spacing-5: var(--app-space-4);
+  --spacing-6: var(--app-space-5);
+  --spacing-7: var(--app-space-5);
+  --spacing-8: var(--app-space-6);
+  --spacing-9: var(--app-space-6);
+  --spacing-10: var(--app-space-6);
+  --spacing-11: var(--app-space-6);
+  --spacing-12: var(--app-space-6);
+  --spacing-14: var(--app-space-6);
+  --spacing-16: var(--app-space-6);
+  --spacing-20: var(--app-space-6);
+  --spacing-24: var(--app-space-6);
+  --spacing-28: var(--app-space-6);
+  --spacing-32: var(--app-space-6);
+
+  /* Tailwind utility shades → พาเลตโลโก้ (blue/orange/green/red/sky/emerald/indigo) */
+  --color-blue-50: color-mix(in srgb, var(--brand-logo-sky) 10%, white);
+  --color-blue-100: color-mix(in srgb, var(--brand-logo-sky) 20%, white);
+  --color-blue-200: color-mix(in srgb, var(--brand-logo-sky) 35%, white);
+  --color-blue-700: color-mix(in srgb, var(--brand-logo-blue-dark) 88%, black);
+  --color-blue-800: var(--brand-logo-blue-dark);
+  --color-blue-900: color-mix(in srgb, var(--brand-logo-blue-dark) 92%, black);
+  --color-sky-50: color-mix(in srgb, var(--brand-logo-sky) 12%, white);
+  --color-sky-200: color-mix(in srgb, var(--brand-logo-sky) 38%, white);
+  --color-sky-600: color-mix(in srgb, var(--brand-logo-sky) 78%, var(--brand-logo-blue-dark));
+  --color-sky-900: color-mix(in srgb, var(--brand-logo-blue-dark) 85%, black);
+  --color-orange-50: color-mix(in srgb, var(--brand-logo-orange) 12%, white);
+  --color-orange-100: color-mix(in srgb, var(--brand-logo-orange) 22%, white);
+  --color-orange-200: color-mix(in srgb, var(--brand-logo-orange) 38%, white);
+  --color-orange-700: color-mix(in srgb, var(--brand-logo-orange) 82%, #3d2200);
+  --color-orange-900: color-mix(in srgb, var(--brand-logo-orange) 72%, #1a0e00);
+  --color-orange-950: color-mix(in srgb, var(--brand-logo-orange) 65%, black);
+  --color-amber-50: color-mix(in srgb, var(--brand-logo-orange) 10%, white);
+  --color-emerald-100: color-mix(in srgb, var(--brand-logo-green-light) 22%, white);
+  --color-emerald-300: color-mix(in srgb, var(--brand-logo-green-light) 48%, white);
+  --color-emerald-950: color-mix(in srgb, var(--brand-logo-green-dark) 88%, black);
+  --color-green-100: color-mix(in srgb, var(--brand-logo-green-light) 22%, white);
+  --color-indigo-50: color-mix(in srgb, var(--brand-logo-sky) 10%, white);
+  --color-indigo-200: color-mix(in srgb, var(--brand-logo-sky) 34%, white);
+  --color-red-50: color-mix(in srgb, var(--admin-danger) 10%, white);
+  --color-red-100: color-mix(in srgb, var(--admin-danger) 18%, white);
+  --color-red-200: color-mix(in srgb, var(--admin-danger) 32%, white);
+  --color-red-600: var(--admin-danger);
+  --color-red-700: color-mix(in srgb, var(--admin-danger) 88%, black);
+  --color-red-800: color-mix(in srgb, var(--admin-danger) 78%, black);
+  --color-red-900: color-mix(in srgb, var(--admin-danger) 72%, black);
+  --color-red-950: color-mix(in srgb, var(--admin-danger) 65%, black);
+}
+
+html {
+  @apply antialiased;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+  /* fallback tokens — sync กับ applyThemeToDocument (dark) */
+  --app-bg: #0f172a;
+  --app-surface: #1e293b;
+  --app-surface-muted: #334155;
+  --app-text: #f8fafc;
+  --app-text-muted: #cbd5e1;
+  --app-border: #475569;
+  --app-sidebar: #1e293b;
+  --app-sidebar-fg: rgba(255, 255, 255, 0.94);
+  --app-sidebar-fg-muted: rgba(255, 255, 255, 0.76);
+  --app-sidebar-border: rgba(255, 255, 255, 0.06);
+  --app-sidebar-inner-highlight: rgba(255, 255, 255, 0.06);
+  --app-sidebar-elevated:
+    inset -1px 0 0 var(--app-sidebar-inner-highlight),
+    0 10px 32px rgba(0, 0, 0, 0.42);
+  --app-sidebar-elevated-pinned:
+    inset -1px 0 0 var(--app-sidebar-inner-highlight),
+    0 4px 16px rgba(0, 0, 0, 0.32);
+  --app-sidebar-elevated-hover:
+    inset -1px 0 0 rgba(255, 255, 255, 0.09),
+    0 18px 44px rgba(0, 0, 0, 0.55);
+  --app-accent: var(--brand-logo-sky);
+  --app-glass-bg: rgba(30, 41, 59, 0.78);
+  --app-glass-border: rgba(255, 255, 255, 0.14);
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-base);
+  line-height: 1.5;
+  background-color: var(--app-bg);
+  color: var(--app-text);
+}
+
+/* Nav / sidebar group headings — ขนาดจาก Admin Branding */
+.nav-menu-group-heading {
+  font-family: var(--app-font-family);
+  font-size: var(--app-nav-heading-size);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--app-text-muted) 88%, var(--app-text));
+  line-height: 1.35;
+}
+
+.macos-sidebar .nav-menu-group-heading {
+  color: var(--sb-menu-muted);
+  letter-spacing: 0.08em;
+}
+
+.nav-menu-group-heading--sidebar {
+  margin-top: var(--app-space-3);
+  padding: var(--app-space-2) var(--app-space-3) var(--app-space-1);
+  border-left: 3px solid color-mix(in srgb, var(--app-accent) 55%, transparent);
+  background: color-mix(in srgb, var(--app-accent) 6%, transparent);
+  border-radius: 0 var(--app-radius-button) var(--app-radius-button) 0;
+}
+
+.macos-sidebar .nav-menu-group-heading--sidebar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: color-mix(in srgb, var(--app-sidebar) 94%, var(--app-surface));
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--app-sidebar-border) 70%, transparent);
+}
+
+.nav-menu-group-heading--sidebar.nav-menu-group-heading--first {
+  margin-top: var(--app-space-1);
+}
+
+.sidebar-group-marker {
+  display: flex;
+  justify-content: center;
+  padding: var(--app-space-2) 0;
+  cursor: default;
+}
+
+.sidebar-group-marker--spaced {
+  margin-top: var(--app-space-2);
+}
+
+/* Command palette (Ctrl+K) */
+.command-palette-kbd__key {
+  display: inline-flex;
+  min-width: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--app-border) 80%, transparent);
+  background: color-mix(in srgb, var(--app-surface-muted) 90%, var(--app-surface));
+  padding: 0.1rem 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--app-text-muted);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--app-text) 6%, transparent);
+}
+
+.app-command-palette__cmd [cmdk-group-heading] {
+  padding: 0.5rem 0.5rem 0.25rem;
+  font-family: var(--app-font-family);
+  font-size: var(--app-nav-heading-size);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--app-text-muted);
+}
+
+.app-command-palette__item[aria-selected='true'] {
+  background: color-mix(in srgb, var(--app-accent) 12%, var(--app-surface-muted));
+  outline: none;
+}
+
+.app-command-palette__item[aria-selected='true'] .app-command-palette__item-icon {
+  border-color: color-mix(in srgb, var(--app-accent) 35%, var(--app-border));
+  color: var(--app-accent);
+  background: color-mix(in srgb, var(--app-accent) 10%, var(--app-surface));
+}
+
+.command-palette-trigger {
+  border-color: color-mix(in srgb, var(--app-border) 90%, transparent);
+}
+
+.app-topbar-icon-btn:hover {
+  color: var(--app-accent);
+}
+
+/* Announcement banner — คอลัมน์เนื้อหาเท่านั้น (ไม่ทับ sidebar) */
+.app-announcement-zone {
+  position: relative;
+  z-index: 15;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* U4g.10 — impersonation / system banners: content column only (sidebar z-30) */
+.app-shell-banners {
+  position: relative;
+  z-index: 15;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.app-announcement__icon {
+  opacity: 0.85;
+}
+
+.app-announcement__dismiss:hover {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.app-announcement--info {
+  border-color: color-mix(in srgb, var(--app-accent) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--app-accent) 10%, var(--app-surface));
+  color: color-mix(in srgb, var(--app-accent) 88%, var(--app-text));
+}
+
+.app-announcement--warn {
+  border-color: color-mix(in srgb, var(--admin-warning) 45%, var(--app-border));
+  background: color-mix(in srgb, var(--admin-warning) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--admin-warning) 88%, var(--app-text));
+}
+
+.app-announcement--error {
+  border-color: color-mix(in srgb, var(--admin-danger) 45%, var(--app-border));
+  background: color-mix(in srgb, var(--admin-danger) 12%, var(--app-surface));
+  color: color-mix(in srgb, var(--admin-danger) 82%, var(--app-text));
+}
+
+.app-announcement--maintenance {
+  border-color: color-mix(in srgb, var(--app-accent) 40%, var(--app-border));
+  background: color-mix(in srgb, var(--app-accent) 14%, var(--app-surface-muted));
+  color: var(--app-text);
+}
+
+html.dark .app-announcement--warn {
+  color: color-mix(in srgb, var(--admin-warning) 92%, var(--app-text));
+}
+
+html.dark .app-announcement--error {
+  color: color-mix(in srgb, var(--admin-danger) 90%, var(--app-text));
+}
+
+.macos-admin .app-announcement--info,
+.macos-admin .app-announcement--maintenance {
+  border-color: color-mix(in srgb, var(--admin-primary) 35%, var(--admin-border));
+  background: color-mix(in srgb, var(--admin-primary) 10%, var(--admin-surface));
+  color: color-mix(in srgb, var(--admin-primary) 88%, var(--admin-text));
+}
+
+.sidebar-group-marker__line {
+  display: block;
+  width: 1.25rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--app-accent) 45%, var(--app-sidebar-border)),
+    transparent
+  );
+}
+
+html.dark .macos-admin .macos-sidebar .nav-menu-group-heading {
+  color: color-mix(in srgb, #a1a1aa 90%, white);
+}
+
+/* Admin console group titles */
+.admin-section-group-title {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-lg);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--app-heading-color, var(--admin-primary));
+  line-height: 1.3;
+}
+
+/*
+ * Type scale (skills.md / UI-POLISH U0)
+ * caption < body (base) < section (lg) < page title
+ * ใช้ class .text-caption / .text-body / .text-heading-* หรือ inherit จาก .app-page-content
+ */
+.text-caption {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-caption);
+  line-height: var(--app-line-height-body);
+  color: var(--app-text-muted);
+}
+
+.text-body {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-base);
+  line-height: var(--app-line-height-body);
+  color: var(--app-text);
+}
+
+.text-body-sm {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-sm);
+  line-height: var(--app-line-height-body);
+}
+
+.text-sidebar-muted {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-caption);
+  line-height: var(--app-line-height-tight);
+  color: var(--app-sidebar-fg-muted);
+}
+
+.text-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--app-font-size-caption);
+  line-height: var(--app-line-height-body);
+}
+
+.text-badge {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-caption);
+  line-height: var(--app-line-height-tight);
+}
+
+/* Radius / shadow utilities (UI-POLISH U0) */
+.rounded-app-card {
+  border-radius: var(--app-radius-card);
+}
+
+.rounded-app-button {
+  border-radius: var(--app-radius-button);
+}
+
+.rounded-app-dialog {
+  border-radius: var(--app-radius-dialog);
+}
+
+.shadow-app-card {
+  box-shadow: var(--app-shadow-card);
+}
+
+.shadow-app-button {
+  box-shadow: var(--app-shadow-button);
+}
+
+.shadow-app-dialog {
+  box-shadow: var(--app-shadow-dialog);
+}
+
+.macos-dialog-glass {
+  border-radius: var(--app-radius-dialog);
+  box-shadow: var(--app-shadow-dialog);
+}
+
+/* Vertical stacks — ใช้ gap แทน margin-top สุ่ม */
+.app-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-4);
+}
+
+.app-stack-tight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-2);
+}
+
+.app-stack-loose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-5);
+}
+
+/* Info / accent surfaces — Pepsi blue (แทน violet/indigo ใน UI) */
+.app-tone-info {
+  border-color: color-mix(in srgb, var(--app-accent) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--app-accent) 10%, var(--app-surface));
+  color: color-mix(in srgb, var(--app-accent) 88%, var(--app-text));
+}
+
+.app-tone-info-muted {
+  color: color-mix(in srgb, var(--app-accent) 72%, var(--app-text-muted));
+}
+
+.app-tone-info-row {
+  background: color-mix(in srgb, var(--app-accent) 8%, transparent);
+}
+
+.app-tone-info-fill {
+  background: var(--app-accent);
+}
+
+.app-badge-accent {
+  border: 0;
+  background: var(--app-accent);
+  color: #fff;
+}
+
+.macos-admin .app-tone-info {
+  border-color: color-mix(in srgb, var(--admin-primary) 35%, var(--admin-border));
+  background: color-mix(in srgb, var(--admin-primary) 10%, var(--admin-surface));
+  color: color-mix(in srgb, var(--admin-primary) 88%, var(--admin-text));
+}
+
+/* Semantic status surfaces — success / warning / danger (PRE-UAT §E) */
+.app-tone-success {
+  border-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-success) 10%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-success) 88%, var(--app-text));
+}
+
+.app-tone-warning {
+  border-color: color-mix(in srgb, var(--status-warning) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-warning) 10%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-warning) 88%, var(--app-text));
+}
+
+.app-tone-danger {
+  border-color: color-mix(in srgb, var(--status-danger) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-danger) 10%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-danger) 88%, var(--app-text));
+}
+
+.app-tone-info-soft {
+  background: color-mix(in srgb, var(--status-info) 8%, var(--app-surface));
+}
+
+.app-tone-success-soft {
+  background: color-mix(in srgb, var(--status-success) 8%, var(--app-surface));
+}
+
+.app-tone-warning-soft {
+  background: color-mix(in srgb, var(--status-warning) 8%, var(--app-surface));
+}
+
+.app-tone-info-icon {
+  color: color-mix(in srgb, var(--status-info) 75%, var(--app-text));
+}
+
+.app-tone-success-icon {
+  color: color-mix(in srgb, var(--status-success) 75%, var(--app-text));
+}
+
+.app-tone-warning-icon {
+  color: color-mix(in srgb, var(--status-warning) 75%, var(--app-text));
+}
+
+.app-tone-info-label {
+  color: color-mix(in srgb, var(--status-info) 65%, var(--app-text-muted));
+}
+
+.app-tone-success-label {
+  color: color-mix(in srgb, var(--status-success) 65%, var(--app-text-muted));
+}
+
+.app-tone-warning-label {
+  color: color-mix(in srgb, var(--status-warning) 65%, var(--app-text-muted));
+}
+
+.app-tone-info-strong {
+  color: color-mix(in srgb, var(--status-info) 92%, var(--app-text));
+}
+
+.app-tone-success-strong {
+  color: color-mix(in srgb, var(--status-success) 92%, var(--app-text));
+}
+
+.app-tone-warning-strong {
+  color: color-mix(in srgb, var(--status-warning) 92%, var(--app-text));
+}
+
+.app-tone-info-eyebrow {
+  color: color-mix(in srgb, var(--status-info) 70%, var(--app-text-muted));
+}
+
+.app-tone-info-badge {
+  border: 0;
+  background: color-mix(in srgb, var(--status-info) 12%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-info) 90%, var(--app-text));
+}
+
+.app-tone-success-badge {
+  border-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-success) 12%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-success) 90%, var(--app-text));
+}
+
+.app-tone-warning-badge {
+  border-color: color-mix(in srgb, var(--status-warning) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-warning) 12%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-warning) 90%, var(--app-text));
+}
+
+.app-tone-info-outline-badge {
+  border-color: color-mix(in srgb, var(--status-info) 35%, var(--app-border));
+  color: color-mix(in srgb, var(--status-info) 90%, var(--app-text));
+}
+
+.app-tone-info-tile {
+  border-color: color-mix(in srgb, var(--status-info) 35%, var(--app-border));
+}
+
+.app-tone-success-tile {
+  border-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+}
+
+.app-tone-warning-tile {
+  border-color: color-mix(in srgb, var(--status-warning) 35%, var(--app-border));
+}
+
+.app-tone-info-hero {
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--status-info) 40%, var(--app-border));
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--status-info) 10%, var(--app-surface)),
+    var(--app-surface),
+    color-mix(in srgb, var(--app-accent) 4%, var(--app-surface))
+  );
+}
+
+.app-tone-info-section {
+  border-color: color-mix(in srgb, var(--status-info) 40%, var(--app-border));
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--status-info) 8%, var(--app-surface)),
+    var(--app-surface)
+  );
+}
+
+.app-tone-success-section {
+  border-color: color-mix(in srgb, var(--status-success) 40%, var(--app-border));
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--status-success) 10%, var(--app-surface)),
+    var(--app-surface)
+  );
+}
+
+.app-tone-warning-section {
+  border-color: color-mix(in srgb, var(--status-warning) 40%, var(--app-border));
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--status-warning) 10%, var(--app-surface)),
+    var(--app-surface)
+  );
+}
+
+.app-tone-info-inner {
+  border-color: color-mix(in srgb, var(--status-info) 25%, var(--app-border));
+}
+
+.app-tone-info-editing {
+  border-color: color-mix(in srgb, var(--status-info) 50%, var(--app-border));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--status-info) 28%, transparent);
+}
+
+.app-tone-info-strip {
+  background: color-mix(in srgb, var(--status-info) 45%, transparent);
+}
+
+.app-tone-info-strip-active {
+  background: var(--status-info);
+}
+
+.app-tone-info-avatar {
+  background: color-mix(in srgb, var(--status-info) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-info) 75%, var(--app-text));
+}
+
+.app-tone-info-empty {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--status-info) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-info) 8%, var(--app-surface));
+}
+
+.app-tone-info-empty-icon {
+  color: color-mix(in srgb, var(--status-info) 35%, var(--app-text-muted));
+}
+
+.app-tone-info-card-border {
+  border-color: color-mix(in srgb, var(--status-info) 35%, var(--app-border));
+}
+
+.app-tone-info-card-border-hover:hover {
+  border-color: color-mix(in srgb, var(--status-info) 50%, var(--app-border));
+}
+
+.app-tone-info-card-strip {
+  background: var(--status-info);
+}
+
+.app-tone-info-card-index {
+  background: color-mix(in srgb, var(--status-info) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-info) 90%, var(--app-text));
+}
+
+.app-tone-info-stat-box {
+  border-color: color-mix(in srgb, var(--status-info) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-info) 10%, var(--app-surface));
+}
+
+.app-tone-success-stat-box {
+  border-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-success) 10%, var(--app-surface));
+}
+
+.app-tone-success-stat {
+  border-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+}
+
+.app-tone-success-stat-active {
+  border-color: color-mix(in srgb, var(--status-success) 55%, var(--app-border));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--status-success) 28%, transparent);
+}
+
+.app-tone-success-banner {
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--status-success) 40%, var(--app-border));
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--status-success) 12%, var(--app-surface)),
+    color-mix(in srgb, var(--status-success) 8%, var(--app-surface))
+  );
+}
+
+.app-tone-success-panel {
+  border-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-success) 10%, var(--app-surface));
+}
+
+.app-tone-success-table-head {
+  background: color-mix(in srgb, var(--status-success) 18%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-success) 92%, var(--app-text));
+}
+
+.app-tone-success-fill {
+  background: var(--status-success);
+  color: #fff;
+}
+
+.app-tone-warning-callout {
+  border-color: color-mix(in srgb, var(--status-warning) 45%, var(--app-border));
+  background: color-mix(in srgb, var(--status-warning) 12%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-warning) 92%, var(--app-text));
+}
+
+.app-tone-danger-callout {
+  border-color: color-mix(in srgb, var(--status-danger) 45%, var(--app-border));
+  background: color-mix(in srgb, var(--status-danger) 12%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-danger) 92%, var(--app-text));
+}
+
+.app-tone-danger-text {
+  color: color-mix(in srgb, var(--status-danger) 90%, var(--app-text));
+}
+
+.app-tone-danger-badge {
+  border-color: color-mix(in srgb, var(--status-danger) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-danger) 12%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-danger) 90%, var(--app-text));
+}
+
+.app-tone-danger-btn-ghost {
+  color: color-mix(in srgb, var(--status-danger) 85%, var(--app-text));
+}
+
+.app-tone-danger-btn-ghost:hover {
+  background: color-mix(in srgb, var(--status-danger) 12%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-danger) 95%, var(--app-text));
+}
+
+.app-tone-danger-outline-btn {
+  border-color: color-mix(in srgb, var(--status-danger) 45%, var(--app-border));
+  color: color-mix(in srgb, var(--status-danger) 90%, var(--app-text));
+}
+
+.app-tone-danger-outline-btn:hover {
+  background: color-mix(in srgb, var(--status-danger) 12%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-danger) 95%, var(--app-text));
+}
+
+.app-tone-success-row-highlight {
+  background: color-mix(in srgb, var(--status-success) 10%, var(--app-surface));
+}
+
+.app-tone-success-mass-bar {
+  border-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--status-success) 12%, var(--app-surface)),
+    color-mix(in srgb, var(--status-success) 6%, var(--app-surface))
+  );
+}
+
+.app-tone-warning-move-plan {
+  border-color: color-mix(in srgb, var(--status-warning) 40%, var(--app-border));
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--status-warning) 12%, var(--app-surface)),
+    color-mix(in srgb, var(--status-warning) 8%, var(--app-surface))
+  );
+}
+
+.app-tone-warning-move-plan__icon {
+  background: color-mix(in srgb, var(--status-warning) 18%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-warning) 85%, var(--app-text));
+}
+
+.app-tone-info-callout {
+  border-color: color-mix(in srgb, var(--status-info) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-info) 10%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-info) 92%, var(--app-text));
+}
+
+.app-tone-info-chip {
+  background: color-mix(in srgb, var(--status-info) 12%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-info) 90%, var(--app-text));
+}
+
+.app-tone-info-phase {
+  border-color: color-mix(in srgb, var(--status-info) 35%, var(--app-border));
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--status-info) 12%, var(--app-surface)),
+    var(--app-surface)
+  );
+}
+
+.app-tone-info-section-gradient {
+  border-color: color-mix(in srgb, var(--status-info) 35%, var(--app-border));
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--status-info) 10%, var(--app-surface)),
+    var(--app-surface),
+    color-mix(in srgb, var(--app-accent) 4%, var(--app-surface))
+  );
+}
+
+.app-tone-info-connector {
+  background: color-mix(in srgb, var(--status-info) 28%, var(--app-border));
+}
+
+.app-tone-success-workflow {
+  border-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-success) 10%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-success) 92%, var(--app-text));
+}
+
+.app-tone-success-panel-gradient {
+  border-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--status-success) 12%, var(--app-surface)),
+    var(--app-surface)
+  );
+}
+
+.app-tone-warning-fill {
+  background: var(--status-warning);
+  color: #fff;
+}
+
+.app-tone-info-progress {
+  background: var(--brand-logo-sky);
+  color: #fff;
+}
+
+.app-tone-warning-banner {
+  border-bottom: 1px solid color-mix(in srgb, var(--status-warning) 55%, var(--app-border));
+  background: color-mix(in srgb, var(--status-warning) 18%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-warning) 92%, var(--app-text));
+}
+
+.app-tone-warning-banner-muted {
+  color: color-mix(in srgb, var(--status-warning) 82%, var(--app-text));
+}
+
+.app-tone-warning-banner-btn {
+  border-color: color-mix(in srgb, var(--status-warning) 55%, var(--app-border));
+  background: var(--app-surface);
+}
+
+.app-tone-warning-banner-btn:hover {
+  background: color-mix(in srgb, var(--status-warning) 12%, var(--app-surface));
+}
+
+.app-tone-pill-success {
+  background: color-mix(in srgb, var(--status-success) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-success) 88%, var(--app-text));
+}
+
+.app-tone-pill-warning {
+  background: color-mix(in srgb, var(--status-warning) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-warning) 88%, var(--app-text));
+}
+
+.app-tone-pill-info {
+  background: color-mix(in srgb, var(--brand-logo-sky) 16%, var(--app-surface));
+  color: color-mix(in srgb, var(--brand-logo-sky) 88%, var(--app-text));
+}
+
+.app-tone-pill-danger {
+  background: color-mix(in srgb, var(--status-danger) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-danger) 88%, var(--app-text));
+}
+
+.app-tone-pill-success-ring {
+  background: color-mix(in srgb, var(--status-success) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-success) 88%, var(--app-text));
+  --tw-ring-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+}
+
+.app-tone-pill-warning-ring {
+  background: color-mix(in srgb, var(--status-warning) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-warning) 88%, var(--app-text));
+  --tw-ring-color: color-mix(in srgb, var(--status-warning) 35%, var(--app-border));
+}
+
+.app-tone-pill-info-ring {
+  background: color-mix(in srgb, var(--brand-logo-sky) 16%, var(--app-surface));
+  color: color-mix(in srgb, var(--brand-logo-sky) 88%, var(--app-text));
+  --tw-ring-color: color-mix(in srgb, var(--brand-logo-sky) 35%, var(--app-border));
+}
+
+.app-tone-pill-danger-ring {
+  background: color-mix(in srgb, var(--status-danger) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-danger) 88%, var(--app-text));
+  --tw-ring-color: color-mix(in srgb, var(--status-danger) 35%, var(--app-border));
+}
+
+.app-tone-success-row-selected {
+  background: color-mix(in srgb, var(--status-success) 8%, transparent);
+}
+
+.app-tone-warning-highlight-row {
+  background: color-mix(in srgb, var(--status-warning) 10%, var(--app-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--status-warning) 35%, var(--app-border));
+}
+
+.app-tone-warning-strip-fill {
+  background: var(--status-warning);
+}
+
+.app-tone-success-strip-fill {
+  background: var(--status-success);
+}
+
+.app-tone-success-card-index {
+  background: color-mix(in srgb, var(--status-success) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-success) 88%, var(--app-text));
+}
+
+.app-tone-warning-card-index {
+  background: color-mix(in srgb, var(--status-warning) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-warning) 88%, var(--app-text));
+}
+
+.app-tone-warning-review {
+  border-color: color-mix(in srgb, var(--status-warning) 40%, var(--app-border));
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--status-warning) 10%, var(--app-surface)),
+    var(--app-surface),
+    color-mix(in srgb, var(--app-accent) 3%, var(--app-surface))
+  );
+}
+
+.app-tone-warning-review-item {
+  border-color: color-mix(in srgb, var(--status-warning) 30%, var(--app-border));
+}
+
+.app-tone-warning-review-divider {
+  border-color: color-mix(in srgb, var(--status-warning) 35%, var(--app-border));
+}
+
+.app-tone-success-row {
+  background: color-mix(in srgb, var(--status-success) 10%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-success) 90%, var(--app-text));
+}
+
+.wo-pm-phase--create {
+  border-color: color-mix(in srgb, var(--status-warning) 55%, var(--app-border));
+  background: color-mix(in srgb, var(--status-warning) 18%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-warning) 92%, var(--app-text));
+  --tw-ring-color: color-mix(in srgb, var(--status-warning) 35%, transparent);
+}
+
+.wo-pm-phase--rel {
+  border-color: color-mix(in srgb, var(--status-info) 45%, var(--brand-logo-sky));
+  background: color-mix(in srgb, var(--brand-logo-sky) 16%, var(--app-surface));
+  color: color-mix(in srgb, var(--brand-logo-sky) 88%, var(--app-text));
+  --tw-ring-color: color-mix(in srgb, var(--brand-logo-sky) 35%, transparent);
+}
+
+.wo-pm-phase--confirm {
+  border-color: color-mix(in srgb, var(--status-success) 55%, var(--app-border));
+  background: color-mix(in srgb, var(--status-success) 18%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-success) 92%, var(--app-text));
+  --tw-ring-color: color-mix(in srgb, var(--status-success) 35%, transparent);
+}
+
+.macos-admin .app-tone-success {
+  border-color: color-mix(in srgb, var(--admin-success) 35%, var(--admin-border));
+  background: color-mix(in srgb, var(--admin-success) 10%, var(--admin-surface));
+  color: color-mix(in srgb, var(--admin-success) 88%, var(--admin-text));
+}
+
+.macos-admin .app-tone-warning {
+  border-color: color-mix(in srgb, var(--admin-warning) 35%, var(--admin-border));
+  background: color-mix(in srgb, var(--admin-warning) 10%, var(--admin-surface));
+  color: color-mix(in srgb, var(--admin-warning) 88%, var(--admin-text));
+}
+
+.macos-admin .app-tone-danger {
+  border-color: color-mix(in srgb, var(--admin-danger) 35%, var(--admin-border));
+  background: color-mix(in srgb, var(--admin-danger) 10%, var(--admin-surface));
+  color: color-mix(in srgb, var(--admin-danger) 88%, var(--admin-text));
+}
+
+/* Semantic text/border/background — แทน Tailwind zinc-* ในหน้าแอป */
+.text-app {
+  color: var(--app-text);
+}
+
+.text-app-muted {
+  color: var(--app-text-muted);
+}
+
+.border-app {
+  border-color: var(--app-border);
+}
+
+.bg-app-muted {
+  background: var(--app-surface-muted);
+}
+
+.bg-app-subtle {
+  background: color-mix(in srgb, var(--app-surface-muted) 65%, var(--app-surface));
+}
+
+.ring-app {
+  --tw-ring-color: var(--app-border);
+}
+
+.focus-app-ring:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--app-accent) 80%, var(--app-text));
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--app-accent) 28%, transparent);
+}
+
+/* Links & nav — focus ชัดเทียบพื้นหลัง glass/sidebar */
+a:focus-visible,
+.nav-menu-link:focus-visible,
+[role='menuitem']:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--app-primary) 75%, var(--app-accent));
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--app-primary) 22%, transparent);
+}
+
+/* U3 — ข้อความบนพื้น glass อ่านง่าย (เป้า WCAG AA 4.5:1 สำหรับ body) */
+.macos-dialog-glass,
+.login-feedback-dialog,
+.app-glass-readable {
+  color: var(--app-text);
+  background: color-mix(in srgb, var(--app-surface) 94%, white);
+}
+
+.macos-dialog-glass .text-app-muted,
+.login-feedback-dialog .text-app-muted,
+.app-glass-readable .text-app-muted {
+  color: color-mix(in srgb, var(--app-text) 68%, transparent);
+}
+
+.macos-admin .macos-dialog-glass {
+  color: var(--admin-text);
+  background: color-mix(in srgb, var(--admin-surface) 94%, white);
+}
+
+.macos-admin .macos-dialog-glass .text-app-muted {
+  color: var(--admin-text-muted);
+}
+
+html.dark .macos-dialog-glass,
+html.dark .login-feedback-dialog,
+html.dark .app-glass-readable {
+  color: var(--app-text);
+  background: color-mix(in srgb, var(--app-surface) 88%, #0f172a);
+}
+
+html.dark .macos-admin .macos-dialog-glass {
+  color: var(--admin-text);
+  background: color-mix(in srgb, var(--admin-surface) 90%, #0f172a);
+}
+
+.macos-admin .text-app {
+  color: var(--admin-text);
+}
+
+.macos-admin .text-app-muted {
+  color: var(--admin-text-muted);
+}
+
+.macos-admin .border-app {
+  border-color: var(--admin-border);
+}
+
+.macos-admin .bg-app-muted,
+.macos-admin .bg-app-subtle {
+  background: var(--admin-surface-muted);
+}
+
+.text-heading-section {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-lg);
+  font-weight: 600;
+  line-height: var(--app-line-height-tight);
+  color: var(--app-heading-color, var(--app-text));
+}
+
+.text-heading-page {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-page-title);
+  font-weight: 600;
+  line-height: var(--app-line-height-tight);
+  letter-spacing: -0.02em;
+  color: var(--app-heading-color, var(--app-text));
+}
+
+.text-eyebrow {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--app-primary);
+}
+
+.app-page-content {
+  padding: var(--app-space-4) var(--app-space-4) var(--app-space-5);
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-base);
+  line-height: var(--app-line-height-body);
+  color: var(--app-text);
+}
+
+.app-page-content :where(h1) {
+  font-size: var(--app-font-size-page-title);
+  font-weight: 600;
+  line-height: var(--app-line-height-tight);
+  letter-spacing: -0.02em;
+  color: var(--app-heading-color, var(--app-text));
+}
+
+.app-page-content :where(h2) {
+  font-size: var(--app-font-size-xl);
+  font-weight: 600;
+  line-height: var(--app-line-height-tight);
+  color: var(--app-heading-color, var(--app-text));
+}
+
+.app-page-content :where(h3) {
+  font-size: var(--app-font-size-lg);
+  font-weight: 600;
+  line-height: var(--app-line-height-tight);
+  color: var(--app-heading-color, var(--app-text));
+}
+
+.app-page-content :where(h4, h5, h6) {
+  font-size: var(--app-font-size-base);
+  font-weight: 600;
+  line-height: var(--app-line-height-tight);
+}
+
+.app-page-content :where(small, .text-muted-hint) {
+  font-size: var(--app-font-size-caption);
+  color: var(--app-text-muted);
+}
+
+.macos-sidebar nav a {
+  font-family: var(--app-font-family);
+  font-size: var(--app-nav-link-size);
+  line-height: var(--app-line-height-body);
+}
+
+/* Admin — same scale, semantic heading colors */
+.macos-admin :where(h1),
+.admin-page-title {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-page-title);
+  font-weight: 600;
+  line-height: var(--app-line-height-tight);
+  letter-spacing: -0.02em;
+  color: var(--app-heading-color, var(--admin-text));
+}
+
+.macos-admin :where(h2) {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-xl);
+  font-weight: 600;
+  line-height: var(--app-line-height-tight);
+  color: var(--app-heading-color, var(--admin-text));
+}
+
+.macos-admin :where(h3) {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-lg);
+  font-weight: 600;
+  line-height: var(--app-line-height-tight);
+  color: var(--app-heading-color, var(--admin-text));
+}
+
+.macos-admin :where(p, li, td, th, label, input, select, textarea, button) {
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-base);
+  line-height: var(--app-line-height-body);
+}
+
+.macos-admin .text-eyebrow {
+  color: var(--admin-primary);
+}
+
+.macos-admin .text-caption {
+  color: var(--admin-text-muted);
+}
+
+.macos-admin .text-heading-page {
+  color: var(--app-heading-color, var(--admin-text));
+}
+
+#root {
+  min-height: 100svh;
+}
+
+.app-surface {
+  background-color: var(--app-surface);
+  color: var(--app-text);
+  border-color: var(--app-border);
+}
+
+.app-glass {
+  background: var(--app-glass-bg);
+  border: 1px solid var(--app-glass-border);
+  backdrop-filter: blur(20px);
+}
+
+/* Login — wallpaper เต็มจอ + การ์ด glass กลาง (liquid glass · เงา · animation) */
+.login-page {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--app-bg);
+  perspective: 1200px;
+}
+
+.login-page__wallpaper {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transform-origin: center center;
+  animation: login-wallpaper-drift 28s ease-in-out infinite alternate;
+}
+
+.login-page__overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(3px) saturate(1.15);
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--app-bg) 42%, transparent) 0%,
+    color-mix(in srgb, var(--app-accent) 18%, transparent) 38%,
+    color-mix(in srgb, var(--app-bg) 72%, transparent) 100%
+  );
+}
+
+html.dark .login-page__overlay {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--app-bg) 55%, transparent) 0%,
+    color-mix(in srgb, var(--app-accent) 22%, transparent) 40%,
+    color-mix(in srgb, var(--app-bg) 82%, transparent) 100%
+  );
+}
+
+.login-page__glow {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  opacity: 0.55;
+  animation: login-glow-float 14s ease-in-out infinite;
+}
+
+.login-page__glow--accent {
+  top: 12%;
+  left: 8%;
+  width: min(42vw, 22rem);
+  height: min(42vw, 22rem);
+  background: color-mix(in srgb, var(--app-accent) 35%, transparent);
+}
+
+.login-page__glow--primary {
+  right: 6%;
+  bottom: 10%;
+  width: min(38vw, 18rem);
+  height: min(38vw, 18rem);
+  background: color-mix(in srgb, var(--app-primary) 28%, transparent);
+  animation-delay: -5s;
+}
+
+.login-page__toolbar {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 20;
+}
+
+.login-page__center {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 28rem;
+  margin-inline: auto;
+  padding: 2rem 1.25rem;
+}
+
+.login-page__logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.login-page__logo {
+  filter: drop-shadow(0 8px 24px color-mix(in srgb, var(--app-text) 18%, transparent));
+}
+
+.login-page__card {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--app-radius-dialog);
+  border: 1px solid color-mix(in srgb, white 42%, var(--app-glass-border));
+  background: color-mix(in srgb, var(--app-glass-bg) 88%, var(--app-surface));
+  backdrop-filter: blur(22px) saturate(1.25);
+  -webkit-backdrop-filter: blur(22px) saturate(1.25);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--app-accent) 12%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 55%, transparent),
+    var(--app-shadow-dialog),
+    0 28px 56px color-mix(in srgb, var(--app-accent) 22%, transparent);
+  transform-style: preserve-3d;
+}
+
+.login-page__card-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    125deg,
+    transparent 0%,
+    color-mix(in srgb, white 38%, transparent) 42%,
+    transparent 58%
+  );
+  animation: login-card-shine 5.5s ease-in-out infinite;
+}
+
+.login-page__card-inner {
+  position: relative;
+  z-index: 1;
+  padding: var(--app-space-5);
+}
+
+.login-page__card-header {
+  text-align: center;
+}
+
+.login-page__title {
+  color: var(--app-text);
+}
+
+.login-page__label {
+  font-size: var(--app-font-size-sm);
+  font-weight: 500;
+  color: color-mix(in srgb, var(--app-text) 92%, transparent);
+}
+
+.login-page__input {
+  border-color: color-mix(in srgb, var(--app-border) 78%, var(--app-accent) 22%);
+  background: color-mix(in srgb, var(--app-surface) 88%, transparent);
+}
+
+.login-page__input:focus-visible {
+  border-color: color-mix(in srgb, var(--app-accent) 65%, var(--app-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--app-accent) 28%, transparent);
+}
+
+html.dark .login-page__input {
+  border-color: color-mix(in srgb, var(--app-border) 70%, white 30%);
+  background: color-mix(in srgb, var(--app-bg) 55%, var(--app-surface) 45%);
+}
+
+html.dark .login-page__input::placeholder {
+  color: color-mix(in srgb, var(--app-text-muted) 88%, white);
+}
+
+.login-page__submit {
+  font-weight: 600;
+}
+
+.login-page__footer {
+  text-align: center;
+}
+
+.login-page__footer-link {
+  font-size: var(--app-font-size-sm);
+  font-weight: 500;
+  color: color-mix(in srgb, var(--app-text) 88%, var(--app-accent) 12%);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.login-page__footer-link:hover {
+  color: var(--app-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+html.dark .login-page__footer-link {
+  color: color-mix(in srgb, var(--app-text) 92%, white);
+}
+
+html.dark .login-page__footer-link:hover {
+  color: var(--app-accent);
+}
+
+html.dark .login-page__card {
+  border-color: color-mix(in srgb, var(--app-border) 85%, transparent);
+  background: color-mix(in srgb, var(--app-glass-bg) 72%, var(--app-surface));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--app-accent) 18%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 8%, transparent),
+    var(--app-shadow-dialog),
+    0 28px 56px color-mix(in srgb, black 45%, transparent);
+}
+
+html.dark .login-page__card-shine {
+  opacity: 0.22;
+  background: linear-gradient(
+    125deg,
+    transparent 0%,
+    color-mix(in srgb, white 12%, transparent) 42%,
+    transparent 58%
+  );
+}
+
+html.dark .login-page__glow {
+  opacity: 0.38;
+}
+
+.text-form-error {
+  color: var(--sys-red-light);
+}
+
+html.dark .text-form-error {
+  color: color-mix(in srgb, var(--sys-red-light) 88%, white);
+}
+
+@keyframes login-wallpaper-drift {
+  from {
+    transform: scale(1.03);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes login-glow-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(12px, -16px) scale(1.08);
+  }
+}
+
+@keyframes login-card-shine {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateX(-30%) skewX(-8deg);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translateX(30%) skewX(-8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-page__wallpaper,
+  .login-page__glow,
+  .login-page__card-shine {
+    animation: none;
+  }
+}
+
+/* Portal hub — wallpaper + glass hero + module cards */
+.portal-page {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background-color: var(--app-bg);
+}
+
+.portal-page__glow {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  opacity: 0.5;
+  animation: login-glow-float 16s ease-in-out infinite;
+}
+
+.portal-page__glow--accent {
+  top: 8%;
+  left: 4%;
+  width: min(44vw, 24rem);
+  height: min(44vw, 24rem);
+  background: color-mix(in srgb, var(--app-accent) 32%, transparent);
+}
+
+.portal-page__glow--primary {
+  right: 2%;
+  bottom: 6%;
+  width: min(40vw, 20rem);
+  height: min(40vw, 20rem);
+  background: color-mix(in srgb, var(--app-primary) 26%, transparent);
+  animation-delay: -6s;
+}
+
+.portal-page__topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 1px solid color-mix(in srgb, var(--app-border) 65%, transparent);
+  background: color-mix(in srgb, var(--app-glass-bg) 78%, var(--app-surface));
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+}
+
+.portal-page__topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 0.75rem 1.25rem;
+}
+
+.portal-page__brand {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--app-text);
+  text-decoration: none;
+}
+
+.portal-page__brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--app-radius-button);
+  border: 1px solid color-mix(in srgb, var(--app-border) 80%, transparent);
+  background: color-mix(in srgb, var(--app-surface) 90%, white);
+  box-shadow: var(--app-shadow-sm);
+}
+
+.portal-page__main {
+  position: relative;
+  z-index: 10;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.portal-page__hero {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border-radius: var(--app-radius-dialog);
+  border: 1px solid color-mix(in srgb, white 38%, var(--app-glass-border));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--app-accent) 10%, transparent),
+    var(--app-shadow-dialog),
+    0 24px 48px color-mix(in srgb, var(--app-accent) 16%, transparent);
+}
+
+.portal-page__hero-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem 1.5rem 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .portal-page__hero-body {
+    flex-direction: row;
+    align-items: center;
+    padding: 1.75rem 2rem 2rem;
+  }
+}
+
+.portal-page__hero-logo {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: var(--app-radius-card);
+  border: 1px solid color-mix(in srgb, var(--app-border) 70%, transparent);
+  background: color-mix(in srgb, var(--app-surface) 92%, white);
+  box-shadow: var(--app-shadow-sm);
+}
+
+.portal-page__welcome-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: var(--app-text-caption-size);
+  font-weight: 600;
+  color: var(--app-text);
+  background: color-mix(in srgb, var(--app-accent) 14%, var(--app-surface));
+  border: 1px solid color-mix(in srgb, var(--app-accent) 28%, transparent);
+}
+
+.portal-page__role-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: var(--app-text-caption-size);
+  font-weight: 500;
+  color: var(--app-text-muted);
+  background: var(--app-subtle);
+  border: 1px solid var(--app-border);
+}
+
+.portal-page__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .portal-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .portal-page__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.portal-module-card {
+  --portal-module-accent: var(--app-accent);
+  border-color: color-mix(in srgb, var(--app-border) 85%, transparent);
+  background: color-mix(in srgb, var(--app-glass-bg) 86%, var(--app-surface));
+  backdrop-filter: blur(16px) saturate(1.12);
+  -webkit-backdrop-filter: blur(16px) saturate(1.12);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.portal-module-card--active {
+  cursor: pointer;
+}
+
+.portal-module-card--active:hover {
+  border-color: color-mix(in srgb, var(--portal-module-accent) 45%, var(--app-border));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--portal-module-accent) 22%, transparent),
+    var(--app-shadow-card),
+    0 20px 40px color-mix(in srgb, var(--portal-module-accent) 18%, transparent);
+}
+
+.portal-module-card--disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.portal-module-card__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--portal-module-accent),
+    color-mix(in srgb, var(--portal-module-accent) 55%, white)
+  );
+}
+
+.portal-module-card__shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(
+    125deg,
+    transparent 0%,
+    color-mix(in srgb, white 32%, transparent) 46%,
+    transparent 58%
+  );
+  transition: opacity 0.35s ease;
+}
+
+.portal-module-card--active:hover .portal-module-card__shine {
+  opacity: 0.65;
+}
+
+.portal-module-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--app-radius-button);
+  color: var(--portal-module-accent);
+  background: color-mix(in srgb, var(--portal-module-accent) 14%, var(--app-surface));
+  border: 1px solid color-mix(in srgb, var(--portal-module-accent) 24%, transparent);
+  transition: transform 0.2s ease;
+}
+
+.portal-module-card--active:hover .portal-module-card__icon {
+  transform: scale(1.06);
+}
+
+.portal-module-card__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  color: var(--portal-module-accent);
+  background: color-mix(in srgb, var(--portal-module-accent) 12%, var(--app-surface));
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.portal-module-card--active:hover .portal-module-card__arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.portal-module-card__cta {
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.portal-module-card--active:hover .portal-module-card__cta {
+  opacity: 1;
+}
+
+html.dark .portal-page__topbar {
+  background: color-mix(in srgb, var(--app-glass-bg) 68%, var(--app-surface));
+}
+
+html.dark .portal-page__hero {
+  border-color: color-mix(in srgb, var(--app-border) 80%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--app-accent) 14%, transparent),
+    var(--app-shadow-dialog),
+    0 24px 48px color-mix(in srgb, black 40%, transparent);
+}
+
+html.dark .portal-module-card {
+  background: color-mix(in srgb, var(--app-glass-bg) 72%, var(--app-surface));
+}
+
+html.dark .portal-page__glow {
+  opacity: 0.34;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-page__glow,
+  .portal-module-card__shine {
+    animation: none;
+  }
+
+  .portal-module-card--active:hover .portal-module-card__arrow {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Login security feedback — glass dialog */
+.login-feedback-dialog {
+  z-index: 100;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, white 40%, var(--app-glass-border));
+  background: color-mix(in srgb, var(--app-glass-bg) 90%, var(--app-surface));
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--app-accent) 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 50%, transparent),
+    var(--app-shadow-dialog),
+    0 32px 64px color-mix(in srgb, var(--app-text) 22%, transparent);
+}
+
+.login-feedback-dialog > button.absolute {
+  display: none;
+}
+
+.login-feedback-dialog__icon-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.login-feedback-dialog__icon {
+  padding: 0.75rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--app-surface-muted) 80%, transparent);
+}
+
+.login-feedback-dialog--success .login-feedback-dialog__icon {
+  color: var(--sys-green-light);
+  background: color-mix(in srgb, var(--sys-green-light) 18%, var(--app-surface));
+}
+
+.login-feedback-dialog--invalid .login-feedback-dialog__icon,
+.login-feedback-dialog--generic .login-feedback-dialog__icon {
+  color: var(--sys-red-light);
+  background: color-mix(in srgb, var(--sys-red-light) 14%, var(--app-surface));
+}
+
+.login-feedback-dialog--lockout .login-feedback-dialog__icon,
+.login-feedback-dialog--rate_limit .login-feedback-dialog__icon {
+  color: var(--sys-orange-light);
+  background: color-mix(in srgb, var(--sys-orange-light) 16%, var(--app-surface));
+}
+
+.login-feedback-dialog--blocked .login-feedback-dialog__icon {
+  color: var(--sys-red-light);
+  background: color-mix(in srgb, var(--sys-red-light) 14%, var(--app-surface));
+}
+
+.login-feedback-dialog--maintenance .login-feedback-dialog__icon {
+  color: var(--sys-blue-light);
+  background: color-mix(in srgb, var(--sys-blue-light) 14%, var(--app-surface));
+}
+
+.login-feedback-dialog__btn {
+  box-shadow: var(--app-shadow-button);
+}
+
+/* ConfirmPhraseDialog — destructive admin confirms (backup / delete / restore) */
+.confirm-phrase-dialog--danger {
+  border-color: color-mix(in srgb, var(--sys-red-light) 38%, var(--app-border));
+  background: color-mix(in srgb, var(--sys-red-light) 7%, var(--app-surface));
+  box-shadow:
+    inset 4px 0 0 var(--sys-red-light),
+    var(--app-shadow-dialog);
+}
+
+.confirm-phrase-dialog__icon-wrap {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  color: var(--sys-red-light);
+  background: color-mix(in srgb, var(--sys-red-light) 14%, var(--app-surface));
+}
+
+.confirm-phrase-dialog__title {
+  color: color-mix(in srgb, var(--sys-red-light) 82%, var(--app-text));
+}
+
+.confirm-phrase-dialog__description {
+  color: color-mix(in srgb, var(--sys-red-light) 58%, var(--app-text-muted));
+}
+
+.confirm-phrase-dialog__phrase-box {
+  border-color: color-mix(in srgb, var(--sys-red-light) 32%, var(--app-border));
+  color: var(--sys-red-light);
+  background: color-mix(in srgb, var(--sys-red-light) 6%, var(--app-surface));
+}
+
+.confirm-phrase-dialog__input--danger:focus-visible {
+  outline-color: color-mix(in srgb, var(--sys-red-light) 80%, var(--app-text));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--sys-red-light) 24%, transparent);
+}
+
+.confirm-phrase-dialog__matched {
+  color: var(--sys-green-light);
+}
+
+.login-page__card--shake {
+  animation: login-card-shake 0.45s ease;
+}
+
+@keyframes login-card-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+/* HTTP / Unexpected error pages — liquid glass + motion */
+.error-page {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--app-bg);
+}
+
+.error-page__backdrop {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--app-bg) 70%, transparent) 0%,
+    color-mix(in srgb, var(--app-accent) 10%, transparent) 40%,
+    color-mix(in srgb, var(--app-bg) 88%, transparent) 100%
+  );
+}
+
+html.dark .error-page__backdrop {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--app-bg) 58%, transparent) 0%,
+    color-mix(in srgb, var(--app-accent) 16%, transparent) 42%,
+    color-mix(in srgb, var(--app-bg) 90%, transparent) 100%
+  );
+}
+
+html.dark .error-page__glow {
+  opacity: 0.34;
+}
+
+html.dark .error-page__card {
+  border-color: color-mix(in srgb, var(--app-border) 85%, transparent);
+  background: color-mix(in srgb, var(--app-glass-bg) 72%, var(--app-surface));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--app-accent) 14%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 8%, transparent),
+    var(--app-shadow-dialog),
+    0 28px 56px color-mix(in srgb, black 45%, transparent);
+}
+
+html.dark .error-page__card-shine {
+  opacity: 0.2;
+}
+
+html.dark .error-page__icon-wrap {
+  border-color: color-mix(in srgb, var(--app-border) 80%, transparent);
+  background: color-mix(in srgb, var(--app-glass-bg) 70%, var(--app-surface));
+}
+
+.error-page__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error-page__glow {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  animation: error-glow-float 16s ease-in-out infinite;
+}
+
+.error-page__glow--accent {
+  top: 8%;
+  left: 10%;
+  width: min(44vw, 24rem);
+  height: min(44vw, 24rem);
+  background: color-mix(in srgb, var(--app-accent) 32%, transparent);
+}
+
+.error-page__glow--primary {
+  right: 8%;
+  bottom: 14%;
+  width: min(36vw, 18rem);
+  height: min(36vw, 18rem);
+  background: color-mix(in srgb, var(--app-primary) 24%, transparent);
+  animation-delay: -6s;
+}
+
+.error-page__glow--soft {
+  top: 42%;
+  left: 38%;
+  width: min(28vw, 14rem);
+  height: min(28vw, 14rem);
+  background: color-mix(in srgb, var(--app-text) 8%, transparent);
+  animation-delay: -3s;
+}
+
+.error-page--server .error-page__glow--accent {
+  background: color-mix(in srgb, var(--sys-red-light) 28%, transparent);
+}
+
+.error-page--crash .error-page__glow--accent {
+  background: color-mix(in srgb, var(--sys-red-light) 34%, transparent);
+}
+
+.error-page__header {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid color-mix(in srgb, var(--app-border) 70%, transparent);
+  background: color-mix(in srgb, var(--app-glass-bg) 82%, var(--app-surface));
+  padding: 0.75rem 1rem;
+  backdrop-filter: blur(14px);
+}
+
+.error-page__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--app-font-size-sm);
+  font-weight: 600;
+  color: var(--app-text);
+  transition: opacity 0.2s ease;
+}
+
+.error-page__brand:hover {
+  opacity: 0.85;
+}
+
+.error-page__main {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.error-page__content {
+  width: 100%;
+  max-width: 32rem;
+}
+
+.error-page__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.error-page__icon-wrap {
+  position: relative;
+  display: flex;
+  margin-bottom: 1rem;
+  width: 5rem;
+  height: 5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--app-radius-dialog);
+  border: 1px solid color-mix(in srgb, white 35%, var(--app-border));
+  background: color-mix(in srgb, var(--app-glass-bg) 88%, var(--app-surface));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 45%, transparent),
+    0 12px 32px color-mix(in srgb, var(--app-text) 12%, transparent);
+  animation: error-icon-float 4s ease-in-out infinite;
+}
+
+.error-page__icon-wrap--client {
+  color: var(--sys-orange-light);
+}
+
+.error-page__icon-wrap--server,
+.error-page__icon-wrap--crash {
+  color: var(--sys-red-light);
+}
+
+.error-page__icon-ring {
+  pointer-events: none;
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    color-mix(in srgb, var(--app-accent) 55%, transparent),
+    transparent,
+    color-mix(in srgb, var(--app-primary) 45%, transparent),
+    transparent
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: error-icon-spin 10s linear infinite;
+}
+
+.error-page__icon {
+  position: relative;
+  z-index: 1;
+}
+
+.error-page__code {
+  display: flex;
+  justify-content: center;
+  gap: 0.06em;
+  font-family: ui-monospace, monospace;
+  font-size: clamp(3.5rem, 12vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--app-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.error-page__code-digit {
+  display: inline-block;
+  text-shadow: 0 8px 28px color-mix(in srgb, var(--app-accent) 25%, transparent);
+}
+
+.error-page__title {
+  margin-top: 0.5rem;
+  font-size: var(--app-font-size-xl);
+  font-weight: 600;
+  color: var(--app-text);
+}
+
+.error-page__subtitle {
+  margin-top: 0.25rem;
+  font-size: var(--app-font-size-sm);
+  color: var(--app-text-muted);
+}
+
+.error-page__card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--app-radius-dialog);
+  border: 1px solid color-mix(in srgb, white 38%, var(--app-glass-border));
+  background: color-mix(in srgb, var(--app-glass-bg) 90%, var(--app-surface));
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--app-accent) 8%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 48%, transparent),
+    var(--app-shadow-dialog),
+    0 28px 56px color-mix(in srgb, var(--app-text) 16%, transparent);
+}
+
+.error-page__card-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    color-mix(in srgb, white 32%, transparent) 45%,
+    transparent 60%
+  );
+  animation: error-card-shine 6s ease-in-out infinite;
+}
+
+.error-page__card-inner {
+  position: relative;
+  z-index: 1;
+  padding: var(--app-space-5);
+}
+
+.error-page__card-label {
+  font-size: var(--app-font-size-base);
+  font-weight: 600;
+  color: var(--app-text);
+}
+
+.error-page__card-desc {
+  margin-top: 0.35rem;
+  font-size: var(--app-font-size-sm);
+  line-height: var(--app-line-height-relaxed);
+  color: var(--app-text-muted);
+}
+
+.error-page__detail {
+  margin-top: var(--app-space-4);
+}
+
+.error-page__actions {
+  display: flex;
+  margin-top: var(--app-space-5);
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.error-page__footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: var(--app-font-size-caption);
+  color: var(--app-text-muted);
+}
+
+@keyframes error-glow-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(14px, -18px) scale(1.06);
+  }
+}
+
+@keyframes error-icon-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes error-icon-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes error-card-shine {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateX(-25%) skewX(-6deg);
+  }
+  50% {
+    opacity: 0.75;
+    transform: translateX(25%) skewX(-6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .error-page__glow,
+  .error-page__icon-wrap,
+  .error-page__icon-ring,
+  .error-page__card-shine {
+    animation: none;
+  }
+}
+
+.liquid-glass-bg {
+  background-color: var(--app-bg);
+  background-image:
+    radial-gradient(
+      circle at 12% 8%,
+      color-mix(in srgb, var(--brand-logo-sky) 14%, transparent),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 85% 12%,
+      color-mix(in srgb, var(--brand-logo-orange) 11%, transparent),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 22% 92%,
+      color-mix(in srgb, var(--brand-logo-green-light) 9%, transparent),
+      transparent 38%
+    ),
+    radial-gradient(circle at 50% 110%, color-mix(in srgb, var(--app-text) 6%, transparent), transparent 55%);
+}
+
+/* --- Main app corporate theme (skill-theme.md §13.4) — สอดคล้อง Admin prototype --- */
+.app-theme-corporate {
+  background-color: var(--app-bg);
+  background-image: none;
+}
+
+.app-theme-corporate .liquid-glass-bg {
+  background-image: none;
+}
+
+/* Sidebar shell — โทนเดียวกับ Admin (macos-sidebar) ทุกหน้า */
+.app-sidebar {
+  color: var(--app-sidebar-fg);
+  border-color: var(--app-sidebar-border);
+}
+
+.app-sidebar .sidebar-nav .sidebar-heading-rule {
+  background: var(--app-sidebar-border);
+}
+
+.app-page-header {
+  background: var(--app-surface);
+  border-bottom: 1px solid var(--app-border);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--app-border) 80%, transparent);
+}
+
+@media (min-width: 640px) {
+  .app-page-content {
+    padding: var(--app-space-5) var(--app-space-5) var(--app-space-6);
+  }
+}
+
+.app-card {
+  background: var(--app-surface);
+  color: var(--app-text);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-card);
+  box-shadow: var(--app-shadow-card);
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms ease;
+}
+
+.app-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--app-accent) 35%, var(--app-border));
+  box-shadow: var(--app-shadow-card-hover);
+}
+
+.app-card:focus-visible {
+  outline: 2px solid var(--app-accent);
+  outline-offset: 2px;
+}
+
+/** Padding มาตรฐานการ์ด (flat `div.app-card` — ไม่ใช้ CardHeader) */
+.app-card-pad {
+  padding: var(--app-card-padding);
+}
+
+.app-card-pad-compact {
+  padding: var(--app-card-padding-compact);
+}
+
+/* กล่องตาราง/ฟิลเตอร์ — โทนเดียวกับ app-card ไม่ยกเมื่อ hover */
+.app-table-shell {
+  background: var(--app-surface);
+  color: var(--app-text);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-card);
+  box-shadow: var(--app-shadow-card);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+html.dark .app-table-shell {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+}
+
+/* U3 — overlay/dialog motion ≤200ms (tailwind animate-in default can be slower) */
+[data-radix-dialog-overlay],
+[data-radix-dialog-content],
+.app-sidebar--drawer {
+  --tw-duration: 200ms;
+}
+
+[data-radix-dialog-overlay][data-state='open'],
+[data-radix-dialog-overlay][data-state='closed'],
+[data-radix-dialog-content][data-state='open'],
+[data-radix-dialog-content][data-state='closed'] {
+  animation-duration: 200ms;
+}
+
+/* Data table — sticky header + zebra (ใช้กับ `<Table embedded stickyHeader zebra />` ใน `.app-table-shell`) */
+.app-data-table-sticky thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--app-surface);
+  box-shadow: 0 1px 0 var(--app-border);
+}
+
+/* Leading column(s) stay visible when table scrolls horizontally */
+.app-table-sticky {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: var(--app-surface);
+  box-shadow: 2px 0 6px -2px color-mix(in srgb, var(--app-text) 14%, transparent);
+}
+
+.app-table-sticky--col-2 {
+  left: 2.5rem;
+}
+
+.app-table-sticky--col-3 {
+  left: 7rem;
+}
+
+.app-table-sticky--col-4 {
+  left: 12.5rem;
+}
+
+.app-data-table-sticky thead th.app-table-sticky {
+  z-index: 5;
+}
+
+.app-data-table-zebra tbody tr:nth-child(even) .app-table-sticky {
+  background: color-mix(in srgb, var(--app-surface-muted) 50%, var(--app-surface));
+}
+
+.app-data-table-zebra tbody tr:hover .app-table-sticky {
+  background: color-mix(in srgb, var(--app-accent) 6%, var(--app-surface));
+}
+
+.app-data-table-zebra tbody tr.app-tone-info-row .app-table-sticky,
+.app-tone-info-row .app-table-sticky {
+  background: color-mix(in srgb, var(--app-accent) 10%, var(--app-surface));
+}
+
+.app-data-table-zebra tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--app-surface-muted) 50%, var(--app-surface));
+}
+
+.app-data-table-zebra tbody tr:hover {
+  background: color-mix(in srgb, var(--app-accent) 6%, var(--app-surface));
+}
+
+/* Master Plan — sticky Zone + Machine List column offsets */
+.master-plan-excel-table {
+  --mp-sticky-col1-width: 4.5rem;
+}
+
+.master-plan-excel-table .app-table-sticky--col-2 {
+  left: var(--mp-sticky-col1-width);
+}
+
+.master-plan-excel-table tbody tr.bg-\[\#f5f8fc\] .app-table-sticky,
+.master-plan-excel-table tbody tr.bg-\[\#f5f8fc\] .app-table-sticky--col-2 {
+  background: #f5f8fc;
+}
+
+.master-plan-excel-table tbody tr.bg-white .app-table-sticky,
+.master-plan-excel-table tbody tr.bg-white .app-table-sticky--col-2 {
+  background: #fff;
+}
+
+.master-plan-excel-table tbody tr:hover .app-table-sticky,
+.master-plan-excel-table tbody tr:hover .app-table-sticky--col-2 {
+  background: #e9eff7;
+}
+
+.master-plan-excel-table thead th.app-table-sticky,
+.master-plan-excel-table thead th.app-table-sticky--col-2 {
+  background: #2f5597;
+}
+
+@keyframes master-plan-cell-flash-keyframes {
+  0%,
+  20% {
+    background-color: #c6efce;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.master-plan-cell-flash {
+  animation: master-plan-cell-flash-keyframes 2.5s ease-out;
+}
+
+.master-plan-row-focus {
+  outline: 2px solid #2f5597;
+  outline-offset: -2px;
+  background: #e9eff7 !important;
+}
+
+/* Planning list — single-row feedback after assign (PRE-UAT U4c) */
+@keyframes planning-row-assign-highlight {
+  0% {
+    background-color: color-mix(in srgb, var(--app-accent) 24%, var(--app-surface));
+    box-shadow: inset 3px 0 0 var(--app-accent);
+  }
+  55% {
+    background-color: color-mix(in srgb, var(--app-accent) 12%, var(--app-surface));
+    box-shadow: inset 3px 0 0 color-mix(in srgb, var(--app-accent) 70%, transparent);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: inset 3px 0 0 transparent;
+  }
+}
+
+.app-data-table-zebra tbody tr.planning-row--assign-highlight,
+tbody tr.planning-row--assign-highlight {
+  animation: planning-row-assign-highlight 1.8s ease-out forwards;
+}
+
+.planning-row--assign-highlight-static,
+.app-data-table-zebra tbody tr.planning-row--assign-highlight-static,
+tbody tr.planning-row--assign-highlight-static {
+  background-color: color-mix(in srgb, var(--app-accent) 14%, var(--app-surface));
+  box-shadow: inset 3px 0 0 var(--app-accent);
+}
+
+/* Planning — ack pending pulse once (PRE-UAT U4c) */
+@keyframes planning-ack-pending-pulse-once {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--app-accent) 42%, transparent);
+    border-color: color-mix(in srgb, var(--app-accent) 38%, var(--app-border));
+  }
+  45% {
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--app-accent) 0%, transparent);
+    border-color: color-mix(in srgb, var(--app-accent) 58%, var(--app-border));
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+    border-color: var(--app-border);
+  }
+}
+
+.planning-ack-pending-pulse-once {
+  animation: planning-ack-pending-pulse-once 1.2s ease-out 1 forwards;
+}
+
+.planning-ack-pending-pulse-static {
+  border-color: color-mix(in srgb, var(--app-accent) 45%, var(--app-border));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .planning-ack-pending-pulse-once {
+    animation: none;
+    border-color: color-mix(in srgb, var(--app-accent) 45%, var(--app-border));
+  }
+
+  .app-data-table-zebra tbody tr.planning-row--assign-highlight,
+  tbody tr.planning-row--assign-highlight {
+    animation: none;
+    background-color: color-mix(in srgb, var(--app-accent) 14%, var(--app-surface));
+    box-shadow: inset 3px 0 0 var(--app-accent);
+  }
+}
+
+html.dark .app-theme-corporate {
+  --app-bg: #0f172a;
+}
+
+html.dark .text-caption,
+html.dark .text-app-muted {
+  color: var(--app-text-muted);
+}
+
+html.dark .app-topbar-brand-title {
+  background: linear-gradient(
+    120deg,
+    var(--brand-logo-sky) 0%,
+    #f1f5f9 55%,
+    #e2e8f0 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+html.dark .app-topbar-brand-tagline {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+html.dark .command-palette-trigger {
+  color: var(--app-text);
+}
+
+html.dark .command-palette-trigger .text-app-muted,
+html.dark .command-palette-trigger span {
+  color: var(--app-text-muted);
+}
+
+html.dark .nav-menu-group-heading--sidebar {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+html.dark .macos-sidebar .nav-menu-group-heading {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+html.dark .macos-sidebar .sidebar-nav a {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+html.dark .macos-sidebar .sidebar-nav a:hover,
+html.dark .macos-sidebar .sidebar-nav a[aria-current='page'] {
+  color: #f8fafc;
+}
+
+html.dark .macos-sidebar .sidebar-nav a .nav-menu-link__icon,
+html.dark .macos-sidebar .sidebar-nav a svg.lucide {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+html.dark .macos-sidebar .sidebar-nav a:hover .nav-menu-link__icon,
+html.dark .macos-sidebar .sidebar-nav a:hover svg.lucide {
+  color: #f8fafc;
+}
+
+html.dark .macos-sidebar .sidebar-nav a[aria-current='page'] .nav-menu-link__icon,
+html.dark .macos-sidebar .sidebar-nav a[aria-current='page'] svg.lucide {
+  color: var(--brand-logo-sky);
+}
+
+html.dark .dashboard-kpi__cta {
+  color: var(--brand-logo-sky);
+}
+
+html.dark .dashboard-kpi--pepsi-blue .dashboard-kpi__icon {
+  color: var(--brand-logo-sky);
+  background: color-mix(in srgb, var(--brand-logo-sky) 18%, var(--app-surface));
+}
+
+html.dark .dashboard-kpi--pepsi-red .dashboard-kpi__icon {
+  color: color-mix(in srgb, var(--brand-logo-orange) 82%, white);
+  background: color-mix(in srgb, var(--brand-logo-orange) 16%, var(--app-surface));
+}
+
+html.dark .dashboard-kpi--pepsi-orange .dashboard-kpi__icon {
+  color: color-mix(in srgb, var(--brand-logo-orange) 78%, white);
+  background: color-mix(in srgb, var(--brand-logo-orange) 16%, var(--app-surface));
+}
+
+html.dark .dashboard-quick {
+  color: var(--app-text);
+}
+
+html.dark .dashboard-quick p,
+html.dark .dashboard-quick .font-medium {
+  color: var(--app-text);
+}
+
+html.dark .dashboard-quick .text-xs,
+html.dark .dashboard-quick .text-\[var\(--app-text-muted\)\] {
+  color: var(--app-text-muted);
+}
+
+html.dark .app-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+html.dark .app-card:hover {
+  border-color: color-mix(in srgb, var(--app-accent) 40%, var(--app-border));
+}
+
+/* Status tones on app KPI / badges (reuse admin semantic vars from applyTheme) */
+.app-kpi-card[data-tone='success'] {
+  border-top: 3px solid var(--admin-success);
+}
+
+.app-kpi-card[data-tone='warning'] {
+  border-top: 3px solid var(--admin-warning);
+}
+
+/* สถานะ PM execution badge — พาเลตโลโก้ */
+.app-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  border-width: 1px;
+  padding: 0.15rem 0.65rem;
+  font-size: var(--app-font-size-caption, 13px);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.app-status-badge--progress {
+  border-color: color-mix(in srgb, var(--brand-logo-sky) 40%, var(--app-border));
+  background: color-mix(in srgb, var(--brand-logo-sky) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--brand-logo-blue-dark) 92%, var(--app-text));
+}
+
+.app-status-badge--success {
+  border-color: color-mix(in srgb, var(--brand-logo-green-light) 42%, var(--app-border));
+  background: color-mix(in srgb, var(--brand-logo-green-light) 16%, var(--app-surface));
+  color: color-mix(in srgb, var(--brand-logo-green-dark) 90%, var(--app-text));
+}
+
+.app-kpi-card[data-tone='danger'] {
+  border-top: 3px solid var(--admin-danger);
+}
+
+.app-kpi-card[data-tone='info'] {
+  border-top: 3px solid var(--admin-info);
+}
+
+/* ——— Modern dashboard (/) ——— */
+.dashboard-page {
+  background: var(--app-bg);
+}
+
+.dashboard-page__pad {
+  padding-inline: var(--app-space-4);
+}
+
+@media (min-width: 640px) {
+  .dashboard-page__pad {
+    padding-inline: var(--app-space-5);
+  }
+}
+
+/* เนื้อหาใต้ hero ใช้ `AppPageContent` — ไม่เพิ่ม padding-top ซ้ำ */
+.dashboard-page__body {
+  padding-top: 0;
+}
+
+/* การ์ด KPI แบบกะทัดรัด — 4 คอลัมน์บนจอใหญ่ */
+.dashboard-kpi-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .dashboard-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .dashboard-kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.dashboard-hero--compact {
+  padding-top: 1.25rem;
+}
+
+.dashboard-hero--compact .dashboard-hero__pepsi-stripe {
+  margin-top: 1.25rem;
+}
+
+.dashboard-hero--compact .dashboard-hero__content {
+  padding-bottom: 1.25rem;
+}
+
+.dashboard-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0 0;
+  color: var(--brand-logo-white);
+  background: linear-gradient(
+    128deg,
+    var(--brand-logo-blue-dark) 0%,
+    color-mix(in srgb, var(--brand-logo-blue-dark) 50%, var(--brand-logo-sky) 50%) 24%,
+    color-mix(in srgb, var(--brand-logo-green-dark) 70%, var(--brand-logo-blue-dark) 30%) 46%,
+    color-mix(in srgb, var(--brand-logo-green-light) 35%, var(--brand-logo-green-dark) 65%) 60%,
+    color-mix(in srgb, var(--brand-logo-orange) 40%, var(--brand-logo-blue-dark) 60%) 78%,
+    color-mix(in srgb, var(--brand-logo-blue-dark) 88%, #000812) 100%
+  );
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--brand-logo-white) 12%, transparent),
+    0 20px 48px color-mix(in srgb, var(--brand-logo-blue-dark) 32%, transparent);
+}
+
+.dashboard-hero__pepsi-stripe {
+  position: relative;
+  z-index: 2;
+  height: 4px;
+  margin-top: 2rem;
+}
+
+.dashboard-hero__mesh {
+  position: absolute;
+  inset: 0;
+  opacity: 0.42;
+  background-image:
+    radial-gradient(
+      circle at 14% 28%,
+      color-mix(in srgb, var(--brand-logo-sky) 42%, transparent) 0%,
+      transparent 46%
+    ),
+    radial-gradient(
+      circle at 82% 18%,
+      color-mix(in srgb, var(--brand-logo-orange) 34%, transparent) 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 68% 78%,
+      color-mix(in srgb, var(--brand-logo-green-light) 30%, transparent) 0%,
+      transparent 44%
+    ),
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0%, transparent 42%),
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 50%,
+      transparent 100%
+    );
+  pointer-events: none;
+}
+
+.dashboard-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.dashboard-orb--a {
+  top: -12%;
+  left: 8%;
+  width: 280px;
+  height: 280px;
+  background: color-mix(in srgb, var(--brand-logo-sky) 72%, var(--brand-logo-white));
+}
+
+.dashboard-orb--b {
+  top: 10%;
+  right: 5%;
+  width: 220px;
+  height: 220px;
+  background: color-mix(in srgb, var(--brand-logo-green-light) 58%, var(--brand-logo-white));
+  opacity: 0.38;
+}
+
+.dashboard-orb--c {
+  bottom: -20%;
+  left: 42%;
+  width: 200px;
+  height: 200px;
+  background: color-mix(in srgb, var(--brand-logo-orange) 62%, transparent);
+}
+
+.dashboard-hero__content {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 2rem;
+}
+
+.dashboard-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+  font-size: var(--app-font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, white 85%, transparent);
+}
+
+.dashboard-hero__title {
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
+}
+
+.dashboard-hero__subtitle {
+  margin-top: 0.65rem;
+  max-width: 36rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, white 82%, transparent);
+}
+
+.dashboard-hero__badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  vertical-align: middle;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+}
+
+.dashboard-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-live__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 10px #4ade80;
+}
+
+.dashboard-live--pulse .dashboard-live__dot {
+  animation: dashboard-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes dashboard-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.85);
+  }
+}
+
+.dashboard-hero__btn-primary {
+  background: var(--brand-logo-orange) !important;
+  color: var(--brand-logo-white) !important;
+  border: none;
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--brand-logo-orange) 45%, transparent);
+}
+
+.dashboard-hero__btn-primary:hover {
+  background: color-mix(in srgb, var(--brand-logo-orange) 88%, white) !important;
+}
+
+.dashboard-hero__btn {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-hero__btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.dashboard-hero__actions :where(button, a):not(.dashboard-hero__btn-primary):not(.dashboard-live) {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-hero__actions :where(button, a):not(.dashboard-hero__btn-primary):not(.dashboard-live):hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.app-page-hero__hint {
+  display: inline-block;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.125rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+}
+
+.dashboard-hero .dashboard-hero__badge,
+.dashboard-hero [data-hero-badge] {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.dashboard-kpi {
+  position: relative;
+  border-radius: var(--app-radius-card);
+  overflow: hidden;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--app-text) 5%, transparent),
+    0 12px 32px color-mix(in srgb, var(--app-accent) 10%, transparent);
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms ease;
+}
+
+.dashboard-kpi:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--app-accent) 40%, var(--app-border));
+  box-shadow:
+    0 4px 12px color-mix(in srgb, var(--app-accent) 12%, transparent),
+    0 20px 40px color-mix(in srgb, var(--app-accent) 18%, transparent);
+}
+
+.dashboard-kpi__glow {
+  position: absolute;
+  inset: -1px;
+  opacity: 0;
+  transition: opacity 320ms ease;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--brand-pepsi-blue) 14%, transparent),
+    color-mix(in srgb, var(--brand-pepsi-red) 10%, transparent)
+  );
+}
+
+.dashboard-kpi:hover .dashboard-kpi__glow {
+  opacity: 1;
+}
+
+.dashboard-kpi__stripe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--brand-logo-stripe);
+  border-radius: var(--app-radius-card) var(--app-radius-card) 0 0;
+  opacity: 0.85;
+}
+
+.dashboard-kpi__inner {
+  position: relative;
+  padding: 1.35rem 1.35rem 1.25rem;
+}
+
+.dashboard-kpi__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--brand-pepsi-blue) 16%, transparent);
+}
+
+.dashboard-kpi--pepsi-blue .dashboard-kpi__icon {
+  background: color-mix(in srgb, var(--brand-pepsi-blue) 14%, var(--app-surface));
+  color: var(--brand-pepsi-blue);
+}
+
+.dashboard-kpi--pepsi-red .dashboard-kpi__icon {
+  background: color-mix(in srgb, var(--brand-pepsi-red) 14%, var(--app-surface));
+  color: var(--brand-pepsi-red);
+}
+
+.dashboard-kpi--pepsi-orange .dashboard-kpi__icon {
+  background: color-mix(in srgb, var(--brand-logo-orange) 16%, var(--app-surface));
+  color: var(--sys-orange-light, var(--brand-logo-orange));
+}
+
+.dashboard-kpi__delta {
+  display: inline-flex;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.dashboard-kpi__delta--up {
+  color: var(--brand-logo-green-dark);
+  background: color-mix(in srgb, var(--brand-logo-green-light) 14%, var(--app-surface));
+}
+
+.dashboard-kpi__delta--down {
+  color: var(--brand-pepsi-red);
+  background: color-mix(in srgb, var(--brand-pepsi-red) 12%, var(--app-surface));
+}
+
+.dashboard-kpi__cta {
+  opacity: 0.7;
+  transition: opacity 200ms ease;
+}
+
+.dashboard-kpi:hover .dashboard-kpi__cta {
+  opacity: 1;
+}
+
+.dashboard-quick {
+  position: relative;
+  padding: 1rem 1.15rem;
+  border-radius: 0.875rem;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--app-text) 4%, transparent),
+    0 8px 20px color-mix(in srgb, var(--app-text) 4%, transparent);
+  overflow: hidden;
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms ease,
+    border-color 240ms ease;
+}
+
+.dashboard-quick:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--app-accent) 35%, var(--app-border));
+  box-shadow:
+    0 8px 24px color-mix(in srgb, var(--app-accent) 14%, transparent),
+    0 16px 36px color-mix(in srgb, var(--app-text) 6%, transparent);
+}
+
+.dashboard-quick__shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, white 35%, transparent),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 600ms ease;
+  pointer-events: none;
+}
+
+.dashboard-quick:hover .dashboard-quick__shine {
+  left: 140%;
+}
+
+html.dark .dashboard-quick__shine {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, white 8%, transparent),
+    transparent
+  );
+}
+
+.dashboard-quick__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.65rem;
+  color: var(--brand-pepsi-blue);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--brand-pepsi-blue) 12%, var(--app-surface)),
+    color-mix(in srgb, var(--brand-pepsi-red) 8%, var(--app-surface))
+  );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 40%, transparent),
+    0 2px 8px color-mix(in srgb, var(--brand-pepsi-blue) 12%, transparent);
+}
+
+.dashboard-quick:hover .dashboard-quick__icon {
+  color: var(--brand-pepsi-red);
+}
+
+html.dark .dashboard-quick__icon {
+  color: var(--brand-logo-sky);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--brand-logo-sky) 22%, var(--app-surface)),
+    color-mix(in srgb, var(--brand-logo-orange) 14%, var(--app-surface))
+  );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 8%, transparent),
+    0 2px 8px color-mix(in srgb, var(--brand-logo-sky) 18%, transparent);
+}
+
+html.dark .dashboard-quick:hover .dashboard-quick__icon {
+  color: color-mix(in srgb, var(--brand-logo-orange) 82%, white);
+}
+
+.dashboard-panel {
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--app-text) 6%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .admin-card:hover,
+  .admin-layout-shell .admin-card:hover,
+  .admin-layout-shell .admin-quick-link:hover,
+  .app-card:hover {
+    transform: none !important;
+  }
+
+  .dashboard-kpi:hover,
+  .dashboard-quick:hover {
+    transform: none !important;
+  }
+
+  .dashboard-quick:hover .dashboard-quick__shine {
+    left: -100% !important;
+  }
+}
+
+/*
+ * § Sidebar Premium (U4g) — consolidated block
+ * Token map: docs/customer-requirements/UI-DESIGN-TOKENS.md § U4g
+ * Shell:     AppNavShell.tsx · use-sidebar-state.ts · sidebar-prefs.ts
+ * Nav items: NavMenuList.tsx
+ * Preview:   /dev/ui · SidebarPlaygroundStates.tsx
+ *
+ * Layers (do not scatter new sidebar rules outside this section):
+ *   1. .macos-sidebar shell + --sb-menu-* aliases
+ *   2. .app-sidebar-brand* header
+ *   3. .sidebar-nav / .sidebar-nav-indicator / .nav-menu-link*
+ *   4. .app-sidebar--drawer mobile
+ * Group headings live earlier: .nav-menu-group-heading (line ~225)
+ */
+
+/* macOS-style nav shell — ใช้ทั้งแอปหลักและ Admin */
+.macos-sidebar {
+  --sb-menu-text: var(--app-sidebar-fg);
+  --sb-menu-muted: var(--app-sidebar-fg-muted);
+  --sb-menu-accent: var(--app-primary);
+  --sb-menu-highlight: var(--app-accent);
+  --sb-menu-active-surface: var(--app-sidebar);
+  --sidebar-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --sidebar-motion: 300ms var(--sidebar-ease);
+
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--app-sidebar) 86%, var(--app-surface)) 0%,
+    color-mix(in srgb, var(--app-sidebar) 96%, var(--app-surface-muted)) 100%
+  );
+  border-right: 1px solid var(--app-sidebar-border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: var(--app-sidebar-elevated);
+  transition:
+    width var(--sidebar-motion),
+    box-shadow var(--sidebar-motion);
+}
+
+.macos-sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--app-sidebar-inner-highlight);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.macos-sidebar[data-pinned='true'] {
+  box-shadow: var(--app-sidebar-elevated-pinned);
+}
+
+.macos-sidebar[data-pinned='false'] {
+  box-shadow: var(--app-sidebar-elevated-hover);
+}
+
+/* Collapsed rail — แยกจากเนื้อหา · ไอคอนชัด · ปักหมุดได้โดยไม่ต้อง hover ขยาย */
+.macos-sidebar[data-collapsed='true'] {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--app-sidebar) 78%, var(--app-surface-muted)) 0%,
+    color-mix(in srgb, var(--app-sidebar) 92%, var(--app-surface)) 100%
+  );
+  box-shadow:
+    inset -1px 0 0 var(--app-sidebar-inner-highlight),
+    4px 0 18px color-mix(in srgb, var(--app-text) 6%, transparent);
+}
+
+.macos-sidebar[data-collapsed='true']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    var(--brand-pepsi-red) 0%,
+    color-mix(in srgb, var(--brand-pepsi-red) 55%, var(--brand-pepsi-blue)) 45%,
+    var(--brand-pepsi-blue) 100%
+  );
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.92;
+}
+
+html.dark .macos-sidebar[data-collapsed='true'] {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--app-sidebar) 88%, #0a0c10) 0%,
+    color-mix(in srgb, var(--app-sidebar) 72%, #06070a) 100%
+  );
+  box-shadow:
+    inset -1px 0 0 var(--app-sidebar-inner-highlight),
+    6px 0 24px rgba(0, 0, 0, 0.28);
+}
+
+.macos-sidebar[data-collapsed='true'] .sidebar-nav {
+  gap: 0.375rem;
+  padding-left: 0.4375rem;
+  padding-right: 0.4375rem;
+}
+
+.macos-sidebar[data-collapsed='true'] .app-sidebar-brand {
+  min-height: 4.25rem;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
+
+.macos-sidebar[data-collapsed='true'] .app-sidebar-brand__mark {
+  padding: 0.3125rem 0.5rem;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 62%, transparent),
+    0 2px 6px color-mix(in srgb, var(--app-text) 10%, transparent);
+}
+
+.macos-sidebar[data-collapsed='true'] .app-sidebar-footer {
+  padding: 0.4375rem;
+}
+
+.macos-sidebar .sidebar-nav--collapsed .nav-menu-link__icon-slot {
+  width: 2.375rem;
+  height: 2.375rem;
+  border-radius: 0.6875rem;
+  background: color-mix(in srgb, var(--app-surface) 88%, var(--app-sidebar));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 70%, transparent),
+    0 1px 3px color-mix(in srgb, var(--app-text) 8%, transparent);
+  transition:
+    background 150ms var(--sidebar-ease),
+    box-shadow 150ms var(--sidebar-ease),
+    transform 150ms var(--sidebar-ease);
+}
+
+html.dark .macos-sidebar .sidebar-nav--collapsed .nav-menu-link__icon-slot {
+  background: color-mix(in srgb, var(--app-surface) 72%, #111318);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.macos-sidebar .sidebar-nav--collapsed a:hover .nav-menu-link__icon-slot {
+  background: color-mix(in srgb, var(--sb-menu-accent) 10%, var(--app-surface));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 75%, transparent),
+    0 2px 8px color-mix(in srgb, var(--sb-menu-accent) 14%, transparent);
+}
+
+.macos-sidebar .sidebar-nav--collapsed a[aria-current='page'] .nav-menu-link__icon-slot,
+.macos-sidebar .sidebar-nav--collapsed a.nav-menu-link--active .nav-menu-link__icon-slot {
+  background: color-mix(in srgb, var(--sb-menu-highlight) 16%, var(--app-surface));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 55%, transparent),
+    0 0 0 2px color-mix(in srgb, var(--sb-menu-highlight) 42%, transparent),
+    0 4px 12px color-mix(in srgb, var(--sb-menu-highlight) 22%, transparent);
+}
+
+.sidebar-pin-btn--collapsed {
+  border-radius: 0.6875rem;
+  background: color-mix(in srgb, var(--app-surface) 82%, var(--app-sidebar));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 65%, transparent),
+    0 1px 3px color-mix(in srgb, var(--app-text) 7%, transparent);
+}
+
+.sidebar-pin-btn--collapsed:hover {
+  background: color-mix(in srgb, var(--sb-menu-accent) 10%, var(--app-surface));
+}
+
+.sidebar-pin-btn--collapsed[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--sb-menu-highlight) 14%, var(--app-sidebar));
+  color: color-mix(in srgb, var(--sb-menu-highlight) 88%, var(--sb-menu-text));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 50%, transparent),
+    0 0 0 2px color-mix(in srgb, var(--sb-menu-highlight) 38%, transparent);
+}
+
+html.dark .macos-sidebar {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--app-sidebar) 94%, #1a1d24) 0%,
+    color-mix(in srgb, var(--app-sidebar) 82%, #0c0e12) 100%
+  );
+  border-right-color: var(--app-sidebar-border);
+}
+
+/* U4g.6 — footer zone */
+.app-sidebar-footer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--app-sidebar-border);
+  padding: 0.5rem;
+  background: color-mix(in srgb, var(--app-sidebar) 90%, var(--app-surface-muted));
+}
+
+html.dark .app-sidebar-footer {
+  background: color-mix(in srgb, var(--app-sidebar) 78%, #08090c);
+}
+
+.app-sidebar-footer__user {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.25rem 0.125rem 0.125rem;
+}
+
+.app-sidebar-footer__user--collapsed {
+  justify-content: center;
+  padding: 0.125rem 0;
+}
+
+.app-sidebar-footer__user-text {
+  overflow: hidden;
+}
+
+.app-sidebar-footer__role-badge {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 999px;
+  margin-top: 0.125rem;
+  padding: 0.0625rem 0.375rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--sb-menu-muted);
+  background: color-mix(in srgb, var(--sb-menu-muted) 10%, var(--app-sidebar));
+}
+
+.macos-sidebar .sidebar-footer__avatar {
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--app-text) 10%, transparent);
+}
+
+/* U4g.5 — pin toggle pressed state */
+.sidebar-pin-btn[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--sb-menu-highlight) 12%, var(--app-sidebar-hover));
+  color: color-mix(in srgb, var(--sb-menu-highlight) 88%, var(--sb-menu-text));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sb-menu-highlight) 24%, transparent);
+}
+
+.sidebar-pin-btn[aria-pressed='true']:hover {
+  background: color-mix(in srgb, var(--sb-menu-highlight) 16%, var(--app-sidebar-hover));
+  color: var(--sb-menu-text);
+}
+
+/* U4g.5 — label reveal: opacity trails width on expand, hides first on collapse */
+.macos-sidebar .sidebar-reveal-label,
+.macos-sidebar .app-sidebar-brand__title-block {
+  transition:
+    opacity 120ms var(--sidebar-ease),
+    max-width var(--sidebar-motion);
+}
+
+.macos-sidebar[data-collapsed='false'] .sidebar-reveal-label,
+.macos-sidebar[data-collapsed='false'] .app-sidebar-brand__title-block {
+  transition-delay: 100ms, 0ms;
+}
+
+.macos-sidebar[data-collapsed='true'] .sidebar-reveal-label,
+.macos-sidebar[data-collapsed='true'] .app-sidebar-brand__title-block {
+  transition-delay: 0ms;
+  transition-duration: 60ms, var(--sidebar-motion);
+}
+
+.macos-sidebar[data-reduced-motion='true'] {
+  --sidebar-motion: 0ms;
+  transition: none;
+}
+
+.macos-sidebar[data-reduced-motion='true'] .sidebar-reveal-label,
+.macos-sidebar[data-reduced-motion='true'] .app-sidebar-brand__title-block,
+.macos-sidebar[data-reduced-motion='true'] .sidebar-nav .nav-menu-link__label {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .macos-sidebar {
+    --sidebar-motion: 0ms;
+    transition: none;
+  }
+
+  .macos-sidebar .sidebar-reveal-label,
+  .macos-sidebar .app-sidebar-brand__title-block,
+  .macos-sidebar .sidebar-nav .nav-menu-link__label {
+    transition: none;
+  }
+}
+
+.macos-admin .macos-sidebar {
+  /* U4g.8 — same sidebar components; shell tokens alias to admin theme */
+  --app-sidebar: var(--admin-surface-muted);
+  --app-sidebar-fg: var(--admin-text);
+  --app-sidebar-fg-muted: var(--admin-text-muted);
+  --app-sidebar-border: var(--admin-border);
+  --app-sidebar-hover: color-mix(in srgb, var(--admin-primary) 10%, var(--admin-surface-muted));
+  --app-sidebar-active: color-mix(in srgb, var(--admin-primary) 16%, var(--admin-surface-muted));
+  --sb-menu-text: var(--admin-text);
+  --sb-menu-muted: color-mix(in srgb, var(--admin-text) 65%, transparent);
+  --sb-menu-accent: var(--admin-primary);
+  --sb-menu-highlight: var(--admin-accent);
+  --sb-menu-active-surface: var(--admin-surface);
+}
+
+html.dark .macos-admin .macos-sidebar {
+  --app-sidebar-inner-highlight: rgba(255, 255, 255, 0.06);
+  --app-sidebar-elevated:
+    inset -1px 0 0 var(--app-sidebar-inner-highlight),
+    4px 0 24px rgba(0, 0, 0, 0.28);
+  --app-sidebar-elevated-pinned:
+    inset -1px 0 0 var(--app-sidebar-inner-highlight),
+    6px 0 28px rgba(0, 0, 0, 0.34);
+  --app-sidebar-elevated-hover:
+    inset -1px 0 0 var(--app-sidebar-inner-highlight),
+    2px 0 16px rgba(0, 0, 0, 0.22);
+}
+
+/* โลโก้เมนู / topbar — ขั้นต่ำ 40px (Admin ตั้งค่าได้สูงกว่า) */
+.app-brand-logo-nav {
+  height: max(2.5rem, var(--brand-logo-nav-height, 2.5rem));
+  width: auto;
+  max-width: calc(max(2.5rem, var(--brand-logo-nav-height, 2.5rem)) * 4);
+}
+
+.pepsi-stripe--sidebar {
+  height: 3px;
+  opacity: 0.92;
+}
+
+.app-sidebar-brand {
+  display: flex;
+  min-height: 4.5rem;
+  flex-shrink: 0;
+  align-items: center;
+  border-bottom: 1px solid var(--app-sidebar-border);
+}
+
+.app-sidebar-brand--expanded {
+  gap: 0.625rem;
+  padding: 0.75rem 0.875rem;
+}
+
+.app-sidebar-brand--collapsed {
+  justify-content: center;
+  padding: 0.75rem 0.375rem;
+}
+
+.app-sidebar-brand__mark {
+  padding: 0.25rem 0.4375rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--app-surface) 94%, white),
+    color-mix(in srgb, var(--brand-pepsi-blue) 5%, var(--app-sidebar))
+  );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 55%, transparent),
+    0 1px 4px color-mix(in srgb, var(--app-text) 7%, transparent);
+}
+
+html.dark .app-sidebar-brand__mark {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--app-surface) 88%, #111114),
+    color-mix(in srgb, var(--brand-pepsi-blue) 12%, #0f0f12)
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.app-sidebar-brand__logo {
+  display: block;
+  height: max(1.75rem, calc(var(--brand-logo-nav-height, 2.5rem) * 0.7));
+  width: auto;
+  max-width: calc(max(1.75rem, var(--brand-logo-nav-height, 2.5rem)) * 1.8);
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px color-mix(in srgb, var(--app-text) 8%, transparent));
+}
+
+/* U4g.9 — compact density: tighter nav stack · 44px touch targets on mobile */
+.macos-sidebar[data-sidebar-density='compact'] .sidebar-nav {
+  gap: 0;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.macos-sidebar[data-sidebar-density='compact'] .nav-menu-group-heading--sidebar {
+  padding-top: 0.375rem;
+  padding-bottom: 0.125rem;
+}
+
+.macos-sidebar[data-sidebar-density='compact'] .nav-menu-link--sidebar {
+  height: 2.25rem;
+  min-height: 2.75rem;
+}
+
+@media (min-width: 1024px) {
+  .macos-sidebar[data-sidebar-density='compact'] .nav-menu-link--sidebar {
+    min-height: 2.25rem;
+  }
+}
+
+.macos-sidebar[data-sidebar-density='compact'] .app-sidebar-brand {
+  min-height: 4rem;
+}
+
+.macos-sidebar[data-sidebar-density='compact'] .app-sidebar-brand--expanded {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
+.macos-sidebar[data-sidebar-density='compact'] .app-sidebar-footer {
+  padding: 0.375rem;
+}
+
+.app-sidebar-brand__title-block {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 0.375rem;
+  overflow: hidden;
+  max-width: 12rem;
+  opacity: 1;
+}
+
+.app-sidebar-brand__title-block--collapsed {
+  max-width: 0;
+  flex: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.app-sidebar-brand__title {
+  font-size: var(--app-font-size-lg);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--app-sidebar-fg);
+}
+
+.app-sidebar-brand__module-chip {
+  flex-shrink: 0;
+  border-radius: 999px;
+  padding: 0.0625rem 0.375rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.macos-sidebar .app-sidebar-brand__module-chip {
+  background: color-mix(in srgb, var(--sb-menu-highlight) 14%, var(--app-sidebar));
+  color: color-mix(in srgb, var(--sb-menu-highlight) 90%, var(--sb-menu-text));
+}
+
+.app-topbar-brand-title {
+  font-size: var(--app-font-size-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--app-text);
+}
+
+html:not(.dark) .app-topbar-brand-title {
+  background: linear-gradient(
+    120deg,
+    var(--brand-pepsi-blue) 0%,
+    color-mix(in srgb, var(--brand-pepsi-blue) 72%, #001a3d) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.app-topbar-brand-tagline {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--app-text-muted) 88%, var(--brand-pepsi-blue));
+}
+
+.app-topbar-brand__mark {
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.875rem;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--app-surface) 94%, white),
+    color-mix(in srgb, var(--brand-pepsi-blue) 5%, var(--app-surface))
+  );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 55%, transparent),
+    0 1px 4px color-mix(in srgb, var(--app-text) 7%, transparent);
+}
+
+html.dark .app-topbar-brand__mark {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--app-surface) 88%, #111114),
+    color-mix(in srgb, var(--brand-pepsi-blue) 12%, #0f0f12)
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.app-topbar-brand__logo {
+  display: block;
+  height: 2rem;
+  width: auto;
+  max-width: 7.5rem;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px color-mix(in srgb, var(--app-text) 8%, transparent));
+}
+
+.app-topbar-brand__divider {
+  width: 1px;
+  height: 2.125rem;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--brand-pepsi-blue) 40%, var(--app-border)) 45%,
+    color-mix(in srgb, var(--brand-pepsi-red) 30%, var(--app-border)) 55%,
+    transparent 100%
+  );
+}
+
+.profile-avatar-ring {
+  background: linear-gradient(
+    135deg,
+    var(--brand-pepsi-blue) 0%,
+    color-mix(in srgb, var(--brand-pepsi-white) 85%, var(--brand-pepsi-blue)) 48%,
+    var(--brand-pepsi-red) 100%
+  );
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--brand-pepsi-blue) 22%, transparent);
+}
+
+.profile-avatar-ring--popover {
+  padding: 3px;
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--brand-pepsi-blue) 28%, transparent);
+}
+
+.app-topbar-user {
+  align-items: center;
+}
+
+.app-topbar-actions {
+  align-items: center;
+}
+
+.macos-topbar {
+  min-height: 3.75rem;
+  background: color-mix(in srgb, var(--app-surface) 82%, white);
+  border-bottom: 1px solid color-mix(in srgb, var(--app-border) 55%, transparent);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 40%, transparent),
+    0 8px 24px color-mix(in srgb, var(--app-text) 6%, transparent);
+}
+
+html.dark .macos-topbar {
+  background: color-mix(in srgb, var(--app-surface) 78%, #0f0f12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04),
+    0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* Admin theme (skills.md 21-32): borderless + whitespace + 60/30/10 */
+
+/* Admin base colors = โลโก้ใหม่: ขาว · ส้ม · ฟ้า · เขียว · น้ำเงินเข้ม */
+.macos-admin {
+  --pepsi-white: var(--brand-logo-white);
+  --pepsi-blue: var(--brand-logo-blue-dark);
+  --pepsi-red: var(--brand-logo-orange);
+  --pepsi-orange: var(--brand-logo-orange);
+  --pepsi-green: var(--brand-logo-green-light);
+
+  /* 60/30/10: 60=background, 30=surface/sidebar, 10=accent */
+  --admin-primary: var(--brand-logo-blue-dark);
+  --admin-accent: var(--brand-logo-orange);
+  --admin-success: var(--brand-logo-green-light);
+  --admin-warning: var(--brand-logo-orange);
+  --admin-danger: var(--sys-red-light);
+  --admin-info: var(--brand-logo-sky);
+  --admin-bg: #eef2f7;
+  --admin-surface: #ffffff;
+  --admin-surface-muted: #f8fafc;
+  --admin-border: #dce3ed;
+  --admin-text: #1e293b;
+  --admin-text-muted: #64748b;
+  --admin-shadow: var(--app-shadow-card);
+
+  background-color: var(--admin-bg);
+  background-image: none;
+  color: var(--admin-text);
+}
+
+html.dark .macos-admin {
+  --pepsi-blue: color-mix(in srgb, var(--brand-logo-blue-dark) 55%, var(--brand-logo-sky));
+  --pepsi-red: color-mix(in srgb, var(--brand-logo-orange) 55%, var(--sys-orange-dark));
+  --pepsi-orange: var(--sys-orange-dark);
+  --pepsi-green: color-mix(in srgb, var(--brand-logo-green-light) 55%, var(--sys-green-dark));
+  /* skill-theme.md §1 — cinematic dark, not pure black */
+  --admin-bg: #0f172a;
+  --admin-surface: #1c1c1e;
+  --admin-surface-muted: rgba(255, 255, 255, 0.04);
+  --admin-text: rgba(255, 255, 255, 0.92);
+  --admin-text-muted: rgba(255, 255, 255, 0.64);
+  --admin-border: rgba(255, 255, 255, 0.12);
+  --admin-shadow: var(--app-shadow-card);
+  background-image: none;
+}
+
+/* Pepsi corporate accents (admin): links + CTA */
+.macos-admin :where(a) {
+  color: color-mix(in srgb, var(--admin-primary) 92%, black);
+}
+.macos-admin :where(a:hover) {
+  color: color-mix(in srgb, var(--admin-accent) 78%, black);
+}
+
+/* CTA buttons: "default" variant uses bg-zinc-900 in this codebase */
+.macos-admin .app-surface :where(button, a)[class*='bg-zinc-900'] {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--admin-primary) 92%, white),
+    color-mix(in srgb, var(--admin-primary) 86%, #111113)
+  ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 12px 28px color-mix(in srgb, var(--admin-primary) 22%, transparent),
+    0 2px 10px color-mix(in srgb, var(--admin-text) 10%, transparent) !important;
+}
+
+/* Admin toolbar — พื้นขาว corporate */
+.macos-admin .admin-layout-glass {
+  position: relative;
+  border: 0;
+  background: var(--admin-surface);
+  box-shadow: 0 1px 0 var(--admin-border);
+}
+.macos-admin .admin-layout-glass::after {
+  content: none;
+}
+
+/* Subtle macOS-like focus ring in admin */
+.macos-admin :where(input, textarea, select, button):focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--admin-primary) 70%, transparent);
+  outline-offset: 2px;
+}
+
+/* Border-less controls (admin only, inside surfaces) */
+.macos-admin .admin-card :where(input, textarea, select),
+.macos-admin .app-surface :where(input, textarea, select) {
+  border-radius: var(--app-radius-card);
+  border-color: transparent;
+  background: color-mix(in srgb, var(--admin-surface-muted) 100%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  backdrop-filter: none;
+}
+
+html.dark .macos-admin .admin-card :where(input, textarea, select),
+html.dark .macos-admin .app-surface :where(input, textarea, select) {
+  border-color: transparent;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.macos-admin .admin-card :where(button),
+.macos-admin .app-surface :where(button) {
+  border-radius: var(--app-radius-button);
+}
+
+.macos-admin .app-surface :where(button[class*='border'], button[class*='outline']) {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--admin-surface-muted) 100%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 6px 16px color-mix(in srgb, var(--admin-text) 10%, transparent);
+  backdrop-filter: none;
+}
+
+.macos-admin .app-surface :where(button:hover) {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.66),
+    0 2px 6px color-mix(in srgb, var(--app-text) 10%, transparent);
+}
+
+.macos-admin .app-surface :where(button:active) {
+  transform: translateY(0.5px);
+}
+
+.macos-admin .app-surface :where(a, button)[class*='bg-zinc-900'] {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--admin-primary) 92%, #ffffff),
+    color-mix(in srgb, var(--admin-primary) 86%, #111113)
+  );
+}
+
+/* macOS26 web: sidebar menu clarity (main app + admin) — U4g.3 sliding indicator */
+.macos-sidebar .sidebar-nav {
+  gap: 4px;
+}
+
+.macos-sidebar .sidebar-nav > div.nav-menu-group-heading::after {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-top: 6px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--sb-menu-text) 14%, transparent),
+    transparent
+  );
+  opacity: 0.8;
+}
+
+/* U4g.8 — indicator behind links; isolated stack (tour / command palette do not clip paint) */
+.macos-sidebar .sidebar-nav {
+  isolation: isolate;
+}
+
+.sidebar-nav-indicator {
+  border-radius: var(--app-radius-button);
+  background: color-mix(in srgb, var(--sb-menu-accent) 16%, var(--sb-menu-active-surface));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 4px 14px color-mix(in srgb, var(--sb-menu-accent) 14%, transparent);
+}
+
+.sidebar-nav-indicator::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  width: 4px;
+  height: 1.25rem;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--sb-menu-highlight) 95%, white),
+    color-mix(in srgb, var(--sb-menu-accent) 85%, transparent)
+  );
+  box-shadow: 0 0 8px color-mix(in srgb, var(--sb-menu-highlight) 35%, transparent);
+}
+
+html.dark .sidebar-nav-indicator {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 6px 18px color-mix(in srgb, var(--sb-menu-accent) 20%, transparent);
+}
+
+.macos-sidebar .sidebar-nav a {
+  position: relative;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--sb-menu-muted);
+  transition:
+    background 150ms var(--sidebar-ease),
+    color 150ms var(--sidebar-ease),
+    transform 150ms var(--sidebar-ease);
+}
+
+.macos-sidebar .sidebar-nav a:hover {
+  background: color-mix(in srgb, var(--sb-menu-accent) 8%, transparent);
+  border-color: transparent;
+  color: var(--sb-menu-text);
+}
+
+.macos-sidebar .sidebar-nav a:active {
+  transform: translateY(0.5px);
+}
+
+.macos-sidebar .sidebar-nav[data-nav-indicator='on'] a[aria-current='page'] {
+  color: var(--sb-menu-text);
+  background: transparent;
+  box-shadow: none;
+}
+
+.macos-sidebar .sidebar-nav[data-nav-indicator='on'] a[aria-current='page']:hover {
+  background: transparent;
+}
+
+.macos-sidebar .sidebar-nav[data-nav-indicator='on'] a[aria-current='page']::before {
+  display: none;
+}
+
+.macos-sidebar .sidebar-nav[data-nav-indicator='off'] a[aria-current='page'] {
+  color: var(--sb-menu-text);
+  background: color-mix(in srgb, var(--sb-menu-accent) 16%, var(--sb-menu-active-surface));
+  border-color: transparent;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 10px 24px color-mix(in srgb, var(--sb-menu-accent) 16%, transparent),
+    0 2px 10px color-mix(in srgb, var(--app-text) 10%, transparent);
+}
+
+/* Sidebar ยุบ (U4g.4) — icon ring · dot · scroll fade · glass tooltip */
+.macos-sidebar[data-collapsed='true'] .sidebar-nav a[aria-current='page']::before,
+.macos-sidebar .sidebar-nav--collapsed a[aria-current='page']::before {
+  display: none;
+}
+
+.macos-sidebar .sidebar-nav--collapsed a {
+  color: color-mix(in srgb, var(--sb-menu-text) 82%, var(--sb-menu-muted));
+}
+
+.macos-sidebar .sidebar-nav--collapsed a:hover {
+  color: var(--sb-menu-text);
+  background: transparent;
+}
+
+.macos-sidebar .sidebar-nav--collapsed a .nav-menu-link__icon {
+  color: color-mix(in srgb, var(--sb-menu-text) 88%, var(--sb-menu-muted));
+}
+
+.macos-sidebar .sidebar-nav--collapsed a:hover .nav-menu-link__icon {
+  color: var(--sb-menu-text);
+}
+
+.macos-sidebar .sidebar-nav--collapsed a[aria-current='page'],
+.macos-sidebar .sidebar-nav--collapsed a.nav-menu-link--active {
+  color: var(--sb-menu-text);
+  background: transparent;
+  box-shadow: none;
+}
+
+.macos-sidebar .sidebar-nav--collapsed a[aria-current='page'] .nav-menu-link__icon,
+.macos-sidebar .sidebar-nav--collapsed a.nav-menu-link--active .nav-menu-link__icon {
+  color: var(--sb-menu-highlight);
+  background: transparent;
+  box-shadow: none;
+}
+
+.macos-sidebar .sidebar-nav--collapsed .nav-menu-link__icon-slot::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  transform: translateX(-50%) scale(0);
+  border-radius: 999px;
+  background: var(--sb-menu-highlight);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--sb-menu-highlight) 50%, transparent);
+  opacity: 0;
+  transition:
+    transform 150ms var(--sidebar-ease),
+    opacity 150ms var(--sidebar-ease);
+}
+
+.macos-sidebar .sidebar-nav--collapsed a[aria-current='page'] .nav-menu-link__icon-slot::after,
+.macos-sidebar .sidebar-nav--collapsed a.nav-menu-link--active .nav-menu-link__icon-slot::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.sidebar-nav--fade-top.sidebar-nav--fade-bottom {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 14px,
+    #000 calc(100% - 14px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 14px,
+    #000 calc(100% - 14px),
+    transparent 100%
+  );
+}
+
+.sidebar-nav--fade-top:not(.sidebar-nav--fade-bottom) {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 100%);
+}
+
+.sidebar-nav--fade-bottom:not(.sidebar-nav--fade-top) {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 14px), transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 14px), transparent 100%);
+}
+
+.sidebar-tooltip {
+  pointer-events: none;
+  border-color: color-mix(in srgb, var(--app-sidebar-border) 75%, var(--app-border));
+  background: color-mix(in srgb, var(--app-surface) 86%, transparent);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, white 35%, transparent),
+    var(--app-shadow-dialog);
+}
+
+html.dark .sidebar-tooltip {
+  background: color-mix(in srgb, var(--app-surface) 82%, #0f0f12);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .macos-sidebar .sidebar-nav--collapsed .nav-menu-link__icon-slot::after {
+    transition: none;
+  }
+}
+
+.app-sidebar--drawer {
+  box-shadow:
+    inset -1px 0 0 var(--app-sidebar-inner-highlight),
+    0 0 0 1px color-mix(in srgb, var(--app-border) 40%, transparent),
+    0 24px 48px color-mix(in srgb, var(--app-text) 18%, transparent);
+}
+
+/* U4g.7 — Sheet nav drawer: sidebar shell over dialog glass · z above banners (z-15) */
+.app-sidebar-sheet.macos-sidebar {
+  /* .macos-sidebar sets position:relative — must win over Sheet fixed for full-viewport drawer */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100svh;
+  max-height: 100svh;
+  min-height: 100svh;
+  border-radius: 0;
+  color: var(--app-sidebar-fg);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--app-sidebar) 86%, var(--app-surface)) 0%,
+    color-mix(in srgb, var(--app-sidebar) 96%, var(--app-surface-muted)) 100%
+  );
+  box-shadow:
+    inset -1px 0 0 var(--app-sidebar-inner-highlight),
+    0 0 0 1px color-mix(in srgb, var(--app-border) 40%, transparent),
+    0 24px 48px color-mix(in srgb, var(--app-text) 18%, transparent);
+}
+
+html.dark .app-sidebar-sheet.macos-sidebar {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--app-sidebar) 94%, #1a1d24) 0%,
+    color-mix(in srgb, var(--app-sidebar) 82%, #0c0e12) 100%
+  );
+}
+
+.macos-admin .app-sidebar-sheet.macos-sidebar {
+  color: var(--admin-text);
+}
+.macos-sidebar .sidebar-nav .nav-menu-link__label {
+  transition:
+    opacity 120ms var(--sidebar-ease),
+    max-width var(--sidebar-motion),
+    margin var(--sidebar-motion);
+}
+
+.macos-sidebar[data-collapsed='false'] .sidebar-nav .nav-menu-link__label {
+  transition-delay: 80ms, 0ms, 0ms;
+}
+
+.macos-sidebar[data-collapsed='true'] .sidebar-nav .nav-menu-link__label {
+  transition-delay: 0ms;
+  transition-duration: 50ms, var(--sidebar-motion), var(--sidebar-motion);
+}
+
+.macos-sidebar .sidebar-nav a svg {
+  transition:
+    background var(--sidebar-motion),
+    transform var(--sidebar-motion),
+    color var(--sidebar-motion);
+}
+
+.macos-sidebar .sidebar-nav[data-nav-indicator='on'] a .nav-menu-link__icon {
+  color: color-mix(in srgb, var(--sb-menu-muted) 92%, var(--sb-menu-text));
+}
+
+.macos-sidebar .sidebar-nav[data-nav-indicator='on'] a[aria-current='page'] .nav-menu-link__icon {
+  color: color-mix(in srgb, var(--sb-menu-highlight) 88%, var(--sb-menu-text));
+}
+
+.macos-sidebar .sidebar-nav[data-nav-indicator='on'] a:hover .nav-menu-link__icon {
+  color: var(--sb-menu-text);
+}
+
+.macos-sidebar .sidebar-nav[data-collapsed='true'] a svg,
+.macos-sidebar .sidebar-nav--collapsed a svg {
+  border-radius: var(--app-radius-button);
+  padding: 6px;
+  box-sizing: content-box;
+}
+
+.macos-sidebar .sidebar-nav a:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--sb-menu-highlight) 72%, transparent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--sb-menu-highlight) 22%, transparent);
+  z-index: 3;
+}
+
+.nav-menu-link--navbar[aria-current='page'] {
+  background: color-mix(in srgb, var(--app-accent) 10%, transparent);
+  box-shadow: inset 0 -2px 0 var(--app-accent);
+}
+
+.nav-menu-link--navbar[aria-current='page']:hover {
+  background: color-mix(in srgb, var(--app-accent) 12%, transparent);
+}
+
+/* macOS Tahoe-ish “Vibrancy” for Admin only (scoped) */
+.admin-layout-shell .app-surface {
+  background: var(--admin-surface);
+  border: 0;
+  box-shadow: var(--admin-shadow);
+  backdrop-filter: none;
+}
+
+.admin-layout-shell .app-surface:hover {
+  box-shadow:
+    0 14px 34px color-mix(in srgb, var(--admin-text) 14%, transparent),
+    0 2px 10px color-mix(in srgb, var(--admin-text) 8%, transparent);
+}
+
+html.dark .admin-layout-shell .app-surface {
+  background: var(--admin-surface);
+  border: 0;
+  box-shadow: var(--admin-shadow);
+  backdrop-filter: none;
+}
+
+/* Softer tables inside admin cards */
+.admin-layout-shell .app-surface table {
+  background: transparent;
+}
+.admin-layout-shell .app-surface thead tr {
+  background: color-mix(in srgb, var(--app-surface) 60%, transparent);
+}
+.admin-layout-shell .app-surface tbody tr:hover {
+  background: color-mix(in srgb, var(--app-accent) 6%, transparent);
+}
+
+/* macOS26 web: tables (admin) */
+.macos-admin .admin-card thead tr,
+.macos-admin .app-surface thead tr {
+  background: color-mix(in srgb, var(--app-surface) 58%, transparent);
+}
+.macos-admin .admin-card th,
+.macos-admin .app-surface th {
+  color: color-mix(in srgb, var(--app-text) 70%, transparent);
+}
+.macos-admin .app-surface tr[data-state='selected'] {
+  background: color-mix(in srgb, var(--admin-primary) 10%, transparent);
+}
+.macos-admin .admin-card tbody tr:hover,
+.macos-admin .app-surface tbody tr:hover {
+  background: color-mix(in srgb, var(--admin-accent) 8%, transparent);
+}
+
+/* macOS26 web: dialogs/popovers (admin) */
+.macos-admin [data-radix-dialog-content],
+.macos-admin [data-radix-popper-content-wrapper] > * {
+  backdrop-filter: blur(18px);
+}
+.macos-admin .macos-popover-glass {
+  background: color-mix(in srgb, var(--app-surface) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--app-border) 55%, transparent);
+  box-shadow:
+    0 1px 1px color-mix(in srgb, var(--app-text) 6%, transparent),
+    0 22px 58px color-mix(in srgb, var(--app-text) 16%, transparent);
+}
+html.dark .macos-admin .macos-popover-glass {
+  background: color-mix(in srgb, var(--app-surface) 80%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.35),
+    0 22px 58px rgba(0, 0, 0, 0.72);
+}
+.macos-admin .macos-dialog-glass {
+  border: 1px solid color-mix(in srgb, var(--app-border) 55%, transparent);
+  border-radius: var(--app-radius-dialog);
+  box-shadow: var(--app-shadow-dialog);
+}
+html.dark .macos-admin .macos-dialog-glass {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.35),
+    0 28px 86px rgba(0, 0, 0, 0.75);
+}
+
+/* macOS26 web: segmented tabs (admin) */
+.macos-admin [data-radix-tabs-list] {
+  background: color-mix(in srgb, var(--admin-primary) 6%, var(--admin-surface));
+  border: 0;
+  border-radius: var(--app-radius-card);
+  padding: 4px;
+  backdrop-filter: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 10px 24px color-mix(in srgb, var(--admin-text) 10%, transparent);
+}
+html.dark .macos-admin [data-radix-tabs-list] {
+  background: rgba(255, 255, 255, 0.06);
+  border: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 14px 34px rgba(0, 0, 0, 0.55);
+}
+.macos-admin [data-radix-tabs-trigger] {
+  border-radius: var(--app-radius-button);
+  transition: background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.macos-admin [data-radix-tabs-trigger][data-state='active'] {
+  background: var(--admin-surface);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 8px 18px color-mix(in srgb, var(--admin-text) 12%, transparent);
+}
+html.dark .macos-admin [data-radix-tabs-trigger][data-state='active'] {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 14px 34px rgba(0, 0, 0, 0.55);
+}
+
+/* Sonner — brand tokens + lucide icons (AppToaster · richColors off) */
+.app-sonner-toaster,
+[data-sonner-toaster] {
+  --toast-bg: color-mix(in srgb, var(--app-surface) 96%, white);
+  --toast-border: color-mix(in srgb, var(--app-border) 70%, transparent);
+  font-family: inherit;
+}
+html.dark .app-sonner-toaster,
+html.dark [data-sonner-toaster] {
+  --toast-bg: color-mix(in srgb, var(--app-surface) 92%, #111113);
+  --toast-border: color-mix(in srgb, var(--app-border) 55%, transparent);
+}
+
+.app-sonner-toast,
+[data-sonner-toast] {
+  background: var(--toast-bg) !important;
+  border: 1px solid var(--toast-border) !important;
+  border-radius: var(--app-radius-card) !important;
+  padding: 0.875rem 1rem !important;
+  gap: 0.75rem !important;
+  backdrop-filter: blur(12px) saturate(1.08);
+  -webkit-backdrop-filter: blur(12px) saturate(1.08);
+  box-shadow:
+    0 12px 30px color-mix(in srgb, var(--app-text) 14%, transparent),
+    0 2px 10px color-mix(in srgb, var(--app-text) 10%, transparent);
+}
+
+html.dark .app-sonner-toast,
+html.dark [data-sonner-toast] {
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.65);
+}
+
+[data-sonner-toast] [data-icon] {
+  margin: 0;
+  height: auto;
+  width: auto;
+}
+
+[data-sonner-toast][data-type='success'] {
+  background: color-mix(in srgb, var(--sys-green-light) 7%, var(--toast-bg)) !important;
+  box-shadow:
+    inset 3px 0 0 color-mix(in srgb, var(--sys-green-light) 85%, transparent),
+    0 12px 30px color-mix(in srgb, var(--app-text) 14%, transparent),
+    0 2px 10px color-mix(in srgb, var(--app-text) 10%, transparent);
+}
+
+[data-sonner-toast][data-type='error'] {
+  background: color-mix(in srgb, var(--sys-red-light) 6%, var(--toast-bg)) !important;
+  box-shadow:
+    inset 3px 0 0 color-mix(in srgb, var(--sys-red-light) 85%, transparent),
+    0 12px 30px color-mix(in srgb, var(--app-text) 14%, transparent),
+    0 2px 10px color-mix(in srgb, var(--app-text) 10%, transparent);
+}
+
+[data-sonner-toast][data-type='warning'] {
+  background: color-mix(in srgb, var(--sys-orange-light) 7%, var(--toast-bg)) !important;
+  box-shadow:
+    inset 3px 0 0 color-mix(in srgb, var(--sys-orange-light) 88%, transparent),
+    0 12px 30px color-mix(in srgb, var(--app-text) 14%, transparent),
+    0 2px 10px color-mix(in srgb, var(--app-text) 10%, transparent);
+}
+
+[data-sonner-toast][data-type='info'] {
+  background: color-mix(in srgb, var(--sys-blue-light) 7%, var(--toast-bg)) !important;
+  box-shadow:
+    inset 3px 0 0 color-mix(in srgb, var(--sys-blue-light) 88%, transparent),
+    0 12px 30px color-mix(in srgb, var(--app-text) 14%, transparent),
+    0 2px 10px color-mix(in srgb, var(--app-text) 10%, transparent);
+}
+
+[data-sonner-toast] [data-close-button] {
+  border-color: var(--app-border);
+  background: color-mix(in srgb, var(--app-surface) 92%, white);
+  color: var(--app-text-muted);
+}
+
+[data-sonner-toast] [data-close-button]:hover {
+  background: var(--app-subtle);
+  color: var(--app-text);
+}
+
+/* Sonner — slide-in from right + icon pop (PRE-UAT U4c) */
+@keyframes app-sonner-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(100% + 0.75rem));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes app-sonner-slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(calc(100% + 0.75rem));
+  }
+}
+
+@keyframes app-sonner-icon-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+[data-sonner-toast][data-mounted='true'] {
+  animation: app-sonner-slide-in 0.32s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+}
+
+[data-sonner-toast][data-removed='true'] {
+  animation: app-sonner-slide-out 0.2s ease-in forwards;
+}
+
+[data-sonner-toast][data-mounted='true'] [data-icon] svg {
+  animation: app-sonner-icon-pop 0.22s ease-out 0.06s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-sonner-toast][data-mounted='true'],
+  [data-sonner-toast][data-removed='true'] {
+    animation: none;
+  }
+
+  [data-sonner-toast][data-mounted='true'] [data-icon] svg {
+    animation: none;
+  }
+}
+
+.macos-admin .admin-layout-shell .admin-page-content {
+  padding-bottom: var(--app-space-6);
+}
+
+.admin-layout-shell {
+  min-height: 100%;
+  width: 100%;
+}
+
+.admin-layout-glass {
+  background: var(--app-glass-bg);
+  border: 1px solid var(--app-glass-border);
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 1px 3px color-mix(in srgb, var(--app-text) 7%, transparent),
+    0 12px 30px color-mix(in srgb, var(--app-text) 10%, transparent);
+}
+
+/* Subtle highlight line like macOS toolbars */
+.admin-layout-glass {
+  position: relative;
+}
+.admin-layout-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--app-glass-border) 80%, transparent),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* --- Admin theme prototype (Pepsi corporate — ไม่ใช้ rainbow glass) --- */
+.admin-pepsi-stripe {
+  background: var(--brand-logo-stripe);
+}
+
+.admin-theme-prototype {
+  background-color: var(--admin-bg, #eef2f7);
+  background-image: none;
+}
+
+.admin-layout-shell .admin-page-content {
+  padding: var(--app-space-5) var(--app-space-4) var(--app-space-5);
+}
+
+@media (min-width: 640px) {
+  .admin-layout-shell .admin-page-content {
+    padding: var(--app-space-5) var(--app-space-5) var(--app-space-6);
+  }
+}
+
+.admin-density-compact .admin-page-content {
+  padding-top: var(--app-space-4);
+  padding-bottom: var(--app-space-5);
+}
+
+.admin-density-compact {
+  --app-card-padding: var(--app-card-padding-compact);
+}
+
+.admin-page-header-inner {
+  padding: var(--app-card-padding) var(--app-space-4);
+}
+
+@media (min-width: 640px) {
+  .admin-page-header-inner {
+    padding: var(--app-card-padding) var(--app-space-5);
+  }
+}
+
+.admin-density-compact .admin-page-header-inner {
+  padding-top: var(--app-space-4);
+  padding-bottom: var(--app-space-4);
+}
+
+/* Admin header = dashboard-hero gradient (เทียบ `/calendar`) — fallback ขาวถ้าไม่มี .dashboard-hero */
+.admin-page-header:not(.dashboard-hero) {
+  background: var(--admin-surface) !important;
+  backdrop-filter: none;
+  box-shadow: 0 1px 0 var(--admin-border, #dce3ed) !important;
+  border-bottom: none !important;
+}
+
+/* `.macos-admin :where(h1)` บังคับสีเข้ม — ทับให้ขาวบน gradient hero */
+.macos-admin .admin-page-header.dashboard-hero .dashboard-hero__title,
+.admin-layout-shell .admin-page-header.dashboard-hero .dashboard-hero__title,
+.macos-admin .admin-page-header.dashboard-hero :where(h1) {
+  color: #f8fafc;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
+}
+
+.macos-admin .admin-page-header.dashboard-hero .dashboard-hero__eyebrow {
+  color: color-mix(in srgb, white 85%, transparent);
+}
+
+.macos-admin .admin-page-header.dashboard-hero .dashboard-hero__subtitle {
+  color: color-mix(in srgb, white 82%, transparent);
+}
+
+.macos-admin .admin-page-header:not(.dashboard-hero) .app-page-hero__hint {
+  border-color: color-mix(in srgb, var(--admin-primary) 24%, var(--admin-border));
+  background: color-mix(in srgb, var(--admin-primary) 8%, var(--admin-surface));
+  color: var(--admin-text-muted);
+}
+
+html.dark .macos-admin .admin-page-header:not(.dashboard-hero) .app-page-hero__hint {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.admin-page-stack {
+  max-width: 1600px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.macos-admin .admin-page-content.admin-page-stack {
+  animation: app-page-content-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .macos-admin .admin-page-content.admin-page-stack {
+    animation: none;
+  }
+}
+
+.summary-weekly-chart-full {
+  background: var(--app-bg);
+}
+
+.summary-weekly-chart-full .dashboard-hero {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+html.dark .summary-weekly-chart-full {
+  background: var(--app-bg);
+}
+
+.admin-breadcrumb {
+  font-size: var(--app-font-size-caption, 13px);
+  color: var(--admin-text-muted, #6b7280);
+}
+
+.admin-breadcrumb__link {
+  color: var(--admin-text-muted, #6b7280);
+  text-decoration: none;
+}
+
+.admin-breadcrumb__link:hover {
+  color: var(--admin-primary, var(--brand-logo-blue-dark));
+  text-decoration: underline;
+}
+
+html.dark .admin-breadcrumb__link {
+  color: color-mix(in srgb, var(--admin-text-muted) 88%, var(--admin-text));
+}
+
+html.dark .admin-breadcrumb__link:hover {
+  color: color-mix(in srgb, var(--admin-primary) 80%, white);
+}
+
+.admin-page-title {
+  color: var(--app-heading-color, var(--admin-primary));
+}
+
+.admin-layout-shell .admin-card {
+  background: var(--admin-surface);
+  color: var(--admin-text);
+  border: 1px solid var(--admin-border, #dce3ed);
+  border-radius: var(--app-radius-card);
+  box-shadow: var(--admin-shadow);
+  backdrop-filter: none;
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms ease;
+}
+
+.admin-layout-shell .admin-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--admin-primary) 35%, var(--admin-border, #dce3ed));
+  box-shadow: var(--app-shadow-card-hover);
+}
+
+.admin-kpi-grid {
+  gap: var(--app-space-4);
+}
+
+.admin-density-compact .admin-kpi-grid {
+  gap: var(--app-space-3);
+}
+
+.admin-kpi-card {
+  border-top: 3px solid var(--admin-primary);
+}
+
+.admin-kpi-card__value {
+  font-size: var(--app-font-size-xl, 20px);
+  font-weight: 600;
+  line-height: var(--app-line-height-tight, 1.25);
+  letter-spacing: -0.02em;
+}
+
+.admin-density-compact .admin-kpi-card__header {
+  padding-bottom: var(--app-space-1) !important;
+}
+
+.admin-density-compact .admin-kpi-card__value {
+  font-size: var(--app-font-size-lg, 17px);
+}
+
+.admin-density-compact .admin-kpi-card__hint {
+  padding-top: 0 !important;
+}
+
+.admin-kpi-card[data-tone='default'] {
+  border-top-color: var(--admin-primary);
+}
+
+.admin-kpi-card[data-tone='info'] {
+  border-top-color: var(--admin-info);
+}
+
+.admin-kpi-card[data-tone='success'] {
+  border-top-color: var(--admin-success);
+}
+
+.admin-kpi-card[data-tone='warning'] {
+  border-top-color: var(--admin-warning);
+}
+
+.admin-kpi-card[data-tone='danger'] {
+  border-top-color: var(--admin-danger);
+}
+
+.admin-kpi-card[data-tone='success']:hover {
+  box-shadow:
+    0 2px 4px color-mix(in srgb, var(--admin-success) 12%, transparent),
+    0 14px 34px color-mix(in srgb, var(--admin-success) 22%, transparent);
+}
+
+.admin-kpi-card[data-tone='warning']:hover {
+  box-shadow:
+    0 2px 4px color-mix(in srgb, var(--admin-warning) 12%, transparent),
+    0 14px 34px color-mix(in srgb, var(--admin-warning) 22%, transparent);
+}
+
+.admin-kpi-card[data-tone='danger']:hover {
+  box-shadow:
+    0 2px 4px color-mix(in srgb, var(--admin-danger) 12%, transparent),
+    0 14px 34px color-mix(in srgb, var(--admin-danger) 22%, transparent);
+}
+
+.admin-kpi-card[data-tone='info']:hover {
+  box-shadow:
+    0 2px 4px color-mix(in srgb, var(--admin-info) 12%, transparent),
+    0 14px 34px color-mix(in srgb, var(--admin-info) 22%, transparent);
+}
+
+.admin-layout-shell .admin-quick-link {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--admin-border, #dce3ed);
+  background: var(--admin-surface);
+  border-radius: var(--app-radius-card);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  transition:
+    border-color 240ms ease,
+    box-shadow 240ms ease,
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.admin-layout-shell .admin-quick-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--brand-pepsi-blue);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.admin-layout-shell .admin-quick-link:hover {
+  border-color: color-mix(in srgb, var(--brand-pepsi-blue) 40%, var(--admin-border, #dce3ed));
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--brand-logo-blue-dark) 12%, transparent);
+}
+
+.admin-layout-shell .admin-quick-link:hover::before {
+  opacity: 1;
+}
+
+.admin-layout-shell .admin-quick-link .admin-quick-link-icon {
+  background: color-mix(in srgb, var(--brand-pepsi-blue) 12%, white);
+  color: var(--brand-pepsi-blue);
+}
+
+.admin-density-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--app-radius-card);
+  border: 1px solid var(--admin-border, #dce3ed);
+  background: var(--admin-surface);
+  box-shadow: var(--app-shadow-button);
+}
+
+.admin-density-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--app-radius-button);
+  font-size: var(--app-font-size-caption, 13px);
+  font-weight: 500;
+  color: var(--admin-text-muted, #6b7280);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.admin-density-toggle__btn:hover {
+  color: var(--admin-text);
+  background: color-mix(in srgb, var(--admin-primary) 8%, transparent);
+}
+
+.admin-density-toggle__btn--active,
+.admin-density-toggle__btn[aria-pressed='true'] {
+  color: #fff;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--brand-logo-sky) 35%, var(--brand-logo-blue-dark)),
+    var(--brand-logo-blue-dark)
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 2px 8px color-mix(in srgb, var(--brand-pepsi-blue) 35%, transparent);
+}
+
+.admin-density-compact .admin-density-toggle__btn {
+  height: 28px;
+  padding: 0 10px;
+}
+
+.admin-layout-shell .admin-toolbar-btn {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.admin-layout-shell .admin-toolbar-btn:active {
+  transform: scale(0.97);
+}
+
+.admin-layout-shell .admin-toolbar-primary,
+.admin-layout-shell .admin-toolbar-btn[class*='bg-zinc-900'] {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--brand-logo-sky) 35%, var(--brand-logo-blue-dark)),
+    var(--brand-logo-blue-dark)
+  ) !important;
+  color: #fff !important;
+  border: 0 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 4px 14px color-mix(in srgb, var(--brand-logo-blue-dark) 35%, transparent) !important;
+}
+
+.admin-layout-shell .admin-toolbar-primary:hover {
+  filter: brightness(1.05);
+}
+
+html.dark .admin-layout-shell .admin-quick-link {
+  background: var(--admin-surface);
+  border-color: var(--admin-border);
+}
+
+html.dark .admin-layout-shell .admin-quick-link:hover {
+  background: var(--admin-surface);
+}
+
+html.dark .admin-layout-shell .admin-card {
+  background: var(--admin-surface);
+  border-color: var(--admin-border);
+}
+
+/* FullCalendar — align with app shell (Pepsi PM) */
+.pm-fullcalendar .fc {
+  --fc-border-color: var(--app-border);
+  --fc-button-bg-color: var(--app-text);
+  --fc-button-border-color: var(--app-text);
+  --fc-button-hover-bg-color: color-mix(in srgb, var(--app-text) 85%, transparent);
+  --fc-button-hover-border-color: color-mix(in srgb, var(--app-text) 85%, transparent);
+  --fc-today-bg-color: color-mix(in srgb, var(--app-accent) 12%, var(--app-surface));
+  font-size: 0.875rem;
+}
+
+.pm-fullcalendar .fc .fc-toolbar-title {
+  @apply text-base font-semibold capitalize;
+  color: var(--app-text);
+}
+
+.pm-fullcalendar .fc .fc-button {
+  border-radius: var(--app-radius-button);
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-sm);
+  line-height: var(--app-line-height-body);
+  font-weight: 500;
+  box-shadow: var(--app-shadow-button);
+}
+
+.pm-fullcalendar .fc .fc-daygrid-event {
+  cursor: pointer;
+  border-radius: 0.25rem;
+  padding-inline: 0.125rem;
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-caption);
+  line-height: var(--app-line-height-body);
+  font-weight: 500;
+}
+
+.pm-fullcalendar .fc .fc-event-title {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-break: break-all;
+}
+
+/* Touch / tablet — long-press then drag events; keep scroll on grid */
+.pm-fullcalendar--touch-dnd .fc .fc-daygrid-event {
+  touch-action: none;
+}
+
+.pm-fullcalendar--touch-dnd .fc .fc-daygrid-day-frame {
+  touch-action: pan-y;
+}
+
+/* Scheduling / app pages — template layout (calendar / WO / backlog / AppPageShell) */
+.worktime-kpi-hero {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--brand-pepsi-blue) 95%, black) 0%,
+    color-mix(in srgb, var(--brand-pepsi-blue) 82%, black) 48%,
+    color-mix(in srgb, var(--sys-blue-light) 58%, var(--brand-pepsi-blue)) 48%,
+    color-mix(in srgb, var(--sys-blue-light) 58%, var(--brand-pepsi-blue)) 100%
+  );
+}
+
+.app-surface-panel {
+  border: 1px solid color-mix(in srgb, var(--app-border) 65%, transparent);
+  background: color-mix(in srgb, var(--app-surface) 94%, var(--app-bg));
+}
+
+.app-surface-panel--success {
+  border-color: color-mix(in srgb, var(--status-success) 35%, var(--app-border));
+  background: color-mix(in srgb, var(--status-success) 12%, var(--app-surface));
+}
+
+.app-surface-panel--soft {
+  background: color-mix(in srgb, var(--app-surface) 82%, transparent);
+}
+
+/* Semantic callout — ใช้แทน bg-amber-50 / bg-emerald-50 ใน dark mode */
+.app-callout {
+  border-radius: var(--app-radius-card);
+  border-width: 1px;
+  padding: 0.75rem 1rem;
+  font-size: var(--app-font-size-body-sm);
+  line-height: var(--app-line-height-body);
+}
+
+.app-callout--amber {
+  border-color: color-mix(in srgb, var(--sys-orange-light) 32%, var(--app-border));
+  background: color-mix(in srgb, var(--sys-orange-light) 10%, var(--app-surface));
+  color: color-mix(in srgb, var(--sys-orange-light) 68%, var(--app-text));
+}
+
+.app-callout--emerald {
+  border-color: color-mix(in srgb, var(--sys-green-light) 32%, var(--app-border));
+  background: color-mix(in srgb, var(--sys-green-light) 10%, var(--app-surface));
+  color: color-mix(in srgb, var(--sys-green-light) 55%, var(--app-text));
+}
+
+.admin-callout {
+  border-radius: var(--app-radius-card);
+  border-width: 1px;
+  padding: 0.75rem 1rem;
+  font-size: var(--app-font-size-body-sm);
+}
+
+.admin-callout--amber {
+  border-color: color-mix(in srgb, var(--sys-orange-light) 32%, var(--admin-border));
+  background: color-mix(in srgb, var(--sys-orange-light) 10%, var(--admin-surface));
+  color: color-mix(in srgb, var(--sys-orange-light) 68%, var(--admin-text));
+}
+
+.admin-callout--danger {
+  border-color: color-mix(in srgb, var(--sys-red-light) 32%, var(--admin-border));
+  background: color-mix(in srgb, var(--sys-red-light) 10%, var(--admin-surface));
+  color: color-mix(in srgb, var(--sys-red-light) 62%, var(--admin-text));
+}
+
+html.dark .app-callout--amber,
+html.dark .admin-callout--amber {
+  border-color: color-mix(in srgb, var(--status-warning) 42%, var(--app-border));
+  background: color-mix(in srgb, var(--status-warning) 14%, var(--app-surface));
+  color: color-mix(in srgb, var(--status-warning) 92%, var(--app-text));
+}
+
+html.dark .macos-admin .admin-callout--amber {
+  border-color: color-mix(in srgb, var(--status-warning) 42%, var(--admin-border));
+  background: color-mix(in srgb, var(--status-warning) 14%, var(--admin-surface));
+  color: color-mix(in srgb, var(--status-warning) 92%, var(--admin-text));
+}
+
+html.dark .app-tone-warning-review {
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--status-warning) 14%, var(--app-surface)),
+    var(--app-surface),
+    color-mix(in srgb, var(--app-accent) 4%, var(--app-surface))
+  );
+}
+
+.admin-diff--added {
+  border-left: 4px solid var(--sys-green-light);
+  background: color-mix(in srgb, var(--sys-green-light) 10%, var(--admin-surface));
+}
+
+.admin-diff--removed {
+  border-left: 4px solid var(--sys-red-light);
+  background: color-mix(in srgb, var(--sys-red-light) 10%, var(--admin-surface));
+}
+
+.admin-diff--changed {
+  border-left: 4px solid var(--sys-orange-light);
+  background: color-mix(in srgb, var(--sys-orange-light) 10%, var(--admin-surface));
+}
+
+html.dark .macos-admin .admin-table-sticky {
+  background: var(--admin-surface) !important;
+}
+
+html.dark .pm-fullcalendar--modern {
+  --pm-cal-weekend-bg: color-mix(in srgb, var(--brand-logo-orange) 8%, var(--app-surface));
+  --pm-cal-sunday-bg: color-mix(in srgb, var(--brand-logo-orange) 11%, var(--app-surface));
+  --pm-cal-saturday-bg: color-mix(in srgb, var(--brand-logo-sky) 9%, var(--app-surface));
+  --pm-cal-weekend-border: color-mix(in srgb, var(--brand-logo-orange) 22%, var(--app-border));
+}
+
+html.dark .pm-fullcalendar .fc .fc-daygrid-day-number,
+html.dark .pm-fullcalendar--modern .fc .pm-cal-day-num {
+  color: var(--app-text);
+}
+
+html.dark .pm-fullcalendar .fc {
+  --fc-border-color: var(--app-border);
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: color-mix(in srgb, var(--app-bg) 40%, var(--app-surface));
+  --fc-neutral-text-color: var(--app-text-muted);
+  --fc-button-text-color: var(--app-text);
+  --fc-button-bg-color: var(--app-surface-muted);
+  --fc-button-border-color: var(--app-border);
+  --fc-button-hover-bg-color: color-mix(in srgb, var(--app-accent) 16%, var(--app-surface-muted));
+  --fc-button-hover-border-color: color-mix(in srgb, var(--app-accent) 28%, var(--app-border));
+  --fc-button-active-bg-color: color-mix(in srgb, var(--app-accent) 22%, var(--app-surface-muted));
+  --fc-button-active-border-color: color-mix(in srgb, var(--app-accent) 35%, var(--app-border));
+}
+
+html.dark .pm-fullcalendar .fc .fc-scrollgrid,
+html.dark .pm-fullcalendar .fc .fc-scrollgrid-section > td,
+html.dark .pm-fullcalendar .fc .fc-col-header-cell,
+html.dark .pm-fullcalendar .fc .fc-daygrid-day {
+  background: transparent;
+  color: var(--app-text);
+}
+
+html.dark .pm-fullcalendar .fc .fc-popover {
+  background: var(--app-surface);
+  border-color: var(--app-border);
+  color: var(--app-text);
+  box-shadow: var(--app-shadow-dialog);
+}
+
+html.dark .pm-fullcalendar .fc .fc-popover .fc-header {
+  background: color-mix(in srgb, var(--app-surface-muted) 80%, var(--app-surface));
+  color: var(--app-text);
+}
+
+html.dark .pm-fullcalendar .fc .fc-daygrid-more-link {
+  color: var(--app-accent);
+}
+
+html.dark .pm-fullcalendar .fc .fc-daygrid-more-link:hover {
+  background: color-mix(in srgb, var(--app-accent) 12%, var(--app-surface));
+}
+
+.scheduling-page-stack {
+  max-width: 1600px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.scheduling-page .app-page-content,
+.app-page-content.scheduling-page {
+  animation: app-page-content-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes app-page-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scheduling-page .app-page-content,
+  .app-page-content.scheduling-page {
+    animation: none;
+  }
+}
+
+.scheduling-calendar-panel__pulse {
+  animation: scheduling-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes scheduling-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.scheduling-segment button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--app-accent) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.pm-fullcalendar .fc .fc-daygrid-day {
+  transition: background-color 0.15s ease;
+}
+
+.pm-fullcalendar .fc .fc-daygrid-day:hover {
+  background-color: color-mix(in srgb, var(--app-accent) 4%, transparent);
+}
+
+.pm-fullcalendar .fc .fc-daygrid-event {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pm-fullcalendar .fc .fc-daygrid-event:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--app-text) 18%, transparent);
+}
+
+.pm-fullcalendar .fc .fc-col-header-cell {
+  font-weight: 600;
+  color: var(--app-text-muted);
+}
+
+.scheduling-calendar-widget .scheduling-period-picker {
+  margin-bottom: 0.25rem;
+}
+
+/* ── Modern FullCalendar (pm-fullcalendar--modern) ── */
+.pm-fullcalendar--modern {
+  --pm-cal-day-min-height: 7.5rem;
+  --cal-status-in-progress: var(--brand-logo-sky);
+  --cal-status-overdue: #ff3b30;
+  --cal-status-moved: var(--brand-logo-orange);
+  --cal-status-completed: var(--brand-logo-green-light);
+  --cal-pipeline-unassigned: #ff3b30;
+  --cal-pipeline-assigned: #7b61ff;
+  --cal-pipeline-in-progress: var(--brand-logo-sky);
+  --cal-pipeline-closed: var(--brand-logo-green-light);
+  --cal-team-a: color-mix(in srgb, var(--status-success) 88%, white);
+  --cal-team-b: color-mix(in srgb, var(--status-danger) 82%, white);
+  --cal-team-ee: color-mix(in srgb, var(--status-info) 85%, white);
+  --cal-team-ut: color-mix(in srgb, var(--status-warning) 85%, white);
+  --pm-cal-weekend-bg: color-mix(in srgb, var(--brand-logo-orange) 6%, var(--app-surface));
+  --pm-cal-weekend-border: color-mix(in srgb, var(--brand-logo-orange) 18%, var(--app-border));
+  --pm-cal-sunday-bg: color-mix(in srgb, var(--brand-logo-orange) 9%, var(--app-surface));
+  --pm-cal-saturday-bg: color-mix(in srgb, var(--brand-logo-sky) 7%, var(--app-surface));
+  --pm-cal-weekend-header: color-mix(in srgb, var(--brand-logo-orange) 70%, var(--app-text-muted));
+  --pm-cal-saturday-header: color-mix(in srgb, var(--brand-logo-sky) 65%, var(--app-text-muted));
+}
+
+.pm-fullcalendar--modern .fc {
+  --fc-border-color: transparent;
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: color-mix(in srgb, var(--app-bg) 35%, var(--app-surface));
+  --fc-list-event-hover-bg-color: color-mix(in srgb, var(--app-accent) 8%, var(--app-surface));
+  --fc-highlight-color: color-mix(in srgb, var(--app-accent) 14%, transparent);
+  --fc-today-bg-color: transparent;
+  font-size: 0.8125rem;
+}
+
+.pm-fullcalendar--modern .fc .fc-scrollgrid,
+.pm-fullcalendar--modern .fc .fc-scrollgrid table {
+  border: none;
+}
+
+.pm-fullcalendar--modern .fc .fc-scrollgrid-section > td {
+  border: none;
+}
+
+.pm-fullcalendar--modern .fc .fc-col-header-cell {
+  border: none;
+  padding-bottom: 0.35rem;
+}
+
+.pm-fullcalendar--modern .fc .fc-col-header-cell-cushion {
+  padding: 0.35rem 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--app-text-muted);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-dow--weekend .fc-col-header-cell-cushion {
+  color: var(--pm-cal-weekend-header);
+  font-weight: 800;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-dow--saturday .fc-col-header-cell-cushion {
+  color: var(--pm-cal-saturday-header);
+}
+
+.pm-fullcalendar--modern .fc .fc-daygrid-day {
+  border: none;
+  background: transparent;
+}
+
+.pm-fullcalendar--modern .fc .fc-daygrid-day-frame {
+  margin: 3px;
+  min-height: var(--pm-cal-day-min-height);
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--app-border) 70%, transparent);
+  background: color-mix(in srgb, var(--app-surface) 92%, var(--app-bg));
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.pm-fullcalendar--modern .fc .fc-daygrid-day:hover .fc-daygrid-day-frame {
+  border-color: color-mix(in srgb, var(--app-accent) 28%, var(--app-border));
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--app-text) 6%, transparent);
+  transform: translateY(-1px);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day--today .fc-daygrid-day-frame {
+  border-color: color-mix(in srgb, var(--app-accent) 45%, var(--app-border));
+  background: color-mix(in srgb, var(--app-accent) 7%, var(--app-surface));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--app-accent) 12%, transparent);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day--weekend .fc-daygrid-day-frame {
+  border-color: var(--pm-cal-weekend-border);
+  background: var(--pm-cal-weekend-bg);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day--sunday .fc-daygrid-day-frame {
+  background: var(--pm-cal-sunday-bg);
+  border-color: color-mix(in srgb, var(--brand-logo-orange) 22%, var(--app-border));
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day--saturday .fc-daygrid-day-frame {
+  background: var(--pm-cal-saturday-bg);
+  border-color: color-mix(in srgb, var(--brand-logo-sky) 20%, var(--app-border));
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day--weekend.pm-cal-day--today .fc-daygrid-day-frame {
+  background: color-mix(in srgb, var(--app-accent) 10%, var(--pm-cal-weekend-bg));
+  border-color: color-mix(in srgb, var(--app-accent) 45%, var(--pm-cal-weekend-border));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--app-accent) 14%, transparent);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day--past:not(.pm-cal-day--today) .fc-daygrid-day-frame {
+  opacity: 0.88;
+}
+
+.pm-fullcalendar--modern .fc .fc-daygrid-day-top {
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0.35rem 0.45rem 0.15rem;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--app-text);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day-num--muted {
+  color: var(--app-text-muted);
+  opacity: 0.65;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day-num--weekend:not(.pm-cal-day-num--today) {
+  color: var(--pm-cal-weekend-header);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day--saturday .pm-cal-day-num:not(.pm-cal-day-num--today) {
+  color: var(--pm-cal-saturday-header);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-day-num--today {
+  background: var(--app-text);
+  color: var(--app-surface);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--app-text) 25%, transparent);
+  transform: scale(1.05);
+}
+
+.pm-fullcalendar--modern .fc .fc-daygrid-day-events {
+  padding: 0 0.35rem 0.4rem;
+  margin-top: 0.1rem;
+  min-height: 2.5rem;
+}
+
+.pm-fullcalendar--modern .fc .fc-daygrid-event {
+  margin-top: 2px;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.12rem 0.38rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1.2;
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--app-text) 12%, transparent);
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    filter 0.16s ease;
+}
+
+@media (min-width: 640px) {
+  .pm-fullcalendar--modern {
+    --pm-cal-day-min-height: 8rem;
+  }
+
+  .pm-fullcalendar--modern .fc .fc-daygrid-event {
+    font-size: 0.68rem;
+    padding: 0.15rem 0.4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pm-fullcalendar--modern {
+    --pm-cal-day-min-height: 8.5rem;
+  }
+}
+
+.pm-fullcalendar--modern .fc .fc-daygrid-event:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--app-text) 18%, transparent);
+  filter: brightness(1.04);
+  z-index: 2;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--enter {
+  animation: pm-cal-event-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--locked {
+  opacity: 0.92;
+  cursor: not-allowed;
+}
+
+@keyframes pm-cal-event-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pm-fullcalendar--modern .fc .fc-event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: normal;
+}
+
+.pm-fullcalendar--modern .fc .fc-daygrid-more-link {
+  margin-top: 2px;
+  border-radius: 9999px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--app-accent);
+  background: color-mix(in srgb, var(--app-accent) 10%, var(--app-surface));
+  transition: background-color 0.15s ease;
+}
+
+.pm-fullcalendar--modern .fc .fc-daygrid-more-link:hover {
+  background: color-mix(in srgb, var(--app-accent) 16%, var(--app-surface));
+  color: var(--app-accent);
+}
+
+.pm-fullcalendar--modern .fc .fc-highlight {
+  border-radius: 0.65rem;
+  margin: 3px;
+}
+
+/* Week / day views */
+.pm-fullcalendar--modern .fc .fc-timegrid-slot,
+.pm-fullcalendar--modern .fc .fc-timegrid-axis {
+  border-color: color-mix(in srgb, var(--app-border) 50%, transparent);
+}
+
+.modern-cal-view-switch button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--app-accent) 45%, transparent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pm-fullcalendar--modern .fc .pm-cal-event--enter {
+    animation: none;
+  }
+
+  .pm-fullcalendar--modern .fc .fc-daygrid-day-frame,
+  .pm-fullcalendar--modern .fc .fc-daygrid-event {
+    transition: none;
+  }
+}
+
+/* Print — ซ่อน chrome · บังคับ light สำหรับ dark mode · chart full */
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  html.dark {
+    color-scheme: light;
+  }
+
+  /* ซ่อน shell ทั้งแอปและ admin */
+  .macos-sidebar,
+  .app-sidebar,
+  .macos-topbar,
+  .admin-layout-glass,
+  .admin-pepsi-stripe,
+  .dashboard-hero__mesh,
+  .dashboard-orb,
+  .dashboard-hero__pepsi-stripe,
+  .print-hidden,
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  /* เนื้อหาหลักเต็มความกว้าง */
+  .app-shell-main,
+  .app-page-content,
+  main {
+    margin: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+  /* Summary weekly chart full — landscape */
+  @page chart-landscape {
+    size: landscape;
+    margin: 12mm;
+  }
+
+  .summary-weekly-chart-full {
+    page: chart-landscape;
+  }
+
+  body:has(.summary-weekly-chart-full) {
+    background: #fff !important;
+  }
+
+  .summary-weekly-chart-full .print-hidden {
+    display: none !important;
+  }
+
+  .summary-weekly-chart-full {
+    min-height: auto !important;
+    background: #fff !important;
+  }
+
+  .summary-weekly-chart-full .dashboard-hero {
+    position: static !important;
+    background: var(--brand-logo-blue-dark) !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .summary-weekly-chart-full .print-chart-target {
+    box-shadow: none !important;
+    border: none !important;
+    break-inside: avoid;
+  }
+
+  .summary-weekly-chart-full .print-chart-target canvas {
+    max-width: 100% !important;
+  }
+
+  /* ตาราง/การ์ด — หลีกเลี่ยงตัดกลางแถว */
+  .app-table-shell,
+  .app-card,
+  .scheduling-section {
+    break-inside: avoid;
+  }
+}
+
+/* Day view Gantt + ชั่วโมงรวมในช่องวัน */
+.pm-fullcalendar--modern .fc .pm-cal-day-hours {
+  align-self: flex-start;
+  width: 100%;
+  text-align: left;
+  color: var(--app-text-muted);
+}
+
+.pm-cal-gantt__scroll {
+  scrollbar-gutter: stable;
+}
+
+.pm-cal-gantt {
+  --cal-status-in-progress: var(--brand-logo-sky);
+  --cal-status-overdue: #ff3b30;
+  --cal-status-moved: var(--brand-logo-orange);
+  --cal-status-completed: var(--brand-logo-green-light);
+  --cal-pipeline-unassigned: #ff3b30;
+  --cal-pipeline-assigned: #7b61ff;
+  --cal-pipeline-in-progress: var(--brand-logo-sky);
+  --cal-pipeline-closed: var(--brand-logo-green-light);
+  --cal-team-a: color-mix(in srgb, var(--status-success) 88%, white);
+  --cal-team-b: color-mix(in srgb, var(--status-danger) 82%, white);
+  --cal-team-ee: color-mix(in srgb, var(--status-info) 85%, white);
+  --cal-team-ut: color-mix(in srgb, var(--status-warning) 85%, white);
+}
+
+.pm-cal-gantt__bar {
+  z-index: 2;
+  cursor: pointer;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event {
+  position: relative;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--phase-create {
+  box-shadow: inset 3px 0 0 var(--brand-logo-orange);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--phase-rel {
+  box-shadow: inset 3px 0 0 var(--brand-logo-sky);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--phase-confirm {
+  box-shadow: inset 3px 0 0 var(--brand-logo-green-light);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--status-in-progress {
+  background-color: var(--cal-status-in-progress) !important;
+  border-color: color-mix(in srgb, var(--cal-status-in-progress) 80%, black) !important;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--status-overdue {
+  background-color: var(--cal-status-overdue) !important;
+  border-color: color-mix(in srgb, var(--cal-status-overdue) 80%, black) !important;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--status-moved {
+  background-color: var(--cal-status-moved) !important;
+  border-color: color-mix(in srgb, var(--cal-status-moved) 80%, black) !important;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--status-completed {
+  background-color: var(--cal-status-completed) !important;
+  border-color: color-mix(in srgb, var(--cal-status-completed) 75%, black) !important;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--pipeline-unassigned {
+  background-color: var(--cal-pipeline-unassigned) !important;
+  border-color: color-mix(in srgb, var(--cal-pipeline-unassigned) 80%, black) !important;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--pipeline-assigned {
+  background-color: var(--cal-pipeline-assigned) !important;
+  border-color: color-mix(in srgb, var(--cal-pipeline-assigned) 80%, black) !important;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--pipeline-in-progress {
+  background-color: var(--cal-pipeline-in-progress) !important;
+  border-color: color-mix(in srgb, var(--cal-pipeline-in-progress) 80%, black) !important;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--pipeline-closed {
+  background-color: var(--cal-pipeline-closed) !important;
+  border-color: color-mix(in srgb, var(--cal-pipeline-closed) 75%, black) !important;
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--team-a {
+  box-shadow:
+    inset -3px 0 0 var(--cal-team-a),
+    0 1px 3px color-mix(in srgb, var(--app-text) 12%, transparent);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--team-b {
+  box-shadow:
+    inset -3px 0 0 var(--cal-team-b),
+    0 1px 3px color-mix(in srgb, var(--app-text) 12%, transparent);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--team-ee {
+  box-shadow:
+    inset -3px 0 0 var(--cal-team-ee),
+    0 1px 3px color-mix(in srgb, var(--app-text) 12%, transparent);
+}
+
+.pm-fullcalendar--modern .fc .pm-cal-event--team-ut {
+  box-shadow:
+    inset -3px 0 0 var(--cal-team-ut),
+    0 1px 3px color-mix(in srgb, var(--app-text) 12%, transparent);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--status-in-progress {
+  background-color: var(--cal-status-in-progress) !important;
+  border: 1px solid color-mix(in srgb, var(--cal-status-in-progress) 80%, black);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--status-overdue {
+  background-color: var(--cal-status-overdue) !important;
+  border: 1px solid color-mix(in srgb, var(--cal-status-overdue) 80%, black);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--status-moved {
+  background-color: var(--cal-status-moved) !important;
+  border: 1px solid color-mix(in srgb, var(--cal-status-moved) 80%, black);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--status-completed {
+  background-color: var(--cal-status-completed) !important;
+  border: 1px solid color-mix(in srgb, var(--cal-status-completed) 75%, black);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--pipeline-unassigned {
+  background-color: var(--cal-pipeline-unassigned) !important;
+  border: 1px solid color-mix(in srgb, var(--cal-pipeline-unassigned) 80%, black);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--pipeline-assigned {
+  background-color: var(--cal-pipeline-assigned) !important;
+  border: 1px solid color-mix(in srgb, var(--cal-pipeline-assigned) 80%, black);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--pipeline-in-progress {
+  background-color: var(--cal-pipeline-in-progress) !important;
+  border: 1px solid color-mix(in srgb, var(--cal-pipeline-in-progress) 80%, black);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--pipeline-closed {
+  background-color: var(--cal-pipeline-closed) !important;
+  border: 1px solid color-mix(in srgb, var(--cal-pipeline-closed) 75%, black);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--team-a {
+  box-shadow: inset -3px 0 0 var(--cal-team-a);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--team-b {
+  box-shadow: inset -3px 0 0 var(--cal-team-b);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--team-ee {
+  box-shadow: inset -3px 0 0 var(--cal-team-ee);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--team-ut {
+  box-shadow: inset -3px 0 0 var(--cal-team-ut);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--phase-create {
+  box-shadow: inset 3px 0 0 var(--brand-logo-orange);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--phase-rel {
+  box-shadow: inset 3px 0 0 var(--brand-logo-sky);
+}
+
+.pm-cal-gantt__bar.pm-cal-event--phase-confirm {
+  box-shadow: inset 3px 0 0 var(--brand-logo-green-light);
+}
+
+.pm-cal-event--has-bell .fc-event-title,
+.pm-cal-event--has-bell .pm-cal-gantt__bar {
+  padding-left: 1.1rem;
+}
+
+.pm-cal-event-bell {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  z-index: 3;
+  font-size: 0.65rem;
+  line-height: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.35));
+}
+
+.pm-cal-pipeline-badges {
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  z-index: 3;
+  display: flex;
+  gap: 1px;
+  pointer-events: none;
+}
+
+.pm-cal-pipeline-badge {
+  font-size: 0.6rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.35));
+}

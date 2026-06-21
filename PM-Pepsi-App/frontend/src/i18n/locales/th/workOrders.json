@@ -1,0 +1,118 @@
+{
+  "page": {
+    "title": "WO/Confirmation",
+    "noAccessTitle": "ไม่มีสิทธิ์เข้าถึง",
+    "noAccessDesc": "ต้องมีสิทธิ์",
+    "hintSearchWo": "ค้นหาเลข WO",
+    "hintMassConfirm": "Mass Confirm ≤44",
+    "hintApproveTeco": "Approve → TECO",
+    "hintPhotos": "รูปหลัง PM"
+  },
+  "links": {
+    "exportConfirmation": "Export Confirmation",
+    "workSchedulingCalendar": "ปฏิทิน Work scheduling",
+    "backlog": "Backlog",
+    "importIw37n": "นำเข้า IW37N"
+  },
+  "filters": {
+    "activeCount": "ใช้ตัวกรอง {{count}} รายการ",
+    "labels": {
+      "activity": "กิจกรรม (mat)",
+      "equipment": "อุปกรณ์",
+      "funcLoc": "Functional location",
+      "searchQ": "ค้นหา (เลข WO / ข้อความ / equipment)"
+    },
+    "searchQPlaceholder": "เช่น 4000001 หรือ motor",
+    "more": "ตัวกรองเพิ่ม (อุปกรณ์ · ช่วงวันที่)"
+  },
+  "filterSummary": {
+    "title": "สรุปทีม A/B",
+    "subtitle": "Live preview เมื่อเปลี่ยนทีม (กด Save เพื่อบันทึก)"
+  },
+  "teamBulk": {
+    "selected": "เลือก {{count}} จาก {{total}} รายการในหน้านี้",
+    "teamLabel": "ทีม {{team}}",
+    "clearTeam": "ล้างทีม",
+    "saveBatch": "บันทึกมอบหมายทีม",
+    "saving": "กำลังบันทึก…",
+    "hint": "เลือกแถว · เลือกทีม · Save ครั้งเดียว",
+    "selectRowsFirst": "เลือกแถวในตารางก่อน",
+    "saved": "บันทึกทีม {{count}} ใบงาน",
+    "partial": "บันทึก {{updated}} · ไม่พบ {{notFound}}"
+  },
+  "search": {
+    "filterTitle": "ค้นหาใบงาน",
+    "collapsedHint": "ค้นหา \"{{q}}\"",
+    "clear": "ล้าง",
+    "orderNumberLabel": "เลขที่ใบงาน",
+    "placeholder": "พิมพ์เลขที่ใบงานอย่างน้อย 2 ตัวอักษร…",
+    "emptyTitle": "ค้นหาเลขที่ใบงาน",
+    "emptyDescription": "ใช้ตัวกรองแล้วกดค้นหา — Approve / Reject และมอบหมายทีม",
+    "listTitle": "รายการใบงาน",
+    "listSubtitle": "{{count}} ใบงาน",
+    "listSubtitleQ": "ค้นหา \"{{q}}\" · {{count}} รายการ",
+    "loadFailedTitle": "โหลดรายการไม่สำเร็จ",
+    "loadFailedFallback": "ตรวจการเชื่อมต่อ API",
+    "loadingListAria": "กำลังโหลดรายการ"
+  },
+  "table": {
+    "loadingAria": "กำลังโหลดรายการ",
+    "emptyTitle": "ไม่พบใบงาน",
+    "emptyDescription": "ลองค้นหาเลขที่อื่น หรือตรวจว่านำเข้า IW37N แล้ว",
+    "colOrderNumber": "เลขที่ใบงาน",
+    "colPmPhase": "Create / REL / Confirm",
+    "colMaintPlan": "แผนบำรุง",
+    "colTypeActivity": "ประเภท/กิจกรรม (ZB / ZD)",
+    "colEquipment": "อุปกรณ์",
+    "colFuncLoc": "Functional loc.",
+    "colTeam": "ทีม",
+    "colApproveReject": "Approve / Reject",
+    "selectAllAria": "เลือกทั้งหน้า",
+    "selectRowAria": "เลือกใบงาน {{wkorder}}",
+    "teamNone": "—"
+  },
+  "toastTeam": {
+    "rowSaved": "มอบหมายทีม {{team}} แล้ว",
+    "rowCleared": "ล้างทีมแล้ว",
+    "rowSaveFailed": "บันทึกทีมไม่สำเร็จ"
+  },
+  "qc": {
+    "badgeTecoApproved": "TECO / อนุมัติแล้ว",
+    "badgeRejected": "ส่งกลับแก้ไข",
+    "badgePending": "รอตรวจ",
+    "noReviewPermission": "ไม่มีสิทธิ์ตรวจ",
+    "approveDisabledTitle": "ต้องมีรายละเอียด รูปหลัง PM และบันทึกปิดงานก่อน",
+    "approve": "Approve",
+    "reject": "Reject",
+    "rejectPrompt": "เหตุผลส่งกลับ (ถ้ามี)",
+    "rejectTitle": "ส่งกลับแก้ไข",
+    "rejectNoteLabel": "เหตุผล (ถ้ามี)",
+    "rejectNotePlaceholder": "เช่น ยังไม่มีรูปหลัง PM · เวลาปิดไม่ถูกต้อง…"
+  },
+  "toast": {
+    "approveSuccess": "อนุมัติ {{wkorder}} — สถานะ TECO บน Dashboard ช่าง",
+    "approveFailed": "อนุมัติไม่สำเร็จ",
+    "rejectSent": "ส่งกลับ {{wkorder}} ให้ช่างแก้ไข",
+    "rejectFailed": "ส่งกลับไม่สำเร็จ"
+  },
+  "technician": {
+    "emptyTitle": "ค้นหาเลขที่ใบงาน",
+    "emptyDescription": "พิมพ์เลขที่ใบงานแล้วเลือกจากรายการ — ระบบจะแสดงสถานะช่าง (ค้างงาน / เสร็จงาน)",
+    "loadingAria": "กำลังโหลดใบงาน",
+    "loadFailedTitle": "โหลดใบงานไม่สำเร็จ",
+    "loadFailedFallback": "ไม่พบใบงาน",
+    "workOrderLabel": "ใบงาน {{wkorder}}",
+    "openDetailClose": "เปิดรายละเอียด / ปิดงาน",
+    "doneCount": "ช่างเสร็จงาน {{count}}",
+    "pendingCount": "ช่างค้างงาน {{count}}",
+    "closeHintSuffix": " — บันทึกในแท็บปิดงาน (รายละเอียด + รูปหลัง PM)",
+    "hintNeedComment": "กรุณาบันทึกรายละเอียด (ความคิดเห็น) ก่อนปิดงาน",
+    "hintNeedImages": "กรุณาแนบรูปหลังทำ PM เสร็จก่อนปิดงาน",
+    "noTechnicians": "ยังไม่มีช่างที่จ่ายงานหรือบันทึกปิดงาน — เปิดรายละเอียดเพื่อจ่ายงานหรือบันทึกปิดงาน",
+    "colTechCode": "รหัสช่าง",
+    "colName": "ชื่อ",
+    "colStatus": "สถานะ",
+    "statusDone": "เสร็จงาน",
+    "statusPending": "ค้างงาน"
+  }
+}

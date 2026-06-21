@@ -1,0 +1,114 @@
+{
+  "title": "แผน PM / CM",
+  "description": "งานเปิด/ปิดตาม work center ของคุณ — จ่ายงาน · บันทึกปิดงาน · เปิดรายละเอียด WO",
+  "noAccess": "ไม่มีสิทธิ์เข้าถึง",
+  "noAccessHint": "ต้องมีสิทธิ์ planning.read",
+  "badgeOpen": "CRTD + REL",
+  "badgeClosed": "ปิดแล้ว",
+  "hints": {
+    "openClosed": "งานเปิด/ปิด",
+    "assign": "จ่ายงาน",
+    "close": "บันทึกปิด",
+    "wo": "เปิด WO"
+  },
+  "actions": {
+    "planCalendar": "ปฏิทินจ่ายงาน",
+    "woConfirm": "WO/Confirmation",
+    "iw37n": "นำเข้า IW37N"
+  },
+  "list": {
+    "title": "รายการแผนงาน",
+    "description": "เฉพาะ view_planwork ของ work center ที่ล็อกอิน",
+    "openJobs": "งานเปิด",
+    "closedJobs": "งานปิดแล้ว",
+    "loading": "กำลังโหลดแผนงาน",
+    "loadFailed": "โหลดแผนงานไม่สำเร็จ",
+    "emptyOpen": "ไม่มีงานเปิด",
+    "emptyClosed": "ไม่มีงานปิดแล้ว",
+    "emptyOpenHint": "นำเข้า IW37N หรือตรวจว่า wkctr ของใบงาน map กับ work center ที่ล็อกอิน",
+    "emptyClosedHint": "ตรวจว่าใบงานมีสถานะปิดแล้วและอยู่ใน view_planwork ของคุณ",
+    "goIw37n": "ไปนำเข้า IW37N",
+    "showOpenJobs": "ดูงานเปิด",
+    "showing": "แสดง {{count}} รายการ",
+    "updating": " · กำลังอัปเดต…"
+  },
+  "table": {
+    "wo": "เลข WO",
+    "type": "ประเภท",
+    "detail": "รายละเอียด",
+    "lineFl": "สาย / FL",
+    "plan": "แผน",
+    "hours": "ชม.งาน",
+    "moved": "ย้ายแผน",
+    "closedDate": "วันปิดแผน",
+    "status": "สถานะ",
+    "owner": "ผู้รับ",
+    "actions": "จัดการ",
+    "hoursUnit": "ชม.",
+    "viewInList": "ดูในรายการใบงาน",
+    "ack": "รับทราบ"
+  },
+  "ack": {
+    "acknowledge": "รับทราบ",
+    "acknowledged": "รับทราบแล้ว",
+    "pending": "รอรับทราบ",
+    "success": "รับทราบงานแล้ว",
+    "failed": "รับทราบไม่สำเร็จ"
+  },
+  "status": {
+    "OPEN": "รอจ่ายงาน",
+    "CONF": "จ่ายแล้ว",
+    "CLOS": "ปิด"
+  },
+  "row": {
+    "recordClose": "บันทึกปิดงาน",
+    "viewClose": "ดูปิดงาน",
+    "assign": "จ่ายงาน",
+    "assignTitleNew": "จ่ายงานเข้า tbplangingwork",
+    "assignTitleUpdate": "มีแผนแล้ว — กดเพื่ออัปเดต (upsert)",
+    "assignNoPermission": "ต้องมีสิทธิ์ planning.assign",
+    "closeTabOpen": "เปิดแท็บ Confirm เพื่อบันทึกปิดงาน",
+    "closeTabClosed": "เปิดแท็บ Confirm เพื่อดูประวัติปิดงาน"
+  },
+  "assignDialog": {
+    "title": "จ่ายงาน WO {{wo}}",
+    "description": "Manual = เลือกหลายช่างพร้อมกัน (checkbox) หรือคลิกทีละคน · Auto = ขยายทั้งกลุ่ม — บันทึก tbplangingwork",
+    "woHours": "ชม.งาน WO (IW37N):",
+    "hoursUnit": "ชม.",
+    "importWkctr": "wkctr จาก import:",
+    "availableHour": "Available hour วันที่ {{date}} — ชม.ว่าง = HR (Manhour prorate) − ชม.แผนที่จ่ายในวันเดียวกัน (แสดงใต้การ์ดช่าง)",
+    "modeLabel": "โหมดจ่ายงาน",
+    "groupLabel": "กลุ่มช่าง (wkctrgroup)",
+    "groupPlaceholder": "— เลือกกลุ่ม —",
+    "autoHint": "Auto Mode จะ insert ช่างทุกคนในกลุ่มที่เลือก (pwteam = G)",
+    "commentLabel": "หมายเหตุ",
+    "commentPlaceholder": "เช่น เร่งด่วน / เปลี่ยนทีม",
+    "selectGroupError": "เลือกกลุ่มช่าง (Auto Mode)",
+    "successManual": "จ่ายงาน Manual สำเร็จ",
+    "successManualCount": "จ่ายงาน Manual สำเร็จ {{count}} คน",
+    "successAuto": "จ่ายงาน Auto (กลุ่ม) สำเร็จ",
+    "successAutoCount": "จ่ายงาน Auto สำเร็จ {{count}} คน",
+    "alreadyAssigned": "ช่างคนนี้ถูกจ่ายงาน WO นี้แล้ว — ไม่มีการเปลี่ยนแปลง",
+    "loading": "กำลังโหลดข้อมูล WO…",
+    "loadFailed": "โหลดข้อมูลใบงานสำหรับจ่ายงานไม่สำเร็จ",
+    "submitting": "กำลังบันทึกการจ่ายงาน…",
+    "successTitle": "จ่ายงานเสร็จแล้ว",
+    "successDone": "เสร็จสิ้น",
+    "successCountHint": "เพิ่มช่าง {{count}} คนใน WO นี้",
+    "assignFailed": "จ่ายงานไม่สำเร็จ",
+    "assignAuto": "จ่าย Auto (กลุ่ม)",
+    "assignSelf": "จ่ายให้ฉัน ({{code}})",
+    "mode": {
+      "P": {
+        "label": "Manual Mode",
+        "short": "Manual · รายบุคคล",
+        "description": "Admin/Planner เลือกช่างเอง — ดู Available hour ก่อนจ่าย"
+      },
+      "G": {
+        "label": "Auto Mode",
+        "short": "Auto · กลุ่มช่าง",
+        "description": "ขยายจ่ายทั้งกลุ่มจาก master (tbwkctrgroup) — คล้าย default หลัง import"
+      }
+    }
+  }
+}

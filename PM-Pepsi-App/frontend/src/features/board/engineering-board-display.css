@@ -1,0 +1,233 @@
+/* U3 — /board 1080p / 4K TV: vmin scaling · body grid · ไม่ล้นแนวนอน */
+
+.engineering-board--kiosk {
+  overflow-x: clip;
+}
+
+.engineering-board__viewport,
+.engineering-board__main,
+.engineering-board__body,
+.engineering-board__zone-b-stack,
+.engineering-board__analytics {
+  max-width: 100%;
+}
+
+/* โซน B ได้พื้นที่ยืดหยุ่น แทนแถว auto ที่ดันจอเกิน */
+.engineering-board--kiosk:not(.engineering-board--carousel) .engineering-board__body {
+  grid-template-rows: auto minmax(0, 1fr) minmax(0, min(32vh, 13.5rem));
+}
+
+.engineering-board--kiosk:not(.engineering-board--carousel)
+  .engineering-board__body:has(.engineering-board__announce) {
+  grid-template-rows: auto auto minmax(0, 1fr) minmax(0, min(28vh, 12rem));
+}
+
+.engineering-board__zone-b-stack {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.engineering-board__zone--c {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.engineering-board--carousel {
+  --board-kpi-value: clamp(2.75rem, 5vmin, 5rem);
+}
+
+/* ── 1280×720+ (HD landscape / TV) ── */
+@media (min-width: 1280px) and (min-height: 720px) {
+  .engineering-board {
+    --board-kpi-value: clamp(2.5rem, 4.2vmin, 4.5rem);
+    --board-kpi-label: clamp(0.85rem, 1.5vmin, 1.05rem);
+    --board-kpi-hint: clamp(0.75rem, 1.3vmin, 0.9rem);
+    --board-header-title: clamp(1.4rem, 2.4vmin, 2.25rem);
+    --board-clock: clamp(2rem, 3.6vmin, 3.25rem);
+    --board-gap: clamp(0.65rem, 1vmin, 1.1rem);
+    --board-pad-x: clamp(1rem, 1.8vmin, 2rem);
+  }
+
+  .engineering-board__chart-zone {
+    min-height: clamp(8.5rem, 18vh, 17rem);
+  }
+
+  .engineering-board__zone-b-stack .engineering-board__panel--team {
+    flex: 0 1 min(38%, 10.5rem);
+    min-height: 6rem;
+    max-height: 10.5rem;
+  }
+
+  .eng-util-team-grid--kiosk {
+    grid-auto-columns: minmax(7rem, 8.75rem);
+  }
+}
+
+/* จอกว้าง: โซน B ซ้าย · โซน C ขวา */
+@media (min-width: 1500px) and (min-height: 800px) {
+  .engineering-board--kiosk:not(.engineering-board--carousel) .engineering-board__body {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22vw);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .engineering-board--kiosk:not(.engineering-board--carousel)
+    .engineering-board__body:has(.engineering-board__announce) {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22vw);
+    grid-template-rows: auto auto minmax(0, 1fr);
+  }
+
+  .engineering-board--kiosk:not(.engineering-board--carousel)
+    .engineering-board__body
+    > .engineering-board__zone--a,
+  .engineering-board--kiosk:not(.engineering-board--carousel)
+    .engineering-board__body
+    > .engineering-board__announce {
+    grid-column: 1 / -1;
+  }
+
+  .engineering-board--kiosk:not(.engineering-board--carousel)
+    .engineering-board__body
+    > .engineering-board__zone-b-stack {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 0;
+  }
+
+  .engineering-board--kiosk:not(.engineering-board--carousel)
+    .engineering-board__body
+    > .engineering-board__zone--c {
+    grid-column: 2;
+    grid-row: 2;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .engineering-board--kiosk:not(.engineering-board--carousel)
+    .engineering-board__body:has(.engineering-board__announce)
+    > .engineering-board__zone-b-stack,
+  .engineering-board--kiosk:not(.engineering-board--carousel)
+    .engineering-board__body:has(.engineering-board__announce)
+    > .engineering-board__zone--c {
+    grid-row: 3;
+  }
+
+  .engineering-board--kiosk:not(.engineering-board--carousel)
+    .engineering-board__body:has(.engineering-board__announce)
+    > .engineering-board__zone--a {
+    grid-row: 2;
+  }
+
+  .engineering-board__analytics--zone-b {
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  }
+}
+
+/* ── 1920×1080 (Full HD) ── */
+@media (min-width: 1920px) and (min-height: 1080px) {
+  .engineering-board {
+    --board-kpi-value: clamp(2.75rem, 3.6vmin, 5rem);
+    --board-clock: clamp(2.5rem, 3.2vmin, 3.75rem);
+  }
+
+  .engineering-board__chart-zone {
+    min-height: clamp(10rem, 20vh, 20rem);
+  }
+
+  .engineering-board__zone-b-stack .engineering-board__panel--team {
+    flex: 0 1 min(34%, 11.5rem);
+    max-height: 11.5rem;
+  }
+
+  .eng-util-team-grid--kiosk {
+    grid-auto-columns: minmax(7.5rem, 9.25rem);
+  }
+
+  .engineering-board__header-tools {
+    gap: 1rem 1.5rem;
+  }
+}
+
+/* ── 2560×1440 (QHD) ── */
+@media (min-width: 2560px) and (min-height: 1440px) {
+  .engineering-board {
+    --board-kpi-value: clamp(3rem, 3vmin, 5.25rem);
+    --board-clock: clamp(2.75rem, 2.8vmin, 4rem);
+    --board-pad-x: clamp(1.5rem, 1.5vmin, 2.5rem);
+  }
+
+  .engineering-board__chart-zone {
+    min-height: clamp(11rem, 21vh, 22rem);
+  }
+
+  .eng-util-team-grid--kiosk {
+    grid-auto-columns: minmax(8.25rem, 10rem);
+  }
+
+  .eng-util-person-card__stat-value {
+    font-size: clamp(1.1rem, 1.8vmin, 1.65rem);
+  }
+}
+
+/* ── 3840×2160 (4K UHD) ── */
+@media (min-width: 3840px) and (min-height: 2160px) {
+  .engineering-board {
+    --board-kpi-value: clamp(3.25rem, 2.6vmin, 5.5rem);
+    --board-kpi-label: clamp(0.95rem, 1.2vmin, 1.15rem);
+    --board-clock: clamp(3rem, 2.5vmin, 4.25rem);
+    --board-pad-x: 2.5rem;
+  }
+
+  .engineering-board--kiosk:not(.engineering-board--carousel) .engineering-board__body {
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 18vw);
+  }
+
+  .engineering-board__chart-zone {
+    min-height: clamp(12rem, 19vh, 24rem);
+  }
+
+  .engineering-board__zone-b-stack .engineering-board__panel--team {
+    max-height: 13rem;
+  }
+
+  .eng-util-team-grid--kiosk {
+    grid-auto-columns: minmax(9rem, 10.5rem);
+  }
+}
+
+/* จอเตี้ย (720p สูง) — ลดองค์ประกอบรอง */
+@media (max-height: 760px) {
+  .engineering-board__header {
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+  }
+
+  .engineering-board__kpi-spark {
+    display: none;
+  }
+
+  .engineering-board__meta {
+    display: none;
+  }
+
+  .engineering-board--kiosk:not(.engineering-board--carousel) .engineering-board__body {
+    grid-template-rows: auto minmax(0, 1fr) minmax(0, min(26vh, 10rem));
+  }
+
+  .engineering-board__zone-b-stack .engineering-board__panel--team {
+    max-height: 8.5rem;
+  }
+}
+
+/* อัตราส่วนแนวตั้งมาก (ไม่ใช่ TV ทั่วไป) — คง 1 คอลัมน์ */
+@media (max-aspect-ratio: 4/5) {
+  .engineering-board--kiosk:not(.engineering-board--carousel) .engineering-board__body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr) minmax(0, min(36vh, 14rem));
+  }
+
+  .engineering-board--kiosk:not(.engineering-board--carousel)
+    .engineering-board__body
+    > .engineering-board__zone--c {
+    grid-column: 1;
+  }
+}

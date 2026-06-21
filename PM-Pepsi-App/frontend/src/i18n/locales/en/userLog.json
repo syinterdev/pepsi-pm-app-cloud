@@ -1,0 +1,22 @@
+{
+  "title": "Usage history",
+  "description": "Login / logout log — user IP (userIp) and server host (myIp)",
+  "noAccess": "No access",
+  "noAccessDesc": "Requires permission",
+  "hints": ["Login", "Logout", "User IP", "Server"],
+  "recentCount": "{{count}} recent entries",
+  "refresh": "Refresh",
+  "loadFailed": "Could not load history",
+  "cardTitle": "Login / Logout",
+  "cardDesc": "50 most recent entries",
+  "colSeq": "#",
+  "colDateTime": "Date & time",
+  "colStatus": "Status",
+  "colUserIp": "User IP",
+  "colServer": "Server",
+  "emptyTitle": "No records yet",
+  "emptyDesc": "No login/logout events in the system",
+  "actionLogin": "Sign in",
+  "actionLogout": "Sign out",
+  "localhost": "127.0.0.1 (localhost)"
+}

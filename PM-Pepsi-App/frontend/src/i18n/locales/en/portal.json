@@ -1,0 +1,36 @@
+{
+  "title": "Select application",
+  "subtitle": "Choose a system you are authorized to use",
+  "welcome": "Hello, {{name}}",
+  "comingSoon": "Coming soon",
+  "noModules": {
+    "title": "No applications available",
+    "description": "Your account has no module access. Please contact an administrator.",
+    "openSettings": "Profile & settings"
+  },
+  "backToPortal": "Portal",
+  "commandPaletteGroup": "Portal",
+  "commandPaletteHint": "Switch application module",
+  "loadError": "Could not load applications",
+  "handoffError": "Could not open the application. Try again or contact an administrator.",
+  "moduleChipPm": "PM",
+  "openModule": "Open {{name}}",
+  "openCta": "Open application",
+  "modules": {
+    "pm": {
+      "title": "PM Maintenance",
+      "description": "Planning · work orders · confirmation · calendar"
+    },
+    "store": {
+      "title": "Spare Parts Store",
+      "description": "Issue parts and materials for repair and PM work"
+    },
+    "repair": {
+      "title": "Repair Request",
+      "description": "Submit and track repair requests"
+    }
+  },
+  "toast": {
+    "comingSoon": "{{name}} is under development"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "title": "PM / CM Planning",
+  "description": "Open/closed jobs for your work center — assign · close · WO details",
+  "noAccess": "No access",
+  "noAccessHint": "Requires permission planning.read",
+  "badgeOpen": "CRTD + REL",
+  "badgeClosed": "Closed",
+  "hints": {
+    "openClosed": "Open / closed",
+    "assign": "Assign",
+    "close": "Record close",
+    "wo": "Open WO"
+  },
+  "actions": {
+    "planCalendar": "Plan calendar",
+    "woConfirm": "WO / Confirmation",
+    "iw37n": "Import IW37N"
+  },
+  "list": {
+    "title": "Planning list",
+    "description": "view_planwork for your logged-in work center",
+    "openJobs": "Open jobs",
+    "closedJobs": "Closed jobs",
+    "loading": "Loading planning list",
+    "loadFailed": "Could not load planning list",
+    "emptyOpen": "No open jobs",
+    "emptyClosed": "No closed jobs",
+    "emptyOpenHint": "Import IW37N or check WO work center matches your login",
+    "emptyClosedHint": "Check jobs are closed and in your view_planwork",
+    "goIw37n": "Go to IW37N import",
+    "showOpenJobs": "View open jobs",
+    "showing": "Showing {{count}} row(s)",
+    "updating": " · Updating…"
+  },
+  "table": {
+    "wo": "WO no.",
+    "type": "Type",
+    "detail": "Description",
+    "lineFl": "Line / FL",
+    "plan": "Plan",
+    "hours": "Hours",
+    "moved": "Plan moved",
+    "closedDate": "Plan closed",
+    "status": "Status",
+    "owner": "Assignee",
+    "actions": "Actions",
+    "hoursUnit": "hr",
+    "viewInList": "View in work order list",
+    "ack": "Ack"
+  },
+  "ack": {
+    "acknowledge": "Acknowledge",
+    "acknowledged": "Acknowledged",
+    "pending": "Pending ack",
+    "success": "Assignment acknowledged",
+    "failed": "Acknowledge failed"
+  },
+  "status": {
+    "OPEN": "Pending assign",
+    "CONF": "Assigned",
+    "CLOS": "Closed"
+  },
+  "row": {
+    "recordClose": "Record close",
+    "viewClose": "View close",
+    "assign": "Assign",
+    "assignTitleNew": "Assign to tbplangingwork",
+    "assignTitleUpdate": "Plan exists — click to update (upsert)",
+    "assignNoPermission": "Requires permission planning.assign",
+    "closeTabOpen": "Open Confirm tab to record close",
+    "closeTabClosed": "Open Confirm tab to view close history"
+  },
+  "assignDialog": {
+    "title": "Assign WO {{wo}}",
+    "description": "Manual = select multiple technicians (checkboxes) or one-click each · Auto = expand whole group — saves to tbplangingwork",
+    "woHours": "WO hours (IW37N):",
+    "hoursUnit": "hr",
+    "importWkctr": "wkctr from import:",
+    "availableHour": "Available hour on {{date}} — free hrs = HR (Manhour prorate) − planned hrs same day (under technician card)",
+    "modeLabel": "Assignment mode",
+    "groupLabel": "Technician group (wkctrgroup)",
+    "groupPlaceholder": "— Select group —",
+    "autoHint": "Auto Mode inserts every technician in the selected group (pwteam = G)",
+    "commentLabel": "Note",
+    "commentPlaceholder": "e.g. urgent / change team",
+    "selectGroupError": "Select a technician group (Auto Mode)",
+    "successManual": "Manual assignment saved",
+    "successManualCount": "Assigned {{count}} technician(s)",
+    "successAuto": "Auto (group) assignment saved",
+    "successAutoCount": "Group assignment saved for {{count}} technician(s)",
+    "alreadyAssigned": "This technician is already assigned to this WO — no change",
+    "loading": "Loading work order data…",
+    "loadFailed": "Could not load work order for assignment",
+    "submitting": "Saving assignment…",
+    "successTitle": "Assignment complete",
+    "successDone": "Done",
+    "successCountHint": "{{count}} technician(s) added to this WO",
+    "assignFailed": "Assignment failed",
+    "assignAuto": "Assign Auto (group)",
+    "assignSelf": "Assign to me ({{code}})",
+    "mode": {
+      "P": {
+        "label": "Manual Mode",
+        "short": "Manual · per person",
+        "description": "Admin/Planner picks technicians — check Available hour before assigning"
+      },
+      "G": {
+        "label": "Auto Mode",
+        "short": "Auto · technician group",
+        "description": "Expand whole group from master (tbwkctrgroup) — like default after import"
+      }
+    }
+  }
+}

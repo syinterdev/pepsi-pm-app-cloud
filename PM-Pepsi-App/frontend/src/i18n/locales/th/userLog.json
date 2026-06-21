@@ -1,0 +1,22 @@
+{
+  "title": "ประวัติการใช้งาน",
+  "description": "IP ผู้ใช้ (userIp) และเครื่องเซิร์ฟเวอร์ (myIp)",
+  "noAccess": "ไม่มีสิทธิ์เข้าถึง",
+  "noAccessDesc": "ต้องมีสิทธิ์",
+  "hints": ["Login", "Logout", "IP ผู้ใช้", "เซิร์ฟเวอร์"],
+  "recentCount": "{{count}} รายการล่าสุด",
+  "refresh": "รีเฟรช",
+  "loadFailed": "โหลดประวัติไม่สำเร็จ",
+  "cardTitle": "Login / Logout",
+  "cardDesc": "50 รายการล่าสุด",
+  "colSeq": "ลำดับ",
+  "colDateTime": "วันที่-เวลา",
+  "colStatus": "สถานะ",
+  "colUserIp": "IP ผู้ใช้",
+  "colServer": "เซิร์ฟเวอร์",
+  "emptyTitle": "ยังไม่มีบันทึก",
+  "emptyDesc": "ยังไม่มี login/logout ในระบบ",
+  "actionLogin": "เข้าสู่ระบบ",
+  "actionLogout": "ออกจากระบบ",
+  "localhost": "127.0.0.1 (localhost)"
+}
