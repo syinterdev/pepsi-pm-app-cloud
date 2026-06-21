@@ -3,7 +3,7 @@
 
 [build]
 builder = "DOCKERFILE"
-dockerfilePath = "PM-Pepsi-App/backend/Dockerfile"
+dockerfilePath = "Dockerfile"
 watchPatterns = ["PM-Pepsi-App/backend/**"]
 
 [deploy]

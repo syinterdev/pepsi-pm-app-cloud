@@ -10,9 +10,9 @@
 
 Repo เป็น monorepo — Dockerfile อยู่ที่ `PM-Pepsi-App/backend/` ไม่ใช่ root
 
-**แก้แล้ว:** เพิ่ม `Dockerfile` + `railway.toml` ที่ root repo ชี้ไป backend
+**แก้แล้ว:** ใช้ `Dockerfile` ที่ **root repo** (build context = root) — อย่าใช้ `PM-Pepsi-App/backend/Dockerfile` จาก root เพราะจะหา `package.json` ไม่เจอ
 
-**หรือ** ตั้ง Railway → Settings → Source → **Root Directory** = `PM-Pepsi-App/backend`
+**ทางเลือก:** ตั้ง Root Directory = `PM-Pepsi-App/backend` แล้วใช้ Dockerfile ในโฟลเดอร์นั้น
 
 ## Environment variables (Railway Dashboard → Variables)
 
