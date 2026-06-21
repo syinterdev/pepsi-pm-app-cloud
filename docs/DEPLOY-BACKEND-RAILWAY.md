@@ -24,6 +24,15 @@ Build ผ่านแต่ deploy fail ที่ `/api/v1/health` — สาเ
 1. **ไม่ได้ตั้ง Variables บน Railway** (แอป crash ตอน start)
 2. **`sharp` บน Alpine** — แก้แล้ว: ใช้ `node:20-slim` ใน Dockerfile
 
+### ขั้นตอน (ทำก่อน Redeploy)
+
+1. เปิด `PM-Pepsi-App/backend/.env` บนเครื่อง dev
+2. Railway → service → **Variables** → **Raw Editor**
+3. วางค่า (ดู `railway.env.example`) — **อย่างน้อย** `DATABASE_URL` + `SESSION_SECRET`
+4. **Redeploy**
+
+ถ้าไม่ตั้ง Variables แอปจะ crash ทันที → healthcheck ได้ `service unavailable`
+
 ### Variables ที่ต้องมี (Railway → Variables)
 
 | ตัวแปร | จำเป็น | ตัวอย่าง |

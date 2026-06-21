@@ -33,8 +33,9 @@ try {
   const server = createServer(app)
 
   server.listen(env.PORT, '0.0.0.0', () => {
-    console.log(`pm-api listening on port ${env.PORT}`)
-    console.log(`  GET /api/v1/health`)
+    console.log(`[pm-api] started NODE_ENV=${env.NODE_ENV} PORT=${env.PORT}`)
+    console.log(`[pm-api] DATABASE_URL=${env.DATABASE_URL ? 'set' : 'MISSING'}`)
+    console.log(`[pm-api] health GET /api/v1/health`)
   })
 
   async function shutdown(signal: string) {
