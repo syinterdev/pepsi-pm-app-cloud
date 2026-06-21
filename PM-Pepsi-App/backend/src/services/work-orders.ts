@@ -1015,12 +1015,12 @@ export async function getWorkOrderModalDetail(
           r.ack_status === 'pending' ||
           r.ack_status === 'acknowledged' ||
           r.ack_status === 'declined'
-            ? r.ack_status
+            ? (r.ack_status as 'pending' | 'acknowledged' | 'declined')
             : undefined,
         ackAt: r.ack_at?.toISOString() ?? null,
         ackChannel:
           r.ack_channel === 'telegram' || r.ack_channel === 'web'
-            ? r.ack_channel
+            ? (r.ack_channel as 'telegram' | 'web')
             : null,
       }
     })

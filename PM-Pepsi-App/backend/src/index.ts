@@ -31,9 +31,9 @@ if (process.env.INTEGRATION_WATCH_SCHEDULER !== '0') {
 
 const server = createServer(app)
 
-server.listen(env.PORT, () => {
-  console.log(`pm-api listening on http://127.0.0.1:${env.PORT}`)
-  console.log(`  GET http://127.0.0.1:${env.PORT}/api/v1/health`)
+server.listen(env.PORT, '0.0.0.0', () => {
+  console.log(`pm-api listening on port ${env.PORT}`)
+  console.log(`  GET /api/v1/health`)
 })
 
 async function shutdown(signal: string) {

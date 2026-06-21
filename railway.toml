@@ -1,0 +1,13 @@
+# Railway deploy — backend API (monorepo root config)
+# Service root: repo root; Dockerfile lives under PM-Pepsi-App/backend
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "PM-Pepsi-App/backend/Dockerfile"
+watchPatterns = ["PM-Pepsi-App/backend/**"]
+
+[deploy]
+healthcheckPath = "/api/v1/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

@@ -79,7 +79,7 @@ export function registerPmReadingsRoutes(app: Express, pool: Pool, sessionSecret
         }
         const result = await batchCreatePmReadings(
           pool,
-          parsed.data.items,
+          parsed.data.items.map((item) => ({ ...item, v3: item.v3 ?? null })),
           actor,
           wkorder || orderKey,
           idiw37 ?? undefined,
