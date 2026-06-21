@@ -2,36 +2,56 @@
 
 **Repo:** https://github.com/syinterdev/pepsi-pm-app-cloud (branch `main`)
 
-## สาเหตุ 404 NOT_FOUND
+## 1) สร้าง/เชื่อม Project บน Vercel
 
-Vercel deploy จาก **root monorepo** แต่ frontend อยู่ที่ `PM-Pepsi-App/frontend/` — ไม่มี `dist/` ที่ root
+1. ไปที่ https://vercel.com/new
+2. Import **`syinterdev/pepsi-pm-app-cloud`**
+3. **Root Directory:** ว่าง (ใช้ `vercel.json` ที่ root repo)
+4. Framework จะ detect จาก `vercel.json` อัตโนมัติ
 
-**แก้แล้ว:** เพิ่ม `vercel.json` ที่ root ชี้ build/output ไป frontend
+## 2) Environment Variables (Vercel → Settings → Environment Variables)
 
-## ตั้งค่า Vercel Project
+| ตัวแปร | ค่า | หมายเหตุ |
+|--------|-----|----------|
+| `VITE_API_URL` | `https://<railway-backend-url>` | **ไม่มี** trailing slash |
 
-### วิธี A — ใช้ root `vercel.json` (แนะนำ)
+ตัวอย่าง:
 
-- **Root Directory:** ว่าง (repo root)
-- Push แล้ว Redeploy
+```env
+VITE_API_URL=https://intuitive-respect-production.up.railway.app
+```
 
-### วิธี B — ตั้ง Root Directory
+## 3) ตั้ง CORS บน Railway (สำคัญ — login ข้าม domain)
 
-- **Root Directory:** `PM-Pepsi-App/frontend`
-- **Framework Preset:** Vite
-- **Build Command:** `npm run build`
-- **Output Directory:** `dist`
+Railway → Variables:
 
-## Environment Variables
+```env
+CORS_ORIGIN=https://<your-project>.vercel.app
+NODE_ENV=production
+```
 
-| ตัวแปร | ค่า |
-|--------|-----|
-| `VITE_API_URL` | URL Railway backend เช่น `https://pepsi-pm-app-cloud-production.up.railway.app` |
+แล้ว **Redeploy Railway** หลังได้ URL Vercel จริง
 
-ตั้ง `CORS_ORIGIN` บน Railway ให้ตรง URL Vercel เช่น `https://your-project.vercel.app`
+## 4) Deploy
 
-## หลัง deploy
+- Push ขึ้น `main` → Vercel auto-deploy  
+- หรือ Vercel Dashboard → **Deployments → Redeploy**
 
-1. เปิด URL Vercel → ควรเห็นหน้า Login
+## 5) ทดสอบ
+
+1. เปิด URL Vercel → หน้า **Login**
 2. Login: `ADMIN01` / `admin`
-3. ถ้า API error → ตรวจ `VITE_API_URL` และ Railway Variables
+3. ถ้า API error → ตรวจ `VITE_API_URL` และ `CORS_ORIGIN`
+
+## โครงสร้าง build (vercel.json ที่ root)
+
+- Install: `PM-Pepsi-App/frontend`
+- Build: `npm run build:vercel` (vite build)
+- Output: `PM-Pepsi-App/frontend/dist`
+- SPA rewrite → `index.html`
+
+## ทางเลือก: Root Directory = PM-Pepsi-App/frontend
+
+- Build: `npm run build:vercel`
+- Output: `dist`
+- ใช้ `PM-Pepsi-App/frontend/vercel.json`

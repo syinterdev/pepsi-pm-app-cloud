@@ -1,7 +1,7 @@
 import type { Express, Request, Response } from 'express'
 import type { Pool } from 'pg'
 import { voidAudit } from '../lib/audit-mutation.js'
-import { serializeCookie } from '../lib/cookies.js'
+import { serializeCookie, sessionCookieSerializeOptions } from '../lib/cookies.js'
 import { listPermissionsForUserst } from '../lib/has-permission.js'
 import { getSessionTtlMs, sessionTtlMaxAgeSec } from '../lib/session-ttl.js'
 import { SESSION_COOKIE_NAME, signSessionToken } from '../lib/session-token.js'
@@ -43,12 +43,11 @@ export function registerProfileRoutes(app: Express, pool: Pool, sessionSecret: s
         const token = signSessionToken(user, sessionSecret, { ttlMs })
         res.setHeader(
           'Set-Cookie',
-          serializeCookie(SESSION_COOKIE_NAME, token, {
-            httpOnly: true,
-            sameSite: 'Lax',
-            maxAgeSec: sessionTtlMaxAgeSec(ttlMs),
-            path: '/',
-          }),
+          serializeCookie(
+            SESSION_COOKIE_NAME,
+            token,
+            sessionCookieSerializeOptions(sessionTtlMaxAgeSec(ttlMs)),
+          ),
         )
         voidAudit(pool, req, {
           action: 'auth.change_password',

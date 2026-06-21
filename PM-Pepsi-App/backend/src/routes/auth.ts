@@ -4,7 +4,7 @@ import type { Pool } from 'pg'
 
 import { z } from 'zod'
 
-import { clearCookieHeader, serializeCookie } from '../lib/cookies.js'
+import { clearCookieHeader, serializeCookie, sessionCookieSerializeOptions } from '../lib/cookies.js'
 
 import { getClientIp, getServerHostname } from '../lib/request-ip.js'
 
@@ -65,12 +65,7 @@ const userLogQuerySchema = z.object({
 function setSessionCookie(res: Response, token: string, maxAgeSec: number) {
   res.setHeader(
     'Set-Cookie',
-    serializeCookie(SESSION_COOKIE_NAME, token, {
-      httpOnly: true,
-      sameSite: 'Lax',
-      maxAgeSec,
-      path: '/',
-    }),
+    serializeCookie(SESSION_COOKIE_NAME, token, sessionCookieSerializeOptions(maxAgeSec)),
   )
 }
 

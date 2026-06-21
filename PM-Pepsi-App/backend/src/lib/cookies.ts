@@ -16,15 +16,45 @@ export function parseCookieHeader(header: string | undefined): Record<string, st
 export function serializeCookie(
   name: string,
   value: string,
-  opts: { maxAgeSec?: number; httpOnly?: boolean; sameSite?: 'Lax' | 'Strict'; path?: string },
+  opts: {
+    maxAgeSec?: number
+    httpOnly?: boolean
+    sameSite?: 'Lax' | 'Strict' | 'None'
+    secure?: boolean
+    path?: string
+  },
 ): string {
   const parts = [`${name}=${encodeURIComponent(value)}`, `Path=${opts.path ?? '/'}`]
   if (opts.httpOnly !== false) parts.push('HttpOnly')
   if (opts.sameSite) parts.push(`SameSite=${opts.sameSite}`)
+  if (opts.secure) parts.push('Secure')
   if (opts.maxAgeSec !== undefined) parts.push(`Max-Age=${opts.maxAgeSec}`)
   return parts.join('; ')
 }
 
+export function sessionCookieSerializeOptions(maxAgeSec: number) {
+  const crossSite =
+    process.env.NODE_ENV === 'production' && Boolean(process.env.CORS_ORIGIN?.trim())
+  return {
+    httpOnly: true as const,
+    maxAgeSec,
+    path: '/',
+    sameSite: (crossSite ? 'None' : 'Lax') as 'None' | 'Lax',
+    secure: crossSite,
+  }
+}
+
+export function clearSessionCookieHeader(name: string): string {
+  const crossSite =
+    process.env.NODE_ENV === 'production' && Boolean(process.env.CORS_ORIGIN?.trim())
+  return serializeCookie(name, '', {
+    maxAgeSec: 0,
+    path: '/',
+    sameSite: crossSite ? 'None' : 'Lax',
+    secure: crossSite,
+  })
+}
+
 export function clearCookieHeader(name: string): string {
-  return serializeCookie(name, '', { maxAgeSec: 0, path: '/' })
+  return clearSessionCookieHeader(name)
 }
