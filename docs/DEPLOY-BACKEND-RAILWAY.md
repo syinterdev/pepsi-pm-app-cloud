@@ -1,5 +1,8 @@
 # Deploy Backend บน Railway
 
+**Repo ที่ใช้:** https://github.com/syinterdev/pepsi-pm-app-cloud (branch `main`)  
+**ไม่ใช้:** `syinterdev/pepsi-pm-app`
+
 ## สิ่งที่เตรียมแล้ว
 
 - `PM-Pepsi-App/backend/Dockerfile`
